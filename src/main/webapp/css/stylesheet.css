@@ -1,0 +1,80 @@
+/* Add a red background color to navbar links on hover */
+.navbar a:hover {
+    background-color: #0F52BA;
+  } 
+
+  body {
+  background-color: black;
+  color: white;
+}
+
+.light-mode{
+	background-color: white;
+    color: black;
+}
+  
+.center{
+	text-align: center;
+}
+
+.right{
+	text-align: right;
+}
+
+.yellow{
+	color:#ffcc00;
+}
+.bgy{
+	background-color:rgb(0, 255, 242);
+}
+.icon{
+	height:30px;
+	width:30px;
+	margin-top:10px;
+	margin-right:10px;
+}
+
+.lp{
+	padding-right:30px;
+}
+html {
+height: 100%;
+}
+.bgyo{
+	background-image: linear-gradient(90deg, rgb(255, 255, 128), #ffcc00);
+}
+
+.login{
+	background-color: white;
+	width: 50%;
+	border-radius: 25px;
+	margin-left: 25%;
+	margin-top: 150px;
+	
+  
+}
+
+.wcontainer{
+	background-color: white;
+	width: 90%;
+	border-radius: 25px;
+	margin-left: 5%;
+	
+}
+.nav-right{
+	float: right;
+}
+
+.ct{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg-az{
+	Background-color: #007FFF;
+}
+
+.Dscroll{
+	max-height: 100px;
+	overflow-y: scroll;
+}
