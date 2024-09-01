@@ -8,3 +8,22 @@ function lightSwitch() {
    }
    else labelElement.innerHTML = "Light Mode";
 }
+
+function EditSwitch() {
+	var button = document.getElementById("UES");
+	var id = document.getElementById("Id");
+	var label = document.getElementById("IdLable");
+
+	   if (id.disabled) {
+	      id.disabled = false;
+		  id.style.display = "block";
+		  button.innerHTML = "Edit"
+		  label.style.display = "block";
+		  
+	    } else {
+			id.disabled = true;
+		    id.style.display = "none";
+   		    button.innerHTML = "Uplopad"
+		    label.style.display = "none";
+	     }
+}

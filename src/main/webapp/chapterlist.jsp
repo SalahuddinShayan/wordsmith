@@ -39,7 +39,7 @@
       <td>${chapter.postedOn}</td>
       <td>${chapter.keywords}</td>
       <td>${chapter.content}</td>
-      <td><a href="chapter/${chapter.novelName}/${chapter.chapterNo}" class="btn btn-primary"> View</a></td> 
+      <td><a href="chapter/${chapter.chapterId}" class="btn btn-primary"> View</a></td> 
       <td><form method="post" action="deletechapter">
       		<input name="MemberId"  value="${chapter.chapterId}" readonly="true" style="display:none;"/>
       		<input class ="btn btn-primary" type="submit" value="Delete" />
@@ -49,8 +49,12 @@
     </c:forEach>
    </table>
   </div>
+  <h3>Upload a New Chapter/Edit an old Chapter</h3>
+  <h4>Click Here to Switch:</h4><button id="UES" onclick="EditSwitch()">Upload</button>
   
   <form:form method="post" action="savechapter">
+  <form:label path="ChapterId" style="display:none;" id="IdLable">Chapter Id</form:label>
+  <form:input path="ChapterId" disabled="true" style="display:none;" id="Id"/>
   <form:label path="novelName">Name Of The Novel</form:label>
   <form:input path="novelName" value="${novelname}" readonly="true"/>
   <form:label path="chapterNo">Chapter No:</form:label>
@@ -64,5 +68,6 @@
   <input type="submit" value="post Chapter" />
   </form:form>
 
+<script type="text/javascript" src="js/script.js"></script> 
 </body>
 </html>

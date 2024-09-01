@@ -5,17 +5,17 @@
 <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Eastern WordSmith</title>
-        <link rel="icon" type="image/x-icon" href="images/Yin Yang Dragon.jpg">
+        <link rel="icon" type="image/x-icon" href="../images/Yin Yang Dragon.jpg">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
-        <style><%@include file="css/stylesheet.css"%></style>
+        <style><%@include file="../css/stylesheet.css"%></style>
          <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 </head>
 <body>
 
-<nav class="navbar navbar-light bg-az navbar-expand-md sticky-top" >
-            <a href="home" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="images/Yin Yang Dragon.jpg" width="40" height="40"  alt=""></a>
+<nav class="navbar navbar-light bg-az navbar-expand-md" >
+            <a href="home" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="../images/Yin Yang Dragon.jpg" width="40" height="40"  alt=""></a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" >
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,16 +36,16 @@
         <div class= "center">${chapter.novelName}-Chapter ${chapter.chapterNo}</div>
         
          <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-2 col-sm-0  py-3 "></div>
-         <div class="col-lg-8 col-sm-12  py-3 "></div>
-         <div class="col-lg-2 col-sm-0  py-3 "></div>
+         <div class="col-lg-2 col-sm-1  py-3 "></div>
+         <div class="col-lg-8 col-sm-10  py-3">${chapter.content}</div>
+         <div class="col-lg-2 col-sm-1  py-3 "></div>
          </div>
         
         <a href="https://www.vecteezy.com/free-vector/yin-yang-dragon">Yin Yang Dragon Vectors by Vecteezy</a>
-        <a>test</a>
+        <a>"test"</a>
        
         
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
-<script type="text/javascript" src="js/script.js"></script>  
+<script type="text/javascript" src="../js/script.js"></script>  
 </body>
 </html>

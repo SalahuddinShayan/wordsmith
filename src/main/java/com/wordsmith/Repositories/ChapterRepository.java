@@ -15,7 +15,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	@Query(value = "SELECT * FROM Chapter WHERE Novel_Name = :novelname", nativeQuery = true)
     List<Chapter>  byNovelName(@Param("novelname") String novelname);
 	
-	@Query(value = "SELECT * FROM Chapter WHERE Novel_Name = :novelname and chapter_no = :chapterno", nativeQuery = true)
-    Chapter  findChapter(@Param("novelname") String novelname, @Param("chapterno") String chapterno);
+	@Query(value = "SELECT * FROM Chapter_Id WHERE Novel_Name = :novelname and chapter_no = :chapterno", nativeQuery = true)
+    long  findChapterId(@Param("novelname") String novelname, @Param("chapterno") String chapterno);
 
 }

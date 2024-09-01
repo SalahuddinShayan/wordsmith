@@ -40,9 +40,9 @@ public class ChapterController {
 	    return redirectView;
 		}
 	
-	@RequestMapping("/chapter/{novelName}/{chapterNo}")
-	public String Chapter(@PathVariable String novelName, @PathVariable String chapterNo, Model m) {
-		Chapter chapter = cr.findChapter(novelName, chapterNo);
+	@RequestMapping("/chapter/{chapterId}")
+	public String Chapter(@PathVariable long chapterId, Model m) {
+		Chapter chapter = cr.getReferenceById(chapterId);
 		m.addAttribute("chapter",chapter);
 		System.out.println("chapter");
 		return "chaptertemplate";
