@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.wordsmith.Entity.Chapter;
@@ -27,17 +28,19 @@ public class ChapterController {
 	}
 	
 	@RequestMapping("/savechapter")
-    public RedirectView save(@ModelAttribute("chapter")Chapter chapter){    
+    public RedirectView save(@ModelAttribute("chapter")Chapter chapter,RedirectAttributes redirectAttributes){    
 		cr.save(chapter);
 		RedirectView redirectView= new RedirectView("/chapterlist",true);
+		redirectAttributes.addAttribute("NovelName", chapter.getNovelName());
 	    return redirectView;   
     }
 	
 	@RequestMapping(value="/deletechapter")
-	public RedirectView  deletemember(@RequestParam("ChapterId") long id){
-		cr.deleteById(id);
+	public RedirectView  deletemember(@RequestParam("ChapterId") long id, RedirectAttributes redirectAttributes){
 		RedirectView redirectView= new RedirectView("/chapterlist",true);
-	    return redirectView;
+		redirectAttributes.addAttribute("NovelName",cr.getReferenceById(id).getNovelName());
+		cr.deleteById(id);
+		return redirectView;
 		}
 	
 	@RequestMapping("/chapter/{chapterId}")
@@ -47,9 +50,24 @@ public class ChapterController {
 		System.out.println("chapter");
 		return "chaptertemplate";
 	}
-
-
 	
+	@RequestMapping("chapter-next/{chapterId}")
+	public RedirectView nextChapter(@PathVariable long chapterId) {
+		Chapter current =cr.getReferenceById(chapterId);
+		String novelName= current.getNovelName();
+		String nextId = Long.toString(cr.NextChapterId(novelName, chapterId));
+		RedirectView redirectView= new RedirectView("/chapter/" + nextId,true);
+		return redirectView;
+	}
+	
+	@RequestMapping("chapter-previous/{chapterId}")
+	public RedirectView previousChapter(@PathVariable long chapterId) {
+		Chapter current =cr.getReferenceById(chapterId);
+		String novelName= current.getNovelName();
+		String nextId = Long.toString(cr.PreviousChapterId(novelName, chapterId));
+		RedirectView redirectView= new RedirectView("/chapter/" + nextId,true);
+		return redirectView;
+	}
 	
 
 }

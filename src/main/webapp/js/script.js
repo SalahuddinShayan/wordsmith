@@ -23,9 +23,20 @@ function EditSwitch() {
 }
 
 function TextSizeIncrease(){
-	var el = document.getElementById('foo');
+	var el = document.getElementById('CS');
 	var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
 	var fontSize = parseFloat(style); 
-	// now you have a proper float for the font size (yes, it can be a float, not just an integer)
 	el.style.fontSize = (fontSize + 1) + 'px';
+}
+
+function TextSizeDefault(){
+	var el = document.getElementById('CS');
+	el.style.fontSize = 16 + 'px';
+}
+
+function TextSizeDecrease(){
+	var el = document.getElementById('CS');
+	var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+	var fontSize = parseFloat(style); 
+	el.style.fontSize = (fontSize - 1) + 'px';
 }

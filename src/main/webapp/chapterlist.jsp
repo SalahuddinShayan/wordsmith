@@ -41,7 +41,7 @@
       <td>${chapter.content}</td>
       <td><a href="chapter/${chapter.chapterId}" class="btn btn-primary"> View</a></td> 
       <td><form method="post" action="deletechapter">
-      		<input name="MemberId"  value="${chapter.chapterId}" readonly="true" style="display:none;"/>
+      		<input name="ChapterId"  value="${chapter.chapterId}" readonly="true" style="display:none;"/>
       		<input class ="btn btn-primary" type="submit" value="Delete" />
       		</form>
       </td> 

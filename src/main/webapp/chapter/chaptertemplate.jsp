@@ -50,9 +50,9 @@
          <a id="Minus" onclick="TextSizeDecrease()" ><img class ="icon" alt="" src="../images/minus.png"></a>
          <a id="Default" onclick="TextSizeDefault()" ><img class ="icon" alt="" src="../images/alpha.png"></a>
          <a id="Plus" onclick="TextSizeIncrease()" ><img class ="icon" alt="" src="../images/plus-sign.png"></a>
-         <a href=""><img class ="icon" alt="" src="../images/arrow-left.png"></a>
-         <a href=""><img class ="icon" alt="" src="../images/home.png"></a>
-         <a href=""><img class ="icon" alt="" src="../images/right-arrow.png"></a>
+         <a href="../chapter-previous/${chapter.chapterId}"><img class ="icon" alt="" src="../images/arrow-left.png"></a>
+         <a href="../novel/${chapter.novelName}"><img class ="icon" alt="" src="../images/home.png"></a>
+         <a href="../chapter-next/${chapter.chapterId}"><img class ="icon" alt="" src="../images/right-arrow.png"></a>
          <section class ="wcontainer" id="CS">
          ${chapter.content}
          </section>
