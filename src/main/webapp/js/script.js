@@ -1,12 +1,6 @@
 function lightSwitch() {
-   var element = document.body;
+   var element = document.getElementById("CS");
    element.classList.toggle("light-mode");
-   let labelElement = document.getElementById("DMS");
-   var A = labelElement.innerHTML.localeCompare("Light Mode");
-   if(A == 0){
-   labelElement.innerHTML = "Dark Mode";
-   }
-   else labelElement.innerHTML = "Light Mode";
 }
 
 function EditSwitch() {
@@ -26,4 +20,12 @@ function EditSwitch() {
    		    button.innerHTML = "Uplopad"
 		    label.style.display = "none";
 	     }
+}
+
+function TextSizeIncrease(){
+	var el = document.getElementById('foo');
+	var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
+	var fontSize = parseFloat(style); 
+	// now you have a proper float for the font size (yes, it can be a float, not just an integer)
+	el.style.fontSize = (fontSize + 1) + 'px';
 }
