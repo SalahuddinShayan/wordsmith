@@ -1,9 +1,7 @@
 package com.wordsmith.Controllers;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.ParseException;
-import java.time.Instant;
 import java.util.Optional;
 
 
@@ -22,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.wordsmith.Entity.Novel;
+import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Repositories.NovelRepository;
 
 import jakarta.servlet.ServletException;
@@ -33,13 +32,18 @@ public class NovelController {
 	@Autowired
 	NovelRepository NovelRepo;
 	
+	@Autowired
+	ChapterRepository cr;
+	
 	@RequestMapping(value= { "/","/home"})                     
-    public String index() {
+    public String index(Model model) {
+		model.addAttribute("Novels",NovelRepo.popular());
+		model.addAttribute("Novelsu",NovelRepo.NovelUpdates());
         return "index";           
     }
 	
 	@RequestMapping("/novellist")
-	public String memberlist(Model model) {
+	public String novellist(Model model) {
 			model.addAttribute("Novels",NovelRepo.findAll());
 			model.addAttribute("command",new Novel());
 		    return "novellist";
@@ -60,7 +64,7 @@ public class NovelController {
 	public RedirectView  savenovel(@RequestParam("NovelId") int Id, @RequestParam("NovelName") String Name, 
 			@RequestParam("OriginalLanguage") String originalLanguage, @RequestParam("Genre") String genre, 
 			@RequestParam("Author") String Author, @RequestParam("Description") String description, 
-			@RequestParam("Keywords") String keywords, @RequestParam("Pic") MultipartFile pic)
+			@RequestParam("Keywords") String keywords, @RequestParam("Pic") MultipartFile pic, @RequestParam("Status") String Status)
 					throws IllegalStateException, IOException, ParseException {
 		Novel novel = new Novel();
 		novel.setNovelId(Id);
@@ -71,8 +75,8 @@ public class NovelController {
 		novel.setDescription(description);
 		novel.setNovelImage(pic.getBytes());
 		novel.setKeywords(keywords);
-		Timestamp instant= Timestamp.from(Instant.now());
-		novel.setAddedOn(instant);
+		novel.setStatus(Status);
+		novel.setAddedOn(new java.util.Date());
 		NovelRepo.save(novel);
 		RedirectView redirectView= new RedirectView("/novellist",true);
 	    return redirectView;
@@ -89,7 +93,20 @@ public class NovelController {
 	public String Novel(@PathVariable String novelName, Model m) {
 		Novel novel = NovelRepo.byNovelName(novelName);
 		m.addAttribute("novel",novel);
+		m.addAttribute("Chapters", cr.byNovelName(novelName));
 		return "noveltemplate";
+	}
+	
+	@RequestMapping("/novels")
+	public String novels(Model model) {
+			model.addAttribute("Novels",NovelRepo.findAll());
+			return "novels";
+	}
+	
+	@RequestMapping("/updates")
+	public String updates(Model model) {
+			model.addAttribute("Novels",NovelRepo.NovelUpdates());
+			return "updates";
 	}
 
 }

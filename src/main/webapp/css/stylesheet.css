@@ -29,6 +29,12 @@
 .yellow{
 	color:#ffcc00;
 }
+
+.bg-black{
+    background-color: black;
+    color: white;	
+}
+
 .bgy{
 	background-color:#FF4F79;
 }
@@ -98,4 +104,30 @@ height: 100%;
 #DMS{
 	margin-left: 5%;
 	text-align: right;
+}
+.bdt{
+	border-top-style: solid;
+	margin-top: -18px;
+}
+
+.bd{
+	border-style: solid;
+	padding-bottom: -50px;
+}
+
+.bd-az{
+	border-style: solid;
+	border-color: #1F8FFF;
+}
+
+.oneliner{
+	white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.icont{
+	width: 100%;
+	padding-bottom: 15px;
+	
 }

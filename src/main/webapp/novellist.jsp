@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -12,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
     <link rel="stylesheet" href="stylesheet.css" >
 </head>
-<body>
+<body onload="LocalTimeZone()">
 
 <div class="starter-template">
    <h1>List of All The Novels:</h1>
@@ -28,6 +29,7 @@
      <th>Description</th>
      <th>Date Added</th>
      <th>Keywords</th>
+     <th>Status</th>
      <th>View/Add Chapters</th>
      <th>Delete</th>
      
@@ -41,8 +43,9 @@
       <td>${novel.originalLanguage}</td>
       <td>${novel.genre}</td>
       <td><div class = "Dscroll">${novel.description}</div></td>
-      <td>${novel.addedOn}</td>
+      <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${novel.addedOn}" /></td>
       <td>${novel.keywords}</td>
+      <td>${novel.status}</td>
       <td><form method="post" action="chapterlist">
       		<input name="NovelName"  value="${novel.novelName}" readonly="true" style="display:none;"/>
       		<input class ="btn btn-primary" type="submit" value="View/Add Chapters" />
@@ -52,13 +55,13 @@
       		<input name="MemberId"  value="${novel.novelId}" readonly="true" style="display:none;"/>
       		<input class ="btn btn-primary" type="submit" value="Delete" />
       		</form>
-      </td> 
+      </td>
      </tr>
     </c:forEach>
    </table>
   </div>
 
-<h1>Add a new Novel or Update an existing one</h1> 
+<h1>Add a new Novel or Update an existing one </h1> ${timezone} ${timezone2}
 
 <form method="post" action="savenovel" enctype="multipart/form-data">
        <input name="NovelId" placeholder= "NOVEL ID" type= "number" required>
@@ -71,8 +74,11 @@
        <input name="OriginalLanguage" placeholder= "Original Language" type= "text" required>
        <input name="Genre" placeholder= "Genre" type= "text" required>
        <input name="Keywords" placeholder= "Kewords" type= "text" required>
+       <input name="Status" placeholder= "Status" type= "text" required>
        <input type="submit" value="Add Novel" />
        </form> 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

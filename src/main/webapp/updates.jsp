@@ -11,6 +11,7 @@
         <style><%@include file="css/stylesheet.css"%></style>
          <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 </head>
 <body>
 
@@ -32,39 +33,11 @@
         </nav>
         
         <div  Style = "margin-top: 30px;" class = "row">
-        	<div class="col-lg-2 col-sm-2  py-3 "></div>
-        	<div class="col-lg-8 col-sm-8  py-3 ">
-        		<h5 class ="bg-az">Popular Today</h5>
-         		<div  Style = "margin-top: 30px;" class = "row">
-           			<c:forEach var="novel" items="${Novels}">
-           				<div class="col-lg-3 col-sm-6  py-3 center stm oneliner">
-           					<a href ="novel/${novel.novelName}">
-               					<img width="100%" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
-               					alt="images/No-Image.png" onerror="this.src='images/No-Image.png';"> 
-             				</a><br>
-             				<a href ="novel/${novel.novelName}">${novel.novelName}</a><br>
-             				<c:import var="data" url="latest1/${novel.novelName}" charEncoding="UTF-8"/>  
-			   				<c:out value="${data}" escapeXml="false"/>
-           				</div>
-           			</c:forEach>
-         		</div>
-         	</div>
-        	<div class="col-lg-2 col-sm-2  py-3 "></div>
-        </div>
-        
-        <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-2 col-sm-1 "></div>
-         <div class="col-lg-8 col-sm-10 bg-az">
-          <h4>Latest Updates:</h4>
-         </div>
-         <div class="col-lg-2 col-sm-1"></div>
-        </div>
-        
-        <div class = "row">
          <div class="col-lg-2 col-sm-1  py-3 "></div>
-         <div class="col-lg-8 col-sm-10  py-3 bd-az">
+         <div class="col-lg-8 col-sm-10  py-3 bd">
+          <h2>Latest Updates:</h2>
           <div class = "row">
-           <c:forEach var="novel" items="${Novelsu}">
+           <c:forEach var="novel" items="${Novels}">
             <div class="col-lg-6 col-sm-12">
              <div class = "row">
               <div class="col-lg-3 col-sm-3  py-3 center">
@@ -100,7 +73,6 @@
           <div class="col-lg-1 col-sm-1"></div>
          </div>
         </footer>
-        
        
         
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>

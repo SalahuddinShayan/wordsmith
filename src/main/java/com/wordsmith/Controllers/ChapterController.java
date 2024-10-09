@@ -1,5 +1,8 @@
 package com.wordsmith.Controllers;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +31,9 @@ public class ChapterController {
 	}
 	
 	@RequestMapping("/savechapter")
-    public RedirectView save(@ModelAttribute("chapter")Chapter chapter,RedirectAttributes redirectAttributes){    
+    public RedirectView save(@ModelAttribute("chapter")Chapter chapter,RedirectAttributes redirectAttributes){  
+		Timestamp instant= Timestamp.from(Instant.now());
+		chapter.setPostedOn(instant);
 		cr.save(chapter);
 		RedirectView redirectView= new RedirectView("/chapterlist",true);
 		redirectAttributes.addAttribute("NovelName", chapter.getNovelName());
@@ -47,7 +52,6 @@ public class ChapterController {
 	public String Chapter(@PathVariable long chapterId, Model m) {
 		Chapter chapter = cr.getReferenceById(chapterId);
 		m.addAttribute("chapter",chapter);
-		System.out.println("chapter");
 		return "chaptertemplate";
 	}
 	
@@ -69,5 +73,18 @@ public class ChapterController {
 		return redirectView;
 	}
 	
+	@RequestMapping("/latest/{novelname}")
+	public String latestChapters(@PathVariable String novelname, Model model) {
+		model.addAttribute("Chapters", cr.Latest(novelname));
+		return "lc";
+	
+	}
+	
+	@RequestMapping("/latest1/{novelname}")
+	public String latestChapter(@PathVariable String novelname, Model model) {
+		model.addAttribute("Chapter", cr.Latest1(novelname));
+		return "ch";
+	
+	}
 
 }

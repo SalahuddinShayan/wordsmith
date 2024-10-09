@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -36,7 +37,7 @@
       <td>${chapter.novelName}</td>
       <td>${chapter.chapterNo}</td>
       <td>${chapter.title}</td>
-      <td>${chapter.postedOn}</td>
+      <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${chapter.postedOn}" /></td>
       <td>${chapter.keywords}</td>
       <td>${chapter.content}</td>
       <td><a href="chapter/${chapter.chapterId}" class="btn btn-primary"> View</a></td> 

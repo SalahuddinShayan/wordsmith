@@ -5,6 +5,7 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Entity
 public class Novel {
@@ -16,7 +17,8 @@ public class Novel {
 	@Column(unique=true)
 	private String NovelName;
 	
-	@Column
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
 	private byte[] NovelImage;
 	
 	@Column
@@ -36,6 +38,9 @@ public class Novel {
 	
 	@Column
 	private String Keywords;
+	
+	@Column
+	private String Status;
 
 	public int getNovelId() {
 		return NovelId;
@@ -108,6 +113,14 @@ public class Novel {
 
 	public void setKeywords(String keywords) {
 		Keywords = keywords;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
 	}
 	
 	
