@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
@@ -14,11 +15,11 @@ public class WebSecurityConfig {
 	
 	@Bean
 	SecurityFilterChain web(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authorizeHttpRequests) ->
+        http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests((authorizeHttpRequests) ->
         authorizeHttpRequests
-        .requestMatchers("/xyz").authenticated()
+        .requestMatchers("/novellist","/deletenovel","/chapterlist","/deletechapter").authenticated()
         .anyRequest().permitAll()
-        ).csrf(AbstractHttpConfigurer::disable);
+        ).csrf(AbstractHttpConfigurer::disable).formLogin(withDefaults());
         return http.build();
     }
 
