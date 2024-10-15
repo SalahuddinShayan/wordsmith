@@ -15,7 +15,7 @@
 <body onload="ChapStyle()">
 
 <nav class="navbar navbar-light bg-az navbar-expand-md" >
-            <a href="../home" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="../images/Yin Yang Dragon.jpg" width="40" height="40"  alt=""></a>
+            <a href="../home" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="../images/logo.png" width="40" height="40"  alt=""></a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" >
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,14 +38,14 @@
         </div>
         
          <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
-         <div class="col-lg-8 col-sm-10  py-3 stm"><a href ="../home">Eastern Word Smith</a><a>/</a><a  href="../novel/${chapter.novelName}">${chapter.novelName}</a><a>/</a><a  href = "${chapter.chapterId}">Chapter ${chapter.chapterNo}</a></div>
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
+         <div class="col-1 col-lg-2 py-3"></div>
+         <div class="col-10 col-lg-8 py-3 stm"><a href ="../home">Eastern Word Smith</a><a>/</a><a  href="../novel/${chapter.novelName}">${chapter.novelName}</a><a>/</a><a  href = "${chapter.chapterId}">Chapter ${chapter.chapterNo}</a></div>
+         <div class="col-1 col-lg-2 py-3"></div>
          </div>
         
          <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
-         <div class="col-lg-8 col-sm-10  py-3">
+         <div class="col-1 col-lg-2 py-3 "></div>
+         <div class="col-10 col-lg-8 py-3">
          <a id="DMS" onclick="lightSwitch()" ><img class ="icon" alt="" src="../images/moon.png"></a>
          <a id="Minus" onclick="TextSizeDecrease()" ><img class ="icon" alt="" src="../images/minus.png"></a>
          <a id="Default" onclick="TextSizeDefault()" ><img class ="icon" alt="" src="../images/alpha.png"></a>
@@ -64,20 +64,20 @@
          <a href="../novel/${chapter.novelName}"><img class ="icon" alt="" src="../images/home.png"></a>
          <a href="../chapter-next/${chapter.chapterId}"><img class ="icon" alt="" src="../images/right-arrow.png"></a>
          </div>
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
+         <div class="col-1 col-lg-2 py-3 "></div>
          </div>
         
         <footer class ="stm">
          <div  Style = "margin-top: 30px;" class = "row">
-          <div class="col-lg-1 col-sm-1"></div>
-          <div class="col-lg-10 col-sm-10 center bdt">
+          <div class="col-1"></div>
+          <div class="col-10 center bdt">
            <a href="../imageslogo">Images&Logo</a>
            <a>|</a>
            <a href="../novels">Novels</a>
            <a>|</a>
            <a href="../contactus">Contact Us</a>
           </div>
-          <div class="col-lg-1 col-sm-1"></div>
+          <div class="col-1"></div>
          </div>
         </footer>
        

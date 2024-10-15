@@ -4,7 +4,6 @@
   }
 
 .navbar a:hover {
-    background-color: #0275d8;
     color: #2D3047;
   } 
 
@@ -126,8 +125,14 @@ height: 100%;
     text-overflow:ellipsis;
 }
 
+.h{
+	display: block;
+  	height: 10rem;
+  	overflow: hidden;
+  	text-overflow:ellipsis;
+}
+
 .icont{
 	width: 100%;
-	padding-bottom: 15px;
 	
 }

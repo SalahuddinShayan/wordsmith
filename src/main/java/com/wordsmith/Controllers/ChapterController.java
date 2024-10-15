@@ -82,7 +82,7 @@ public class ChapterController {
 	
 	@RequestMapping("/latest1/{novelname}")
 	public String latestChapter(@PathVariable String novelname, Model model) {
-		model.addAttribute("Chapter", cr.Latest1(novelname));
+		model.addAttribute("chapter", cr.Latest1(novelname));
 		return "ch";
 	
 	}

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:forEach var="chapter" items="${Chapters}">
 <div class = "row">
-<div class="col-lg-6 col-sm-6  py-2 stm oneliner"><a href="chapter/${chapter.chapterId}">Chapter ${chapter.chapterNo}: ${chapter.title}</a></div>
-<div class="col-lg-6 col-sm-6  py-2 right"><fmt:formatDate pattern="dd MMM"  value="${chapter.postedOn}" /></div>
+<div class="col-6 py-1 py-lg-2 stm oneliner"><a href="chapter/${chapter.chapterId}">Chapter ${chapter.chapterNo}: ${chapter.title}</a></div>
+<div class="col-6 py-1 py-lg-2 right"><fmt:formatDate pattern="dd MMM"  value="${chapter.postedOn}" /></div>
 </div>
 </c:forEach>

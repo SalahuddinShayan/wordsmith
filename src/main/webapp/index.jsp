@@ -32,12 +32,19 @@
         </nav>
         
         <div  Style = "margin-top: 30px;" class = "row">
-        	<div class="col-lg-2 col-sm-2  py-3 "></div>
-        	<div class="col-lg-8 col-sm-8  py-3 ">
-        		<h5 class ="bg-az">Popular Today</h5>
-         		<div  Style = "margin-top: 30px;" class = "row">
+        	<div class="col-1 col-lg-2 py-3 "></div>
+        	<div class="col-10 col-lg-8 bg-az">
+        	<h5>Popular Today</h5>
+        	</div>
+        	<div class="col-1 col-lg-2 py-3 "></div>
+        </div>
+        
+        <div class = "row">
+        	<div class="col-2  py-3 "></div>
+        	<div class="col-8  py-3 ">
+        		<div class = "row">
            			<c:forEach var="novel" items="${Novels}">
-           				<div class="col-lg-3 col-sm-6  py-3 center stm oneliner">
+           				<div class="col-6 col-lg-3 py-3 center stm oneliner">
            					<a href ="novel/${novel.novelName}">
                					<img width="100%" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
                					alt="images/No-Image.png" onerror="this.src='images/No-Image.png';"> 
@@ -49,31 +56,31 @@
            			</c:forEach>
          		</div>
          	</div>
-        	<div class="col-lg-2 col-sm-2  py-3 "></div>
+        	<div class="col-2  py-3 "></div>
         </div>
         
         <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-2 col-sm-1 "></div>
-         <div class="col-lg-8 col-sm-10 bg-az">
+         <div class="col-1 col-lg-2"></div>
+         <div class="col-10 col-lg-8 bg-az">
           <h4>Latest Updates:</h4>
          </div>
-         <div class="col-lg-2 col-sm-1"></div>
+         <div class="col-1 col-lg-2"></div>
         </div>
         
         <div class = "row">
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
-         <div class="col-lg-8 col-sm-10  py-3 bd-az">
+         <div class="col-1 col-lg-2 py-3 "></div>
+         <div class="col-10 col-lg-8 py-3 bd-az">
           <div class = "row">
            <c:forEach var="novel" items="${Novelsu}">
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-12 col-lg-6">
              <div class = "row">
-              <div class="col-lg-3 col-sm-3  py-3 center">
+              <div class="col-3  py-lg-3 center">
                <a href ="novel/${novel.novelName}">
                  <img class= "icont" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
                  alt="images/No_image_available.svg.png" onerror="this.src='images/No_image_available.svg.png';"> 
                </a>
               </div>
-              <div class="col-lg-9 col-sm-9  py-3">
+              <div class="col-9  py-lg-3">
                <h6 class ="stm oneliner"><a href ="novel/${novel.novelName}">${novel.novelName}</a></h6>
                <c:import var="data" url="latest/${novel.novelName}" charEncoding="UTF-8"/>  
 			   <c:out value="${data}" escapeXml="false"/>
@@ -83,21 +90,21 @@
            </c:forEach>
           </div> 
          </div>
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
+         <div class="col-1 col-lg-2 py-3 "></div>
         </div>
         
         
         <footer class ="stm">
          <div  Style = "margin-top: 30px;" class = "row">
-          <div class="col-lg-1 col-sm-1"></div>
-          <div class="col-lg-10 col-sm-10 center bdt">
+          <div class="col-1"></div>
+          <div class="col-10 center bdt">
            <a href="imageslogo">Images&Logo</a>
            <a>|</a>
            <a href="novels">Novels</a>
            <a>|</a>
            <a href="contactus">Contact Us</a>
           </div>
-          <div class="col-lg-1 col-sm-1"></div>
+          <div class="col-1"></div>
          </div>
         </footer>
         

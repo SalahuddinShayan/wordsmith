@@ -16,7 +16,7 @@
 <body>
 
 <nav class="navbar navbar-light bg-az navbar-expand-md sticky-top" >
-            <a href="../home" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="../images/Yin Yang Dragon.jpg" width="40" height="40"  alt=""></a>
+            <a href="../home" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="../images/logo.png" width="40" height="40"  alt=""></a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" >
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,71 +33,71 @@
         </nav>
         
         <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
-         <div class="col-lg-8 col-sm-10  py-3">
+         <div class="col-1 col-lg-2 py-3 "></div>
+         <div class="col-10 col-lg-8 py-3">
          <div class="center">
          <a><img alt="" src="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>"></a><br>
          </div>
          <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-4 col-sm-4  py-3 right"><a>Name</a><a> : </a></div>
-         <div class="col-lg-8 col-sm-8  py-3 "><a>${novel.novelName}</a></div>
+         <div class="col-4  py-3 right"><a>Name</a><a> : </a></div>
+         <div class="col-8  py-3 "><a>${novel.novelName}</a></div>
          </div>
          <div  class = "row">
-         <div class="col-lg-4 col-sm-4  py-3 right"><a>Original Language</a><a> : </a></div>
-         <div class="col-lg-8 col-sm-8  py-3 "><a>${novel.originalLanguage}</a></div>
+         <div class="col-4  py-3 right"><a>Original Language</a><a> : </a></div>
+         <div class="col-8  py-3 "><a>${novel.originalLanguage}</a></div>
          </div>
          <div  class = "row">
-         <div class="col-lg-4 col-sm-4  py-3 right"><a>Author</a><a> : </a></div>
-         <div class="col-lg-8 col-sm-8  py-3 "><a>${novel.author}</a></div>
+         <div class="col-4  py-3 right"><a>Author</a><a> : </a></div>
+         <div class="col-8  py-3 "><a>${novel.author}</a></div>
          </div>
          <div  class = "row">
-         <div class="col-lg-4 col-sm-4  py-3 right"><a>Genre</a><a> : </a></div>
-         <div class="col-lg-8 col-sm-8  py-3 "><a>${novel.genre}</a></div>
+         <div class="col-4  py-3 right"><a>Genre</a><a> : </a></div>
+         <div class="col-8  py-3 "><a>${novel.genre}</a></div>
          </div>
          <div  class = "row">
-         <div class="col-lg-4 col-sm-4  py-3 right"><a>Status</a><a> : </a></div>
-         <div class="col-lg-8 col-sm-8  py-3 "><a>${novel.status}</a></div>
+         <div class="col-4  py-3 right"><a>Status</a><a> : </a></div>
+         <div class="col-8  py-3 "><a>${novel.status}</a></div>
          </div>
          <div  class = "row">
-         <div class="col-lg-4 col-sm-4  py-3 right"><a>Alternate Names</a><a> : </a></div>
-         <div class="col-lg-8 col-sm-8  py-3 "><a>${novel.keywords}</a></div>
+         <div class="col-4 py-3 right"><a>Alternate Names</a><a> : </a></div>
+         <div class="col-8  py-3 "><a>${novel.keywords}</a></div>
          </div>
          <div  class = "row">
-         <div class="col-lg-4 col-sm-4  py-3 right"><a>Description</a><a> : </a></div>
-         <div class="col-lg-8 col-sm-8  py-3 "><a>${novel.description}</a></div>
+         <div class="col-4  py-3 right"><a>Description</a><a> : </a></div>
+         <div class="col-8  py-3 "><a>${novel.description}</a></div>
          </div>
          </div>
-         <div class="col-lg-2 col-sm-1  py-3 "></div>
+         <div class="col-1 col-lg-2 py-3 "></div>
          </div>
          
          
          <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-3 col-sm-1  py-3 "></div>
-         <div class="col-lg-6 col-sm-10  py-3 ">
+         <div class="col-1 col-lg-3 py-3 "></div>
+         <div class="col-10 col-lg-6 py-3 ">
          <h4 class="center">Table Of Content</h4>
          <c:forEach var="chapter" items="${Chapters}">
          <div  class = "row">
-         <div class="col-lg-8 col-sm-8  py-3 stm"><a href="../chapter/${chapter.chapterId}">Chapter ${chapter.chapterNo} : ${chapter.title}</a></div>
-         <div class="col-lg-4 col-sm-4  py-3 right"><a><fmt:formatDate type="date" value="${chapter.postedOn}" /></a></div>
+         <div class="col-8  py-3 stm"><a href="../chapter/${chapter.chapterId}">Chapter ${chapter.chapterNo} : ${chapter.title}</a></div>
+         <div class="col-4  py-3 right"><a><fmt:formatDate type="date" value="${chapter.postedOn}" /></a></div>
          </div>
          </c:forEach>
          </div>
-         <div class="col-lg-3 col-sm-1  py-3 "></div>
+         <div class="col-1 col-lg-3 py-3 "></div>
          </div>
         
         
         
         <footer class ="stm">
          <div  Style = "margin-top: 30px;" class = "row">
-          <div class="col-lg-1 col-sm-1"></div>
-          <div class="col-lg-10 col-sm-10 center bdt">
+          <div class="col-1"></div>
+          <div class="col-10 center bdt">
            <a href="../imageslogo">Images&Logo</a>
            <a>|</a>
            <a href="../novels">Novels</a>
            <a>|</a>
            <a href="../contactus">Contact Us</a>
           </div>
-          <div class="col-lg-1 col-sm-1"></div>
+          <div class="col-1"></div>
          </div>
         </footer>
        

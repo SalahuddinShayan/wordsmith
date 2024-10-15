@@ -27,7 +27,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	@Query(value = "SELECT * FROM chapter WHERE novel_name = :novelname order by posted_on desc limit 3;", nativeQuery = true)
     List<Chapter>  Latest(@Param("novelname") String novelname);
 	
-	@Query(value = "SELECT chapter_no FROM chapter WHERE novel_name = :novelname order by posted_on desc limit 1;", nativeQuery = true)
-    String  Latest1(@Param("novelname") String novelname);
+	@Query(value = "SELECT * FROM chapter WHERE novel_name = :novelname order by posted_on desc limit 1;", nativeQuery = true)
+    Chapter  Latest1(@Param("novelname") String novelname);
 
 }

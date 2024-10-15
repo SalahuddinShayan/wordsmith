@@ -33,11 +33,12 @@
         </nav>
         
         <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-lg-3 col-sm-1  py-3 "></div>
-         <div class="col-lg-6 col-sm-10  py-3 bd">
+         <div class="col-1 col-lg-3 py-3 "></div>
+         <div class="col-10 col-lg-6 py-3 bd">
           <c:forEach var="novel" items="${Novels}">
            <div class = "row bdt">
-            <div class="col-lg-3 col-sm-3  py-3 center">
+            <div class="col-4 py-3 d-lg-none"></div>
+            <div class="col-4 col-lg-3 py-3 center">
              <a href ="novel/${novel.novelName}">
                <img width="100%" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
                alt="images/No_image_available.svg.png" onerror="this.src='images/No_image_available.svg.png';"> 
@@ -45,29 +46,30 @@
              <a> ${novel.originalLanguage}  </a> <BR>
              <a>${novel.genre}  </a>
             </div>
-            <div class="col-lg-9 col-sm-9  py-3">
-             <h6 class ="stm"><a href ="novel/${novel.novelName}">${novel.novelName}</a></h6>
+            <div class="col-4 py-3 d-lg-none"></div>
+            <div class="col-12 col-lg-9 py-3">
+             <h6 class ="stm oneliner"><a href ="novel/${novel.novelName}">${novel.novelName}</a></h6>
              <a>${novel.status}  </a><br><br>
-             ${novel.description}
+             <div class="">${novel.description}</div>
             </div>
            </div>
           </c:forEach>
          </div>
-         <div class="col-lg-3 col-sm-1  py-3 "></div>
+         <div class="col-1 col-lg-3 py-3 "></div>
         </div>
         
         
         <footer class ="stm">
          <div  Style = "margin-top: 30px;" class = "row">
-          <div class="col-lg-1 col-sm-1"></div>
-          <div class="col-lg-10 col-sm-10 center bdt">
+          <div class="col-1"></div>
+          <div class="col-10 center bdt">
            <a href="imageslogo">Images&Logo</a>
            <a>|</a>
            <a href="novels">Novels</a>
            <a>|</a>
            <a href="contactus">Contact Us</a>
           </div>
-          <div class="col-lg-1 col-sm-1"></div>
+          <div class="col-1"></div>
          </div>
         </footer>
        
