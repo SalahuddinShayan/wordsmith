@@ -4,3 +4,9 @@ Prototype - 1.5:
 -Created Contact Us and Image&Logo Page.
 -Created error controller.
 -Created logback system.
+
+-> Build Failed Reason unknown
+
+Prototype - 1.6:
+
+-Disableing Logging
