@@ -9,4 +9,10 @@ Prototype - 1.5:
 
 Prototype - 1.6:
 
--Disableing Logging
+-Disabling Logging
+
+-> Build Failed
+
+Prototype - 1.7:
+
+-enabling Logging
