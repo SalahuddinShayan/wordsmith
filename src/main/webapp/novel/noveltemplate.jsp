@@ -36,7 +36,8 @@
          <div class="col-1 col-lg-2 py-3 "></div>
          <div class="col-10 col-lg-8 py-3">
          <div class="center">
-         <a><img alt="" src="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>"></a><br>
+         <a><img width="40%" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
+               alt="images/No_image_available.svg.png" onerror="this.src='../images/No-Image.png';"></a><br>
          </div>
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-4  py-3 right"><a>Name</a><a> : </a></div>
@@ -64,7 +65,11 @@
          </div>
          <div  class = "row">
          <div class="col-4  py-3 right"><a>Description</a><a> : </a></div>
-         <div class="col-8  py-3 "><a>${novel.description}</a></div>
+         <div class="col-8  py-3 d-none d-md-block">${novel.description}</div>
+         </div>
+         <div  class = "row d-lg-none">
+         <div class="col-1 py-3 "><a></a></div>
+         <div class="col-11  py-3 ">${novel.description}</div>
          </div>
          </div>
          <div class="col-1 col-lg-2 py-3 "></div>

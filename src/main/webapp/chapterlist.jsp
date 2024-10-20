@@ -65,7 +65,7 @@
   <form:label path="keywords">Keywords</form:label>
   <form:input path="keywords"/>
   <form:label path="content">Content</form:label>
-  <form:input path="content" rows="100" class="form-control md-textarea"/>
+  <form:textarea path="content" rows = "5" cols = "180"/>
   <input type="submit" value="post Chapter" />
   </form:form>
 

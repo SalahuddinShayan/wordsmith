@@ -44,18 +44,9 @@
          </div>
         
          <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-1 col-lg-2 py-3 "></div>
-         <div class="col-10 col-lg-8 py-3">
-         <a id="DMS" onclick="lightSwitch()" ><img class ="icon" alt="" src="../images/moon.png"></a>
-         <a id="Minus" onclick="TextSizeDecrease()" ><img class ="icon" alt="" src="../images/minus.png"></a>
-         <a id="Default" onclick="TextSizeDefault()" ><img class ="icon" alt="" src="../images/alpha.png"></a>
-         <a id="Plus" onclick="TextSizeIncrease()" ><img class ="icon" alt="" src="../images/plus-sign.png"></a>
-         <a href="../chapter-previous/${chapter.chapterId}"><img class ="icon" alt="" src="../images/arrow-left.png"></a>
-         <a href="../novel/${chapter.novelName}"><img class ="icon" alt="" src="../images/home.png"></a>
-         <a href="../chapter-next/${chapter.chapterId}"><img class ="icon" alt="" src="../images/right-arrow.png"></a>
-         <section class ="wcontainer" id="CS">
-         ${chapter.content}
-         </section>
+         <div class="col-1 col-lg-2 d-none d-md-block py-3 "></div>
+         <div class="col-12 col-lg-8 py-3">
+         <div class ="center">
          <a id="DMS" onclick="lightSwitch()" ><img class ="icon" alt="" src="../images/moon.png"></a>
          <a id="Minus" onclick="TextSizeDecrease()" ><img class ="icon" alt="" src="../images/minus.png"></a>
          <a id="Default" onclick="TextSizeDefault()" ><img class ="icon" alt="" src="../images/alpha.png"></a>
@@ -64,7 +55,20 @@
          <a href="../novel/${chapter.novelName}"><img class ="icon" alt="" src="../images/home.png"></a>
          <a href="../chapter-next/${chapter.chapterId}"><img class ="icon" alt="" src="../images/right-arrow.png"></a>
          </div>
-         <div class="col-1 col-lg-2 py-3 "></div>
+         <section class ="wcontainer" id="CS">
+         ${chapter.content}
+         </section>
+         <div class ="center">
+         <a id="DMS" onclick="lightSwitch()" ><img class ="icon" alt="" src="../images/moon.png"></a>
+         <a id="Minus" onclick="TextSizeDecrease()" ><img class ="icon" alt="" src="../images/minus.png"></a>
+         <a id="Default" onclick="TextSizeDefault()" ><img class ="icon" alt="" src="../images/alpha.png"></a>
+         <a id="Plus" onclick="TextSizeIncrease()" ><img class ="icon" alt="" src="../images/plus-sign.png"></a>
+         <a href="../chapter-previous/${chapter.chapterId}"><img class ="icon" alt="" src="../images/arrow-left.png"></a>
+         <a href="../novel/${chapter.novelName}"><img class ="icon" alt="" src="../images/home.png"></a>
+         <a href="../chapter-next/${chapter.chapterId}"><img class ="icon" alt="" src="../images/right-arrow.png"></a>
+         </div>
+         </div>
+         <div class="col-1 col-lg-2 d-none d-md-block py-3 "></div>
          </div>
         
         <footer class ="stm">

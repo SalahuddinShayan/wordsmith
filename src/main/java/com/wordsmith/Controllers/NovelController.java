@@ -108,5 +108,10 @@ public class NovelController {
 			model.addAttribute("Novels",NovelRepo.NovelUpdates());
 			return "updates";
 	}
+	
+	@RequestMapping("/imageslogo")
+	public String images() {
+			return "images&logo";
+	}
 
 }
