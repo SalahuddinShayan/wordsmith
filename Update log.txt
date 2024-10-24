@@ -16,3 +16,8 @@ Prototype - 1.6:
 Prototype - 1.7:
 
 -enabling Logging
+
+
+Prototype - 1.8:
+
+->removed logging
