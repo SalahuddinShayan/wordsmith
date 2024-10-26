@@ -27,3 +27,8 @@ Prototype - 1.9:
 
 ->Changed deployment port
 
+
+V-1.01
+
+->fixed previous and next button for the first and last chapter respectively.
+

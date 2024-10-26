@@ -48,7 +48,7 @@
             </div>
             <div class="col-4 py-3 d-lg-none"></div>
             <div class="col-12 col-lg-9 py-3">
-             <h6 class ="stm oneliner"><a href ="novel/${novel.novelName}">${novel.novelName}</a></h6>
+             <h6 class ="stm"><a href ="novel/${novel.novelName}">${novel.novelName}</a></h6>
              <a>${novel.status}  </a><br><br>
              <div class="">${novel.description}</div>
             </div>

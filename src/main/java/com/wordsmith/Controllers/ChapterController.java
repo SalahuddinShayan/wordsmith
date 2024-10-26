@@ -59,18 +59,31 @@ public class ChapterController {
 	public RedirectView nextChapter(@PathVariable long chapterId) {
 		Chapter current =cr.getReferenceById(chapterId);
 		String novelName= current.getNovelName();
-		String nextId = Long.toString(cr.NextChapterId(novelName, chapterId));
+		try {
+		long nId = cr.NextChapterId(novelName, chapterId);
+		String nextId = Long.toString(nId);
 		RedirectView redirectView= new RedirectView("/chapter/" + nextId,true);
 		return redirectView;
+		}
+		catch(Exception  e) {
+			RedirectView redirectView= new RedirectView("/novel/"+ novelName ,true);
+			return redirectView;
+		}
 	}
 	
 	@RequestMapping("chapter-previous/{chapterId}")
 	public RedirectView previousChapter(@PathVariable long chapterId) {
 		Chapter current =cr.getReferenceById(chapterId);
 		String novelName= current.getNovelName();
+		try {
 		String nextId = Long.toString(cr.PreviousChapterId(novelName, chapterId));
 		RedirectView redirectView= new RedirectView("/chapter/" + nextId,true);
 		return redirectView;
+		}
+		catch(Exception  e) {
+			RedirectView redirectView= new RedirectView("/novel/"+ novelName ,true);
+			return redirectView;
+		}
 	}
 	
 	@RequestMapping("/latest/{novelname}")
