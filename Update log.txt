@@ -32,3 +32,15 @@ V-1.01
 
 ->fixed previous and next button for the first and last chapter respectively.
 
+
+V-1.02
+
+->Corrected the encoding for a few pages to UTF-8.
+
+
+V-1.03
+
+->enabled SSL only
+
+
+
