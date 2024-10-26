@@ -48,5 +48,9 @@ V-1.04
 ->disabled SSL only
 
 
+V 1.05
+->reverting to 1.02
+
+
 
 
