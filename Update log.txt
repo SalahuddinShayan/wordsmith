@@ -43,4 +43,10 @@ V-1.03
 ->enabled SSL only
 
 
+V-1.04
+
+->disabled SSL only
+
+
+
 
