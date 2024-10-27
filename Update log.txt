@@ -52,5 +52,14 @@ V 1.05
 ->reverting to 1.02
 
 
+V 1.06
+-> Adding the function to view messages.
+
+
+V 1.061
+-> Adding view messages to Spring Security.
+
+
+
 
 

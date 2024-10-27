@@ -17,7 +17,7 @@ public class WebSecurityConfig {
 	SecurityFilterChain web(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests((authorizeHttpRequests) ->
         authorizeHttpRequests
-        .requestMatchers("/novellist","/deletenovel","/chapterlist","/deletechapter").authenticated()
+        .requestMatchers("/novellist","/deletenovel","/chapterlist","/deletechapter","/messages").authenticated()
         .anyRequest().permitAll()
         ).csrf(AbstractHttpConfigurer::disable).formLogin(withDefaults());
         return http.build();
