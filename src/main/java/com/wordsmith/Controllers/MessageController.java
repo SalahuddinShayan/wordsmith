@@ -44,5 +44,11 @@ public class MessageController {
 	public String sent() {
 		return "sent";
 	}
+	
+	@RequestMapping("/messages")
+	public String messaegs(Model m) {
+		m.addAttribute("Messages", mr.findAll());
+		return "messages";
+	}
 
 }
