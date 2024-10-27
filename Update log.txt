@@ -59,6 +59,9 @@ V 1.06
 V 1.061
 -> Adding view messages to Spring Security.
 
+V 1.062
+-> corrected the directory of messages page.
+
 
 
 
