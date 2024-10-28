@@ -70,6 +70,10 @@ V 1.063
 ->Adding Adsense in each page.
 
 
+V 1.064
+->Enabling Google Analytics.
+
+
 
 
 
