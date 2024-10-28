@@ -74,6 +74,10 @@ V 1.064
 ->Enabling Google Analytics.
 
 
+V 1.064.1
+->removed the misplaced character on homepage.
+
+
 
 
 

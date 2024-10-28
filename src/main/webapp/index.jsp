@@ -10,7 +10,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-0D3MMVLTED');
-</script>s
+</script>
 <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="google-adsense-account" content="ca-pub-3020770276580291">
