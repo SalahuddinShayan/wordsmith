@@ -16,7 +16,7 @@
 <div class ="center" >
 <h1>Error Code:${errorCode}</h1>
 <h1>${errorMessage}</h1>
-<a class="btn btn-primary" href="home"><i class="fas fa-home "></i>Go Home</a>
+<a class="btn btn-primary" href="https://easternwordsmith.com/"><i class="fas fa-home "></i>Go Home</a>
 </div>
 
 </body>

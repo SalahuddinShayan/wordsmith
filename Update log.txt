@@ -63,6 +63,13 @@ V 1.062
 -> corrected the directory of messages page.
 
 
+V 1.063
+-> Corrected the view for messages.
+->Correcting the queries for home page.
+->Correcting Home link for each page.
+->Adding Adsense in each page.
+
+
 
 
 

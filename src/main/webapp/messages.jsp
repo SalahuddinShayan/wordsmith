@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Novel list</title>
+<title>All Messages:</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
     <link rel="stylesheet" href="stylesheet.css" >
@@ -15,7 +15,7 @@
 <body onload="LocalTimeZone()">
 
 <div class="starter-template">
-   <h1>All messages:</h1>
+   <h1>All Messages:</h1>
    <table
     class="table table-striped table-hover table-condensed table-bordered">
     <tr>
@@ -35,6 +35,7 @@
       <td>${message.email}</td>
       <td>${message.subject}</td>
       <td>${message.message}</td>
+       <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${message.timestamp}" /></td>
       <td><form method="post" action="deletenovel">
       		<input name="MessageId"  value="${message.messageId}" readonly="true" style="display:none;"/>
       		<input class ="btn btn-primary" type="submit" value="Delete" />
