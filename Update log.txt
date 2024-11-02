@@ -76,7 +76,13 @@ V 1.064
 
 V 1.064.1
 ->removed the misplaced character on homepage.
+->Query fixed for latest chapter.
 
+
+V 1.065
+->Fixed query for next and previous chapter.
+->Added Disqus Plugin.
+->Latest Chapter Query Ordered By ChapterId
 
 
 
