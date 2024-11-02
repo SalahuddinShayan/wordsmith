@@ -89,6 +89,9 @@ V 1.065.1
 ->corrected the format of Discus div
 ->Added notice
 
+V 1.065.2
+->changed the system for auto generation of IDs.
+
 
 
 
