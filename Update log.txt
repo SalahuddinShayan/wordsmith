@@ -85,5 +85,10 @@ V 1.065
 ->Latest Chapter Query Ordered By ChapterId
 
 
+V 1.065.1
+->corrected the format of Discus div
+->Added notice
+
+
 
 

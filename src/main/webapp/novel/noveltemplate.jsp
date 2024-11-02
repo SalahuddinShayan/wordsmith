@@ -100,7 +100,13 @@
          <div class="col-1 col-lg-3 py-3 "></div>
          </div>
         
-        <div id="disqus_thread"></div>
+        <div  Style = "margin-top: 30px;" class = "row">
+         <div class="col-1 col-lg-3 py-3 "></div>
+         <div class="col-10 col-lg-6 py-3 ">
+         <div id="disqus_thread"></div>
+         </div>
+         <div class="col-1 col-lg-3 py-3 "></div>
+         </div>
         
         <footer class ="stm">
          <div  Style = "margin-top: 30px;" class = "row">

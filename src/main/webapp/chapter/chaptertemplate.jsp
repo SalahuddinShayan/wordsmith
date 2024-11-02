@@ -52,6 +52,20 @@
          <div class="col-10 col-lg-8 py-3 stm"><a href ="../home">Eastern Word Smith</a><a>/</a><a  href="../novel/${chapter.novelName}">${chapter.novelName}</a><a>/</a><a  href = "${chapter.chapterId}">Chapter ${chapter.chapterNo}</a></div>
          <div class="col-1 col-lg-2 py-3"></div>
          </div>
+         
+         <div  Style = "margin-top: 30px;" class = "row">
+        	<div class="col-1 col-lg-2 py-3 "></div>
+        	<div class="col-10 col-lg-8 bd-az">
+        	<h5>Notice:</h5>
+        	<p>Hello Guys! It has come to our attention that the chapter navigation buttons were not working correctly. We are happy to report 
+        	   that the issue has been resolved. We are also happy to inform you that as of today Disqus is live on the website. We hope 
+        	   this enhances your reading experience.
+        	</p>
+        	<p>In the future if you guys face any problem, or if you just wanna talk to us, please reach us through the Contact US Page. 
+        	</p>
+        	</div>
+        	<div class="col-1 col-lg-2 py-3 "></div>
+        </div>
         
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 d-none d-md-block py-3 "></div>
@@ -81,7 +95,13 @@
          <div class="col-1 col-lg-2 d-none d-md-block py-3 "></div>
          </div>
         
-        <div id="disqus_thread"></div>
+        <div  Style = "margin-top: 30px;" class = "row">
+         <div class="col-1 col-lg-3 py-3 "></div>
+         <div class="col-10 col-lg-6 py-3 ">
+         <div id="disqus_thread"></div>
+         </div>
+         <div class="col-1 col-lg-3 py-3 "></div>
+         </div>
         
         <footer class ="stm">
          <div  Style = "margin-top: 30px;" class = "row">
