@@ -92,6 +92,9 @@ V 1.065.1
 V 1.065.2
 ->changed the system for auto generation of IDs.
 
+V 1.066
+->added js file for money tag.
+
 
 
 
