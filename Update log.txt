@@ -95,6 +95,10 @@ V 1.065.2
 V 1.066
 ->added js file for money tag.
 
+V 1.067
+->removed js file for money tag.
+->added code for popads.
+
 
 
 
