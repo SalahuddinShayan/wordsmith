@@ -45,7 +45,7 @@
       <td>${message.subject}</td>
       <td>${message.message}</td>
        <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${message.timestamp}" /></td>
-      <td><form method="post" action="deletenovel">
+      <td><form method="post" action="deletemessage">
       		<input name="MessageId"  value="${message.messageId}" readonly="true" style="display:none;"/>
       		<input class ="btn btn-primary" type="submit" value="Delete" />
       		</form>

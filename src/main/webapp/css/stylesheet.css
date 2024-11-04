@@ -88,8 +88,9 @@ height: 100%;
 }
 
 .Dscroll{
-	max-height: 100px;
-	overflow-y: scroll;
+	display: block; 
+	height: 200px; 
+	overflow: auto;
 }
 
 .stm a{
@@ -137,3 +138,10 @@ height: 100%;
 	width: 100%;
 	
 }
+
+table {
+	display: block; 
+	height: 600px; 
+	overflow: auto;
+}
+

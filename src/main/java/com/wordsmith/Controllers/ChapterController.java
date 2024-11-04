@@ -32,8 +32,17 @@ public class ChapterController {
 	
 	@RequestMapping("/savechapter")
     public RedirectView save(@ModelAttribute("chapter")Chapter chapter,RedirectAttributes redirectAttributes){  
+		Long cid = chapter.getChapterId();
+		if (cid == 0) {
+		long id = cr.Last() + 1;
+		chapter.setChapterId(id);
 		Timestamp instant= Timestamp.from(Instant.now());
 		chapter.setPostedOn(instant);
+		}
+		else {
+			Chapter chapter2= cr.getReferenceById(cid);
+			chapter.setPostedOn(chapter2.getPostedOn());
+		}
 		cr.save(chapter);
 		RedirectView redirectView= new RedirectView("/chapterlist",true);
 		redirectAttributes.addAttribute("NovelName", chapter.getNovelName());

@@ -99,6 +99,12 @@ V 1.067
 ->removed js file for money tag.
 ->added code for popads.
 
+V 1.068
+-> Created a new system for the generation of the ID of messages and chapter
+-> Created the delete message function.
+-> Corrected the view for the chapter list.
+-> updated the edit function of the chapter table so the date does not change.
+
 
 
 

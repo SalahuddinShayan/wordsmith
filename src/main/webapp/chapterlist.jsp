@@ -5,6 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style><%@include file="css/stylesheet.css"%></style>
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -36,7 +37,7 @@
      <th>Chapter Title</th>
      <th>Posted On</th>
      <th>Keywords</th>
-     <th>Chapter Content</th>
+     <th class="center">Chapter Content</th>
      <th>Preview</th>
      <th>Delete</th>
      
@@ -49,7 +50,7 @@
       <td>${chapter.title}</td>
       <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${chapter.postedOn}" /></td>
       <td>${chapter.keywords}</td>
-      <td>${chapter.content}</td>
+      <td class ="Dscroll">${chapter.content}</td>
       <td><a href="chapter/${chapter.chapterId}" class="btn btn-primary"> View</a></td> 
       <td><form method="post" action="deletechapter">
       		<input name="ChapterId"  value="${chapter.chapterId}" readonly="true" style="display:none;"/>
