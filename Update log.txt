@@ -106,5 +106,11 @@ V 1.068
 -> updated the edit function of the chapter table so the date does not change.
 
 
+V 1.069
+-> First try for Ads.txt
+-> Removing the Message from the Chapter Page.
+-> Updated popup ads code.
+
+
 
 

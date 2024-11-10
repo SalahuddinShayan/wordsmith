@@ -23,9 +23,11 @@
 		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript" data-cfasync="false">
 /*<![CDATA[/* */
-(function(){var f=window,u="e0c1aec43ba85c167e1b35ed321dc0d1",t=[["siteId",786+870+430+5145989],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],a=["d3d3LmRpc3BsYXl2ZXJ0aXNpbmcuY29tL2J0cmFuc3BhcmVuY3kubWluLmNzcw==","ZDNtem9rdHk5NTFjNXcuY2xvdWRmcm9udC5uZXQvclgvaHRlY2hhbi5taW4uanM=","d3d3Lmp5emd1c2Vyb3Robi5jb20vbXRyYW5zcGFyZW5jeS5taW4uY3Nz","d3d3LnltbnRxcWhlci5jb20vZ3JwL290ZWNoYW4ubWluLmpz"],n=-1,q,m,r=function(){clearTimeout(m);n++;if(a[n]&&!(1756549029000<(new Date).getTime()&&1<n)){q=f.document.createElement("script");q.type="text/javascript";q.async=!0;var w=f.document.getElementsByTagName("script")[0];q.src="https://"+atob(a[n]);q.crossOrigin="anonymous";q.onerror=r;q.onload=function(){clearTimeout(m);f[u.slice(0,16)+u.slice(0,16)]||r()};m=setTimeout(r,5E3);w.parentNode.insertBefore(q,w)}};if(!f[u]){try{Object.freeze(f[u]=t)}catch(e){}r()}})();
+(function(){var t=window,i="e0c1aec43ba85c167e1b35ed321dc0d1",u=[["siteId",575-888+124+5148264],["minBid",0],["popundersPerIP","3:6"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],g=["d3d3LmRpc3BsYXl2ZXJ0aXNpbmcuY29tL3BtYXR0ZXIubWluLmNzcw==","ZDNtem9rdHk5NTFjNXcuY2xvdWRmcm9udC5uZXQvWHFvdS9kZGlmZi5taW4uanM=","d3d3LnhoYnVsbXBsLmNvbS9vbWF0dGVyLm1pbi5jc3M=","d3d3Lnl2dm1ua21iZi5jb20vZUpNZmh5L3dkaWZmLm1pbi5qcw=="],f=-1,j,w,a=function(){clearTimeout(w);f++;if(g[f]&&!(1757156693000<(new Date).getTime()&&1<f)){j=t.document.createElement("script");j.type="text/javascript";j.async=!0;var o=t.document.getElementsByTagName("script")[0];j.src="https://"+atob(g[f]);j.crossOrigin="anonymous";j.onerror=a;j.onload=function(){clearTimeout(w);t[i.slice(0,16)+i.slice(0,16)]||a()};w=setTimeout(a,5E3);o.parentNode.insertBefore(j,o)}};if(!t[i]){try{Object.freeze(t[i]=u)}catch(e){}a()}})();
 /*]]>/* */
 </script>
+
+
 		 
 </head>
 <body onload="ChapStyle()">
@@ -59,7 +61,7 @@
          <div class="col-1 col-lg-2 py-3"></div>
          </div>
          
-         <div  Style = "margin-top: 30px;" class = "row">
+        <!--<div  Style = "margin-top: 30px;" class = "row">
         	<div class="col-1 col-lg-2 py-3 "></div>
         	<div class="col-10 col-lg-8 bd-az">
         	<h5>Notice:</h5>
@@ -71,7 +73,7 @@
         	</p>
         	</div>
         	<div class="col-1 col-lg-2 py-3 "></div>
-        </div>
+        </div>-->
         
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 d-none d-md-block py-3 "></div>
