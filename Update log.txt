@@ -112,5 +112,9 @@ V 1.069
 -> Updated popup ads code.
 
 
+V 1.069.1
+-> Google Ads Code added in the pages.
+
+
 
 
