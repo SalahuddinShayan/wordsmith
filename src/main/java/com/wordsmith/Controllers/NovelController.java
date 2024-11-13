@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Entity.Novel;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Repositories.NovelRepository;
@@ -112,6 +113,14 @@ public class NovelController {
 	@RequestMapping("/imageslogo")
 	public String images() {
 			return "images&logo";
+	}
+	
+	@RequestMapping("/allchapter")
+	public String allChapter(@RequestParam("NovelName")String novelname, Model model) {
+		model.addAttribute("Chapters", cr.findAll());
+		model.addAttribute("command", new Chapter());
+		model.addAttribute("novelnames", NovelRepo.allNovel());
+		return "chapterlist";
 	}
 
 }

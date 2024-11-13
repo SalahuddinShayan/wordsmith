@@ -115,6 +115,9 @@ V 1.069
 V 1.069.1
 -> Google Ads Code added in the pages.
 
+V 1.069.2
+-> Google Ads Code removed.
+
 
 
 

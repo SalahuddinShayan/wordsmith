@@ -28,6 +28,7 @@
 
 <div class="starter-template">
    <h1>List of All The Chapter in the Novel:</h1>
+   <a class="btn btn-primary" href="novellist">Novel List</a>
    <table
     class="table table-striped table-hover table-condensed table-bordered">
     <tr>
