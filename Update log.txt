@@ -117,6 +117,11 @@ V 1.069.1
 
 V 1.069.2
 -> Google Ads Code removed.
+-> Added Nocel list Button in Chapter list. 
+
+V 1.069.3
+-> Google Ads Code added in the pages again.
+
 
 
 
