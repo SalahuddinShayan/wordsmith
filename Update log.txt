@@ -117,10 +117,16 @@ V 1.069.1
 
 V 1.069.2
 -> Google Ads Code removed.
--> Added Nocel list Button in Chapter list. 
+-> Added Novel list Button in Chapter list. 
 
 V 1.069.3
 -> Google Ads Code added in the pages again.
+
+
+V 1.070
+-> Added the Ko-fi Link.
+-> Added a message for the Readers.
+
 
 
 

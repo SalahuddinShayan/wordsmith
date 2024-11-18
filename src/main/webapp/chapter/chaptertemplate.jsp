@@ -41,13 +41,15 @@
             </button>
 
             
-            <div class="navbar-collapse collapse" id="navbar" >
+            <div class="navbar-collapse collapse pe-2" id="navbar" >
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="https://easternwordsmith.com/" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="../novels" class="nav-link">All Novels</a></li>
                     <li class="nav-item"><a href="../updates" class="nav-link">Updates</a></li>
                     <li class="nav-item"><a href="../contactus" class="nav-link">Contact Us</a></li>
-                </ul>          
+                </ul>
+                
+                <p class="me-auto"><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support us on Ko-fi', '#000000', 'Y8Y2163B9B');kofiwidget2.draw();</script></p>         
             </div>
             
         </nav>
@@ -63,19 +65,22 @@
          <div class="col-1 col-lg-2 py-3"></div>
          </div>
          
-        <!--<div  Style = "margin-top: 30px;" class = "row">
+        <div  Style = "margin-top: 30px;" class = "row">
         	<div class="col-1 col-lg-2 py-3 "></div>
         	<div class="col-10 col-lg-8 bd-az">
-        	<h5>Notice:</h5>
-        	<p>Hello Guys! It has come to our attention that the chapter navigation buttons were not working correctly. We are happy to report 
-        	   that the issue has been resolved. We are also happy to inform you that as of today Disqus is live on the website. We hope 
-        	   this enhances your reading experience.
-        	</p>
-        	<p>In the future if you guys face any problem, or if you just wanna talk to us, please reach us through the Contact US Page. 
-        	</p>
+        	<h5>Request for Your Support:</h5> 
+        	<p>Hello, dear readers! As you know, we’re a new website, and we need your help to grow and improve. Here are a few ways you can support us:</p> 
+        	<ul> 
+        	<li><strong>Bookmark and Rate Your Favorite Novel:</strong> Head over to Novel Updates, bookmark your favorite stories, rate them, and leave a review. This simple action boosts our visibility and helps us reach more readers like you.</li> 
+        	<li><strong>Engage with Our Chapters:</strong> After reading a chapter, please leave a comment or reaction. Your feedback not only lets us know you’re enjoying the story, but it also keeps us motivated.</li> 
+        	<li><strong>Support Us on Ko-fi:</strong> As a small operation, we rely on your support to cover our costs. If you can, please consider donating on Ko-fi. Even a small contribution makes a huge difference!</li> 
+        	<li><strong>Help Us Improve the Website:</strong> Since we’re still in the early stages, we’d love your feedback on the website’s navigation, design, and user experience. What do you like? What could be better? Are there any features you'd like to see? Share your thoughts with us via the Contact Us form. Your insights are incredibly valuable to us!</li> 
+        	</ul> 
+        	<p>Thank you for being part of our journey! Your support truly means the world to us.</p>
+        	
         	</div>
         	<div class="col-1 col-lg-2 py-3 "></div>
-        </div>-->
+        </div>
         
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 d-none d-md-block py-3 "></div>
@@ -99,7 +104,8 @@
          <a id="Plus" onclick="TextSizeIncrease()" ><img class ="icon" alt="" src="../images/plus-sign.png"></a>
          <a href="../chapter-previous/${chapter.chapterId}"><img class ="icon" alt="" src="../images/arrow-left.png"></a>
          <a href="../novel/${chapter.novelName}"><img class ="icon" alt="" src="../images/home.png"></a>
-         <a href="../chapter-next/${chapter.chapterId}"><img class ="icon" alt="" src="../images/right-arrow.png"></a>
+         <a href="../chapter-next/${chapter.chapterId}"><img class ="icon" alt="" src="../images/right-arrow.png"></a><br><br><br>
+         <p><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Us on Ko-fi', '#1F8FFF', 'Y8Y2163B9B');kofiwidget2.draw();</script></p> 
          </div>
          </div>
          <div class="col-1 col-lg-2 d-none d-md-block py-3 "></div>

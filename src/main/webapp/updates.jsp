@@ -42,13 +42,14 @@
             </button>
 
             
-            <div class="navbar-collapse collapse" id="navbar" >
+            <div class="navbar-collapse collapse  pe-2" id="navbar" >
                 <ul class="navbar-nav">
                     <li class="nav-item"><a href="https://easternwordsmith.com/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="novels" class="nav-link">All Novels</a></li>
-                    <li class="nav-item"><a href="updates" class="nav-link">Updates</a></li>
-                    <li class="nav-item"><a href="contactus" class="nav-link">Contact Us</a></li>
-                </ul>          
+                    <li class="nav-item"><a href="../novels" class="nav-link">All Novels</a></li>
+                    <li class="nav-item"><a href="../updates" class="nav-link">Updates</a></li>
+                    <li class="nav-item"><a href="../contactus" class="nav-link">Contact Us</a></li>
+                </ul>
+                <p class="me-auto"><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support us on Ko-fi', '#000000', 'Y8Y2163B9B');kofiwidget2.draw();</script></p>          
             </div>
         </nav>
         
