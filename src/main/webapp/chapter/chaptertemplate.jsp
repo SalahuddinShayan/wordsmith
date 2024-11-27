@@ -21,16 +21,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
         <style><%@include file="../css/stylesheet.css"%></style>
          <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
-		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script type="text/javascript" data-cfasync="false">
-/*<![CDATA[/* */
-(function(){var o=window,f="e0c1aec43ba85c167e1b35ed321dc0d1",a=[["siteId",264+960-319-978+5148148],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],l=["d3d3LmRpc3BsYXl2ZXJ0aXNpbmcuY29tL2dwb3N0YWwubWluLmNzcw==","ZDNtem9rdHk5NTFjNXcuY2xvdWRmcm9udC5uZXQvb2JweS90aW5kZXgubWluLmpz","d3d3LnFvdXN1anVoLmNvbS9kcG9zdGFsLm1pbi5jc3M=","d3d3LmRjYndrbW55ZW5ocS5jb20vei95aW5kZXgubWluLmpz"],d=-1,h,w,q=function(){clearTimeout(w);d++;if(l[d]&&!(1757414113000<(new Date).getTime()&&1<d)){h=o.document.createElement("script");h.type="text/javascript";h.async=!0;var y=o.document.getElementsByTagName("script")[0];h.src="https://"+atob(l[d]);h.crossOrigin="anonymous";h.onerror=q;h.onload=function(){clearTimeout(w);o[f.slice(0,16)+f.slice(0,16)]||q()};w=setTimeout(q,5E3);y.parentNode.insertBefore(h,y)}};if(!o[f]){try{Object.freeze(o[f]=a)}catch(e){}q()}})();
-/*]]>/* */
-</script>
-
-
-
-		 
+		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 </head>
 <body onload="ChapStyle()">
 
@@ -68,15 +59,21 @@
         <div  Style = "margin-top: 30px;" class = "row">
         	<div class="col-1 col-lg-2 py-3 "></div>
         	<div class="col-10 col-lg-8 bd-az">
-        	<h5>Request for Your Support:</h5> 
-        	<p>Hello, dear readers! As you know, we’re a new website, and we need your help to grow and improve. Here are a few ways you can support us:</p> 
+        	<h5>Update:</h5> 
+        	<p>Hey guys,<br>
+        	   We have an update regarding the ads on the website. Last week we received many complaints about popunder ads that they are intrusive and even show in inappropriate ads
+        	   sometimes and that the constant redirects ruins the reading experience. Therefore we have decided that there will be 
+        	   <b>no popunder ads</b> on our website.
+        	</p>
+        	<p>But hey, it takes two to tango. With this decision, we have demonstrated our commitment to our readers. It's now time to give us your support. You can support us by doing the following:</p> 
         	<ul> 
         	<li><strong>Bookmark and Rate Your Favorite Novel:</strong> Head over to Novel Updates, bookmark your favorite stories, rate them, and leave a review. This simple action boosts our visibility and helps us reach more readers like you.</li> 
         	<li><strong>Engage with Our Chapters:</strong> After reading a chapter, please leave a comment or reaction. Your feedback not only lets us know you’re enjoying the story, but it also keeps us motivated.</li> 
         	<li><strong>Support Us on Ko-fi:</strong> As a small operation, we rely on your support to cover our costs. If you can, please consider donating on Ko-fi. Even a small contribution makes a huge difference!</li> 
-        	<li><strong>Help Us Improve the Website:</strong> Since we’re still in the early stages, we’d love your feedback on the website’s navigation, design, and user experience. What do you like? What could be better? Are there any features you'd like to see? Share your thoughts with us via the Contact Us form. Your insights are incredibly valuable to us!</li> 
+        	<li><strong>Help Us Improve the Website:</strong> Since we’re still in the early stages, we’d love your feedback on the website’s navigation, design, and user experience. What do you like? What could be better? Are there any features you'd like to see? Share your thoughts with us via the Contact Us form. Your insights are incredibly valuable to us!</li>
+        	<li><strong>Do not use Ad-Blocker:</strong> Please know that ads are our only source of revenue right now.</li> 
         	</ul> 
-        	<p>Thank you for being part of our journey! Your support truly means the world to us.</p>
+        	<p>Thank you to all those who reached out to us! We hope that you guys have a fun reading session and that you will continue to support us.</p>
         	
         	</div>
         	<div class="col-1 col-lg-2 py-3 "></div>

