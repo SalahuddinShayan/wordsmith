@@ -132,6 +132,11 @@ V 1.071
 -> Updated the message for the Readers.
 
 
+V 1.072
+-> Created Keywords Meta tags in home, novel template, and chapter template.
+-> updated the order of the chapter list.
+
+
 
 
 
