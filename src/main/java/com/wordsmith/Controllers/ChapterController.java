@@ -30,6 +30,7 @@ public class ChapterController {
 		return "chapterlist";
 	}
 	
+	
 	@RequestMapping("/savechapter")
     public RedirectView save(@ModelAttribute("chapter")Chapter chapter,RedirectAttributes redirectAttributes){  
 		Long cid = chapter.getChapterId();
@@ -49,10 +50,36 @@ public class ChapterController {
 	    return redirectView;   
     }
 	
+	@RequestMapping("/savechapter2")
+    public RedirectView save2(@ModelAttribute("chapter")Chapter chapter,RedirectAttributes redirectAttributes){  
+		Long cid = chapter.getChapterId();
+		if (cid == 0) {
+		long id = cr.Last() + 1;
+		chapter.setChapterId(id);
+		Timestamp instant= Timestamp.from(Instant.now());
+		chapter.setPostedOn(instant);
+		}
+		else {
+			Chapter chapter2= cr.getReferenceById(cid);
+			chapter.setPostedOn(chapter2.getPostedOn());
+		}
+		
+		cr.save(chapter);
+		RedirectView redirectView= new RedirectView("/allchapters",true);
+	    return redirectView;   
+    }
+	
 	@RequestMapping(value="/deletechapter")
 	public RedirectView  deletemember(@RequestParam("ChapterId") long id, RedirectAttributes redirectAttributes){
 		RedirectView redirectView= new RedirectView("/chapterlist",true);
 		redirectAttributes.addAttribute("NovelName",cr.getReferenceById(id).getNovelName());
+		cr.deleteById(id);
+		return redirectView;
+		}
+	
+	@RequestMapping(value="/deletechapter2")
+	public RedirectView  deletechapter(@RequestParam("ChapterId") long id){
+		RedirectView redirectView= new RedirectView("/allchapters",true);
 		cr.deleteById(id);
 		return redirectView;
 		}

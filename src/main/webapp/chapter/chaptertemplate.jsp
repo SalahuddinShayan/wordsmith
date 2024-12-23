@@ -60,13 +60,15 @@
         <div  Style = "margin-top: 30px;" class = "row">
         	<div class="col-1 col-lg-2 py-3 "></div>
         	<div class="col-10 col-lg-8 bd-az">
-        	<h5>Update:</h5> 
-        	<p>Hey guys,<br>
-        	   We have an update regarding the ads on the website. Last week we received many complaints about popunder ads that they are intrusive and even show in inappropriate ads
-        	   sometimes and that the constant redirects ruins the reading experience. Therefore we have decided that there will be 
-        	   <b>no popunder ads</b> on our website.
+        	<h5>Message:</h5> 
+        	<p>Hello guys,<br>
+        	   First of all, we would like to apologize for disappearing without notice. Some problem suddenly came up with the hosting service we 
+        	   were using so we had to migrate our website. It took some time but we are finally up and running again. We will try to make sure 
+        	   that this does not happen again.  
         	</p>
-        	<p>But hey, it takes two to tango. With this decision, we have demonstrated our commitment to our readers. It's now time to give us your support. You can support us by doing the following:</p> 
+        	<p>Additionally, this sudden migration has put a strain on our finances, so we need your support more than ever. As for how you can 
+        	   support us, we have listed that below:
+        	</p> 
         	<ul> 
         	<li><strong>Bookmark and Rate Your Favorite Novel:</strong> Head over to Novel Updates, bookmark your favorite stories, rate them, and leave a review. This simple action boosts our visibility and helps us reach more readers like you.</li> 
         	<li><strong>Engage with Our Chapters:</strong> After reading a chapter, please leave a comment or reaction. Your feedback not only lets us know you’re enjoying the story, but it also keeps us motivated.</li> 
@@ -74,7 +76,7 @@
         	<li><strong>Help Us Improve the Website:</strong> Since we’re still in the early stages, we’d love your feedback on the website’s navigation, design, and user experience. What do you like? What could be better? Are there any features you'd like to see? Share your thoughts with us via the Contact Us form. Your insights are incredibly valuable to us!</li>
         	<li><strong>Do not use Ad-Blocker:</strong> Please know that ads are our only source of revenue right now.</li> 
         	</ul> 
-        	<p>Thank you to all those who reached out to us! We hope that you guys have a fun reading session and that you will continue to support us.</p>
+        	<p>Once again, we would like to apologize for the inconvenience caused. We hope that you will continue to support us.</p>
         	
         	</div>
         	<div class="col-1 col-lg-2 py-3 "></div>

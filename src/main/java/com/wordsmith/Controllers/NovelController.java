@@ -115,12 +115,12 @@ public class NovelController {
 			return "images&logo";
 	}
 	
-	@RequestMapping("/allchapter")
-	public String allChapter(@RequestParam("NovelName")String novelname, Model model) {
-		model.addAttribute("Chapters", cr.findAll());
+	@RequestMapping("/allchapters")
+	public String allChapter(Model model) {
+		model.addAttribute("Chapters", cr.AllChapterd());
 		model.addAttribute("command", new Chapter());
-		model.addAttribute("novelnames", NovelRepo.allNovel());
-		return "chapterlist";
+		model.addAttribute("novelnames", NovelRepo.allNovelName());
+		return "allchapters";
 	}
 
 }
