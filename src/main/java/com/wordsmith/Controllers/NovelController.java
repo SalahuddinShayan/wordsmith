@@ -106,7 +106,7 @@ public class NovelController {
 	
 	@RequestMapping("/updates")
 	public String updates(Model model) {
-			model.addAttribute("Novels",NovelRepo.NovelUpdates());
+			model.addAttribute("Novels",NovelRepo.AllUpdates());
 			return "updates";
 	}
 	
@@ -121,6 +121,11 @@ public class NovelController {
 		model.addAttribute("command", new Chapter());
 		model.addAttribute("novelnames", NovelRepo.allNovelName());
 		return "allchapters";
+	}
+	
+	@RequestMapping("/privacypolicy")
+	public String privacyPolicy() {
+			return "privacypolicy";
 	}
 
 }

@@ -119,6 +119,8 @@
            <a>|</a>
            <a href="../novels">Novels</a>
            <a>|</a>
+           <a href="../privacypolicy">Privacy Policy</a>
+           <a>|</a>
            <a href="../contactus">Contact Us</a>
           </div>
           <div class="col-1"></div>

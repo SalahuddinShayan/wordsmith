@@ -136,6 +136,18 @@ V 1.072
 -> Created Keywords Meta tags in home, novel template, and chapter template.
 -> updated the order of the chapter list.
 
+V 1.073
+-> Migrated to Hostinger VSP.
+-> Created all Chapter page.
+-> Created Message for visiting readers.
+
+
+V 1.074
+-> Trying to migrate to Ezoic
+-> Corrected the query for the home page and the updates page.
+-> Created a Message for visiting readers to tell them about the migration to Ezoic.
+
+
 
 
 

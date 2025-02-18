@@ -62,12 +62,9 @@
         	<div class="col-10 col-lg-8 bd-az">
         	<h5>Message:</h5> 
         	<p>Hello guys,<br>
-        	   First of all, we would like to apologize for disappearing without notice. Some problem suddenly came up with the hosting service we 
-        	   were using so we had to migrate our website. It took some time but we are finally up and running again. We will try to make sure 
-        	   that this does not happen again.  
+        	   We are transitioning to a new ad provider to improve revenue and control. During this process, you may encounter some issues. Please inform us immediately if you experience any problems.   
         	</p>
-        	<p>Additionally, this sudden migration has put a strain on our finances, so we need your support more than ever. As for how you can 
-        	   support us, we have listed that below:
+        	<p>As always, please continue to support us. You can show your support in the following ways:
         	</p> 
         	<ul> 
         	<li><strong>Bookmark and Rate Your Favorite Novel:</strong> Head over to Novel Updates, bookmark your favorite stories, rate them, and leave a review. This simple action boosts our visibility and helps us reach more readers like you.</li> 
@@ -76,7 +73,7 @@
         	<li><strong>Help Us Improve the Website:</strong> Since we’re still in the early stages, we’d love your feedback on the website’s navigation, design, and user experience. What do you like? What could be better? Are there any features you'd like to see? Share your thoughts with us via the Contact Us form. Your insights are incredibly valuable to us!</li>
         	<li><strong>Do not use Ad-Blocker:</strong> Please know that ads are our only source of revenue right now.</li> 
         	</ul> 
-        	<p>Once again, we would like to apologize for the inconvenience caused. We hope that you will continue to support us.</p>
+        	
         	
         	</div>
         	<div class="col-1 col-lg-2 py-3 "></div>
@@ -126,6 +123,8 @@
            <a href="../imageslogo">Images&Logo</a>
            <a>|</a>
            <a href="../novels">Novels</a>
+           <a>|</a>
+           <a href="../privacypolicy">Privacy Policy</a>
            <a>|</a>
            <a href="../contactus">Contact Us</a>
           </div>

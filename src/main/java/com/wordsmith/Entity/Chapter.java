@@ -22,7 +22,7 @@ public class Chapter {
 	@Column
 	private String Title;
 	
-	@Column
+	@Column(columnDefinition = "text")
 	private String Keywords;
 	
 	@Column

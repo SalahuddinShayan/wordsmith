@@ -36,7 +36,7 @@ public class Novel {
 	@Column
 	private Date AddedOn;
 	
-	@Column
+	@Column(columnDefinition = "text")
 	private String Keywords;
 	
 	@Column
