@@ -20,10 +20,10 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name order by c.posted_on desc LIMIT 0,10000) s group by s.novel_name;", nativeQuery = true)
     List<Novel>  AllUpdates();
 	
-	@Query(value = "SELECT * FROM novel WHERE LENGTH(Novel_image)>0 limit 4;", nativeQuery = true)
+	@Query(value = "SELECT * FROM novel WHERE LENGTH(Novel_image)>0 AND status = 'Ongoing' limit 4;", nativeQuery = true)
 	List<Novel>  popular();
 	
-	@Query(value = "SELECT novel_name FROM novel order by novel_id;", nativeQuery = true)
+	@Query(value = "SELECT novel_name FROM novel WHERE status = 'Ongoing' order by novel_id;", nativeQuery = true)
 	List<String>  allNovelName();
 
 }

@@ -148,7 +148,12 @@ V 1.074
 -> Created a Message for visiting readers to tell them about the migration to Ezoic.
 
 
-
+V 1.075
+-> Updated query for popular novels in home page
+-> Updated query for Latest in home page
+-> Updated the query for the novels in all chapters page.
+-> Added a script of Grow by Mediavine.
+-> Changed the message for on the chapter page.
 
 
 
