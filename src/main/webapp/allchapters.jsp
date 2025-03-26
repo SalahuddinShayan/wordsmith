@@ -55,6 +55,7 @@
       <td><a href="chapter/${chapter.chapterId}" class="btn btn-primary"> View</a></td> 
       <td><form method="post" action="deletechapter2">
       		<input name="ChapterId"  value="${chapter.chapterId}" readonly="true" style="display:none;"/>
+      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
       		<input class ="btn btn-primary" type="submit" value="Delete" />
       		</form>
       </td> 
@@ -66,6 +67,7 @@
   <h4>Click Here to Switch:</h4><button id="UES" onclick="EditSwitch()">Upload</button>
   
   <form:form method="post" action="savechapter2">
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
   <form:label path="ChapterId" style="display:none;" id="IdLable">Chapter Id</form:label>
   <form:input path="ChapterId" disabled="true" style="display:none;" id="Id"/>
   <form:label path="novelName">Name Of The Novel</form:label>
@@ -81,6 +83,8 @@
   <input type="submit" value="post Chapter" />
   </form:form>
 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
 <script type="text/javascript" src="js/script.js"></script> 
 </body>
 </html>

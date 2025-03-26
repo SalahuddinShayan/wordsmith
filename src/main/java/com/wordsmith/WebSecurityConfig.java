@@ -4,23 +4,48 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 	
+	
+	    
+	    
+	
 	@Bean
-	SecurityFilterChain web(HttpSecurity http) throws Exception {
-        http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests((authorizeHttpRequests) ->
-        authorizeHttpRequests
-        .requestMatchers("/novellist","/deletenovel","/chapterlist","/deletechapter","/messages","/allchapters").authenticated()
-        .anyRequest().permitAll()
-        ).csrf(AbstractHttpConfigurer::disable).formLogin(withDefaults());
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+            	.requestMatchers("/dashboard").hasAnyAuthority("ADMIN", "TRANSLATOR", "EDITOR")
+                .requestMatchers("/admin/**","/novellist","/deletenovel","/chapterlist","/deletechapter","/messages","/allchapters").hasAnyAuthority("ADMIN")
+                .requestMatchers("/auth/register", "/auth/verify-otp", "/auth/verify","/auth/forgot-password","/auth/verify-reset-otp","/auth/reset-password").permitAll()
+                .anyRequest().permitAll() // Allow unrestricted access to other pages
+            )
+            .formLogin(login -> login
+            	    .loginPage("/auth/loginpage")
+            	    .permitAll()
+            	)
+            .logout(logout -> logout
+                .logoutUrl("/auth/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+                
+            );
         return http.build();
     }
+	
+	
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+	
+	
 
 }

@@ -24,23 +24,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-light bg-az navbar-expand-md sticky-top" >
-            <a href="https://easternwordsmith.com/" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="images/logo2.png" width="40" height="40"  alt=""></a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            
-            <div class="navbar-collapse collapse  pe-2" id="navbar" >
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="https://easternwordsmith.com/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="../novels" class="nav-link">All Novels</a></li>
-                    <li class="nav-item"><a href="../updates" class="nav-link">Updates</a></li>
-                    <li class="nav-item"><a href="../contactus" class="nav-link">Contact Us</a></li>
-                </ul>
-                <p class="me-auto"><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support us on Ko-fi', '#000000', 'Y8Y2163B9B');kofiwidget2.draw();</script></p>          
-            </div>
-        </nav>
+<%@ include file="nav1.jsp" %>
         
         <div  Style = "margin-top: 30px;" class = "center"><h2>Thanks You For Your Valuable feedback.</h2></div>
         
@@ -51,21 +35,7 @@
 		</div>
         
         
-<footer class ="stm">
-         <div  Style = "margin-top: 30px;" class = "row">
-          <div class="col-1"></div>
-          <div class="col-10 center bdt">
-           <a href="imageslogo">Images&Logo</a>
-           <a>|</a>
-           <a href="novels">Novels</a>
-           <a>|</a>
-           <a href="privacypolicy">Privacy Policy</a>
-           <a>|</a>
-           <a href="contactus">Contact Us</a>
-          </div>
-          <div class="col-1"></div>
-         </div>
-        </footer>
+<%@ include file="footer1.jsp" %>
         
        
         

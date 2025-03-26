@@ -2,11 +2,13 @@ package com.wordsmith.Controllers;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.wordsmith.Entity.Chapter;
+import com.wordsmith.Entity.Comment;
 import com.wordsmith.Entity.Novel;
+import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Repositories.NovelRepository;
+import com.wordsmith.Services.CommentService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,11 +35,17 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class NovelController {
 	
-	@Autowired
-	NovelRepository NovelRepo;
+	private final NovelRepository NovelRepo;
 	
-	@Autowired
-	ChapterRepository cr;
+	private final ChapterRepository cr;
+	
+	private final CommentService commentService;
+	
+	public NovelController(CommentService commentService, ChapterRepository cr, NovelRepository NovelRepo) {
+		this.commentService = commentService;
+		this.cr=cr;
+		this.NovelRepo=NovelRepo;
+	}
 	
 	@RequestMapping(value= { "/","/home"})                     
     public String index(Model model) {
@@ -95,7 +106,34 @@ public class NovelController {
 		Novel novel = NovelRepo.byNovelName(novelName);
 		m.addAttribute("novel",novel);
 		m.addAttribute("Chapters", cr.byNovelName(novelName));
+		CommentEntityType type = CommentEntityType.NOVEL;
+		List<Comment> comments = commentService.getCommentsByEntity(type, (long) novel.getNovelId());
+
+		 for (Comment comment : comments) {
+		        if (comment.getCreatedAt() != null) {
+		            comment.setTimeAgo(getTimeDifference(comment.getCreatedAt()));
+		        }
+		    }
+		m.addAttribute("comments", comments);
 		return "noveltemplate";
+	}
+	
+	private String getTimeDifference(ZonedDateTime pastTime) {
+	    ZonedDateTime now = ZonedDateTime.now();
+	    Duration duration = Duration.between(pastTime, now);
+
+	    if (duration.toMinutes() < 1) {
+	        return "Just now";
+	    } else if (duration.toMinutes() < 60) {
+	        return duration.toMinutes() + " minutes ago";
+	    } else if (duration.toHours() < 24) {
+	        return duration.toHours() + " hours ago";
+	    } else if (duration.toDays() < 7) {
+	        return duration.toDays() + " days ago";
+	    } else {
+	        return pastTime.toLocalDate().toString(); // Show full date if older than a week
+	    }
+	    
 	}
 	
 	@RequestMapping("/novels")
@@ -126,6 +164,17 @@ public class NovelController {
 	@RequestMapping("/privacypolicy")
 	public String privacyPolicy() {
 			return "privacypolicy";
+	}
+	
+	@RequestMapping("/aboutus")
+	public String aboutUs() {
+			return "aboutus";
+	}
+	
+	@RequestMapping("/dashboard")
+	public String dashboard() {
+		System.out.println("dashboard");
+			return "dashboard";
 	}
 
 }

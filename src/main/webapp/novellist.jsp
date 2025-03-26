@@ -56,11 +56,13 @@
       <td>${novel.status}</td>
       <td><form method="post" action="chapterlist">
       		<input name="NovelName"  value="${novel.novelName}" readonly="true" style="display:none;"/>
+      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
       		<input class ="btn btn-primary" type="submit" value="View/Add Chapters" />
       		</form>
       </td> 
       <td><form method="post" action="deletenovel">
-      		<input name="MemberId"  value="${novel.novelId}" readonly="true" style="display:none;"/>
+      		<input name="NovelId"  value="${novel.novelId}" readonly="true" style="display:none;"/>
+      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
       		<input class ="btn btn-primary" type="submit" value="Delete" />
       		</form>
       </td>
@@ -72,6 +74,7 @@
 <h1>Add a new Novel or Update an existing one </h1> ${timezone} ${timezone2}
 
 <form method="post" action="savenovel" enctype="multipart/form-data">
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
        <input name="NovelId" placeholder= "NOVEL ID" type= "number" required>
        <input name="NovelName" placeholder= "Novel Name" type= "text" required>
        <input name="Author" placeholder= "Author of the Novel" type= "text" required>

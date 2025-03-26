@@ -1,9 +1,11 @@
 package com.wordsmith.Controllers;
 
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,13 +16,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.wordsmith.Entity.Chapter;
+import com.wordsmith.Entity.Comment;
+import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Repositories.ChapterRepository;
+import com.wordsmith.Services.CommentService;
 
 @Controller
 public class ChapterController {
 	
-	@Autowired
-	ChapterRepository cr;
+	
+	private final ChapterRepository cr;
+	
+	private final CommentService commentService;
+    
+	public ChapterController(CommentService commentService, ChapterRepository cr) {
+		this.commentService = commentService;
+		this.cr=cr;
+	}
 	
 	@RequestMapping("/chapterlist")
 	public String chapterList(@RequestParam("NovelName")String novelname, Model model) {
@@ -88,6 +100,14 @@ public class ChapterController {
 	public String Chapter(@PathVariable long chapterId, Model m) {
 		Chapter chapter = cr.getReferenceById(chapterId);
 		m.addAttribute("chapter",chapter);
+		CommentEntityType type = CommentEntityType.CHAPTER;
+		List<Comment> comments = commentService.getCommentsByEntity(type, chapterId);
+		 for (Comment comment : comments) {
+		        if (comment.getCreatedAt() != null) {
+		            comment.setTimeAgo(getTimeDifference(comment.getCreatedAt()));
+		        }
+		    }
+		m.addAttribute("comments", comments);
 		return "chaptertemplate";
 	}
 	
@@ -105,6 +125,24 @@ public class ChapterController {
 			RedirectView redirectView= new RedirectView("/novel/"+ novelName ,true);
 			return redirectView;
 		}
+	}
+	
+	private String getTimeDifference(ZonedDateTime pastTime) {
+	    ZonedDateTime now = ZonedDateTime.now();
+	    Duration duration = Duration.between(pastTime, now);
+
+	    if (duration.toMinutes() < 1) {
+	        return "Just now";
+	    } else if (duration.toMinutes() < 60) {
+	        return duration.toMinutes() + " minutes ago";
+	    } else if (duration.toHours() < 24) {
+	        return duration.toHours() + " hours ago";
+	    } else if (duration.toDays() < 7) {
+	        return duration.toDays() + " days ago";
+	    } else {
+	        return pastTime.toLocalDate().toString(); // Show full date if older than a week
+	    }
+	    
 	}
 	
 	@RequestMapping("chapter-previous/{chapterId}")

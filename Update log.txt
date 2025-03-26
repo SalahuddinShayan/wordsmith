@@ -155,6 +155,18 @@ V 1.075
 -> Added a script of Grow by Mediavine.
 -> Changed the message for on the chapter page.
 
+V 1.076
+-> Created a proper registration and login system
+-> Role-Based Redirection (Admins, Translators, Editors → Dashboard; Users → Home).
+-> Email OTP Verification during registration.
+-> Forgot Password System (OTP-based password reset).
+-> Security Enhancements (CSRF protection, password encoding).
+-> Login, Register, Verify, Forgot Password, Reset Password pages styled (Dark theme).
+-> Navigation Bar Improvements (Login/Register button changes based on user session).
+-> Contact Us Page (With form submission & improved design).
+-> Created a Comment system.
+-> Created an About Us Page. 
+
 
 
 

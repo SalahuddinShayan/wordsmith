@@ -28,23 +28,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-light bg-az navbar-expand-md sticky-top" >
-            <a href="https://easternwordsmith.com/" class="navbar-brand" style="vertical-align:center;margin:0px 0px 0px 50px"><img src="../images/logo2.png" width="40" height="40"  alt=""></a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar" >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            
-            <div class="navbar-collapse collapse  pe-2" id="navbar" >
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="https://easternwordsmith.com/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="../novels" class="nav-link">All Novels</a></li>
-                    <li class="nav-item"><a href="../updates" class="nav-link">Updates</a></li>
-                    <li class="nav-item"><a href="../contactus" class="nav-link">Contact Us</a></li>
-                </ul>
-                <p class="me-auto"><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support us on Ko-fi', '#000000', 'Y8Y2163B9B');kofiwidget2.draw();</script></p>          
-            </div>
-        </nav>
+<%@ include file="../nav2.jsp" %>
         
         <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 py-3 "></div>
@@ -107,44 +91,102 @@
         <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-3 py-3 "></div>
          <div class="col-10 col-lg-6 py-3 ">
-         <div id="disqus_thread"></div>
+         <div class="comments-section" id="comment">
+    <h3>Comments</h3>
+
+    <div class= "cbox">
+    <div class="">
+    <!-- 🔹 Show login prompt if the user is not logged in -->
+    <c:if test="${empty loggedInUser}">
+        <p>You must <a href="/auth/loginpage">log in</a> to post a comment.</p>
+    </c:if>
+
+    <!-- 🔹 Show comment form if the user is logged in -->
+    <c:if test="${not empty loggedInUser}">
+        <form action="/comments/add" method="post">
+            <input type="hidden" name="entityType" value="novel">
+            <input type="hidden" name="entityId" value="${novel.novelId}">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <textarea name="content" required class="form-control" placeholder="Write a comment..."></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Comment</button>
+        </form>
+    </c:if>
+    </div>
+    
+    <br>
+
+
+    <!-- 🔹 Display Comments and Nested Replies -->
+    <c:forEach var="comment" items="${comments}">
+        <div class="comment">
+            <strong>${comment.userName}</strong>
+            <small>${comment.timeAgo}</small>
+            <p>${comment.content}</p>
+            
+            
+
+            
+            
+            <!-- 🔹 Buttons for Delete, Flag, and Reply (Now in the same row) -->
+            <div class="comment-actions">
+                <c:if test="${loggedInUser.username == comment.userName || loggedInUser.role == 'ADMIN'}">
+                    <form action="/comments/delete" method="post" class="comment-action-form">
+                        <input type="hidden" name="commentId" value="${comment.id}">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <button type="submit" class="icon-btn"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </c:if>
+
+                
+                <form action="/comments/flag" method="post" class="comment-action-form">
+                    <input type="hidden" name="commentId" value="${comment.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button type="submit" class="icon-btn"><i class="fa-solid fa-flag"></i></button>
+                </form>
+
+                <!--<c:if test="${not empty loggedInUser}">
+                    <button class="icon-btn reply-btn" onclick="toggleReplyForm('${comment.id}')">
+                        <i class="fa-solid fa-reply"></i>
+                    </button>
+                </c:if>-->
+            </div>
+
+            <!-- 🔹 Display Replies (Nested Comments) -->
+            <!--<c:if test="${comment.hasReplies}">
+                <div class="replies" style="margin-left: 30px;">
+                    <c:forEach var="reply" items="${comment.replies}">
+                        <div class="comment">
+                            <strong>${reply.user.username}</strong>
+                            <p>${reply.content}</p>
+                            <small>Posted on: ${reply.createdAt}</small>
+
+                            <c:if test="${loggedInUser.id == reply.user.id || loggedInUser.role == 'ADMIN'}">
+                                <form action="/comments/delete" method="post">
+                                    <input type="hidden" name="commentId" value="${reply.id}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </c:if>
+
+                            <form action="/comments/flag" method="post">
+                                <input type="hidden" name="commentId" value="${reply.id}">
+                                <button type="submit" class="btn btn-warning btn-sm">Flag</button>
+                            </form>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>-->
+        </div>
+        <br>
+    </c:forEach>
+</div>
+</div>
          </div>
          <div class="col-1 col-lg-3 py-3 "></div>
          </div>
         
-        <footer class ="stm">
-         <div  Style = "margin-top: 30px;" class = "row">
-          <div class="col-1"></div>
-          <div class="col-10 center bdt">
-           <a href="../imageslogo">Images&Logo</a>
-           <a>|</a>
-           <a href="../novels">Novels</a>
-           <a>|</a>
-           <a href="../privacypolicy">Privacy Policy</a>
-           <a>|</a>
-           <a href="../contactus">Contact Us</a>
-          </div>
-          <div class="col-1"></div>
-         </div>
-        </footer>
+        <%@ include file="../footer2.jsp" %>
        
-<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    
-    var disqus_config = function () {
-    this.page.url = "https://easternwordsmith.com/novel/${novel.novelName}";  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = "Novel_ID:${novel.novelId}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://easternwordsmith.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-</script>
+
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>        
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
 <script type="text/javascript" src="../js/script.js"></script>  
