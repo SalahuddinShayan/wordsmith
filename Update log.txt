@@ -171,6 +171,10 @@ V 1.077
 -> Corrected a few styling problems.
 -> Added a message about OTP and spam folder.
 
+V 1.078
+-> Created pages for viewing all the comments and users.
+
+
 
 
 

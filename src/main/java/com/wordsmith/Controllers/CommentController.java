@@ -85,7 +85,7 @@ public class CommentController {
 
         Comment comment = commentService.getCommentById(commentId);
         if (comment != null && (comment.getUserName().equals(user.getUsername()) || user.getRole().equals(Role.ADMIN))) {
-            commentService.deleteComment(commentId, hasReplies);
+            commentService.deleteComment(commentId);
         }
 
         String referer = request.getHeader("Referer");
@@ -104,4 +104,10 @@ public class CommentController {
         String referer = request.getHeader("Referer");
         return "redirect:" + referer +"#comment";
     }
+    
+    @RequestMapping("/allcomments")
+	public String messaegs(Model m) {
+		m.addAttribute("Comments", commentService.findallcomment());
+		return "allcomments";
+	}
 }

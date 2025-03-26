@@ -15,4 +15,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     
     @Query("SELECT MAX(c.id) FROM Comment c")
     Long findLastCommentId();
+    
 }

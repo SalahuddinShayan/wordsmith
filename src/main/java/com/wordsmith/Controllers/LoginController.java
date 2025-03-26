@@ -81,4 +81,10 @@ public class LoginController {
         String referer = request.getHeader("Referer");
         return "redirect:" + referer; // Redirect to login page
     }
+    
+    @RequestMapping("/users")
+	public String messaegs(Model m) {
+		m.addAttribute("Users", userService.findallusers());
+		return "users";
+	}
 }

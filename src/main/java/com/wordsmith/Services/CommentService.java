@@ -1,7 +1,6 @@
 package com.wordsmith.Services;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.wordsmith.Entity.Comment;
@@ -28,7 +27,9 @@ public class CommentService {
         return commentRepository.findById(commentId).orElse(null);
     }
 
-    public void deleteComment(Long commentId, boolean hasReplies) {
+    public void deleteComment(Long commentId) {
+    	Comment comment = commentRepository.findById(commentId).orElse(null);
+    	boolean hasReplies = comment.isHasReplies();
     	if(hasReplies){
     		CommentEntityType entityType= CommentEntityType.COMMENT;
     		commentRepository.deleteByEntityTypeAndEntityId(entityType, commentId);
@@ -46,5 +47,9 @@ public class CommentService {
     
     public Long getLastCommentId() {
         return commentRepository.findLastCommentId();
+    }
+    
+    public List<Comment> findallcomment() {
+        return commentRepository.findAll();
     }
 }

@@ -1,6 +1,7 @@
 package com.wordsmith.Services;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -59,6 +60,10 @@ public class UserService implements UserDetailsService{
     
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+    
+    public List<User> findallusers() {
+        return userRepository.findAll();
     }
 
     public void saveUser(String email, String username, String password) {

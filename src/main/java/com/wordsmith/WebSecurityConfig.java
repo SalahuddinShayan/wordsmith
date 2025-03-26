@@ -22,7 +22,7 @@ public class WebSecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
             	.requestMatchers("/dashboard").hasAnyAuthority("ADMIN", "TRANSLATOR", "EDITOR")
-                .requestMatchers("/admin/**","/novellist","/deletenovel","/chapterlist","/deletechapter","/messages","/allchapters").hasAnyAuthority("ADMIN")
+                .requestMatchers("/admin/**","/novellist","/deletenovel","/chapterlist","/deletechapter","/messages","/allchapters","/auth/users", "/comments/allcomments").hasAnyAuthority("ADMIN")
                 .requestMatchers("/auth/register", "/auth/verify-otp", "/auth/verify","/auth/forgot-password","/auth/verify-reset-otp","/auth/reset-password").permitAll()
                 .anyRequest().permitAll() // Allow unrestricted access to other pages
             )
