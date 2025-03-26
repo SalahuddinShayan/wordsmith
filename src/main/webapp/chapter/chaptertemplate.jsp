@@ -45,9 +45,11 @@
         <div  Style = "margin-top: 30px;" class = "row">
         	<div class="col-1 col-lg-2 py-3 "></div>
         	<div class="col-10 col-lg-8 bd-az">
-        	<h5>Message:</h5> 
-        	<p>Hello guys,<br>
-        	   We are transitioning to a new ad provider to improve revenue and control. During this process, you may encounter some issues. Please inform us immediately if you experience any problems.   
+        	<h5>Update:</h5> 
+        	<p>Hey guys,<br>
+        	   As most of you probably know by now Disqus has stopped providing services to many sites and our site is one of them. Right now, 
+        	   we are in the middle of developing our independent comment system. As of today(26 March 2025), we are releasing the comment with 
+        	   Limited features. There are other features still under development and may take some time to roll out.
         	</p>
         	<p>As always, please continue to support us. You can show your support in the following ways:
         	</p> 
