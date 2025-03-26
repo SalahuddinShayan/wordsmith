@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
  <title>Verification</title>
 </head>
-<body>
+<body Style= "background-color: #2D3047; color: white;">
 
 
 <%@ include file="../nav2.jsp" %>
@@ -33,6 +33,7 @@
 </form>
 <%-- Resend OTP Button --%>
 <p>If your OTP expired, <a href="/auth/register" class="text-info">click here to request a new one</a>.</p>
+<p>If you didn't receive the OTP, please check your spam folder.</p>
 	</div>
     </div>
 

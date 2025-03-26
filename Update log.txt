@@ -167,6 +167,10 @@ V 1.076
 -> Created a Comment system.
 -> Created an About Us Page. 
 
+V 1.077
+-> Corrected a few styling problems.
+-> Added a message about OTP and spam folder.
+
 
 
 

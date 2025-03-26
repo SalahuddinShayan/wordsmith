@@ -5,7 +5,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<style><%@include file="css/stylesheet.css"%></style>
 <html lang="en">
 <head>
 <!-- Google tag (gtag.js) -->
@@ -22,9 +21,9 @@
 <title>Chapter list</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
-    <link rel="stylesheet" href="stylesheet.css" >
+    <link rel="stylesheet" href="css/stylesheet.css" >
 </head>
-<body>
+<body style= "background-color:white; color: black">
 
 <div class="starter-template">
    <h1>List of All The Chapter in the Novel:</h1>

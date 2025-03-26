@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/stylesheet.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
+<body Style= "background-color: #2D3047; color: white;">
 
     <%@ include file="../nav2.jsp" %>
 
@@ -24,6 +24,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <button type="submit" class="btn btn-primary w-100 mt-3">Verify</button>
             </form>
+            <p>If you didn't receive the OTP, please check your spam folder.</p>
         </div>
     </div>
     

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
  <title>User Registration</title>
 </head>
-<body>
+<body Style= "background-color: #2D3047; color: white;">
 
 
 <%@ include file="../nav2.jsp" %>
@@ -40,7 +40,7 @@
     <button type="submit" class="btn btn-primary w-100">Register</button>
 </form>
 <p class="text-center mt-3">
-            Already have an account? <a href="/auth/login" class="text-info">Login Here</a>
+            Already have an account? <a href="/auth/loginpage" class="text-info">Login Here</a>
     </p>
     </div>
     </div>
