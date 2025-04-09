@@ -37,22 +37,22 @@
             <div class="col-md-6">
                 <div class="card bg-dark text-white p-4 rounded">
                     <h4>Send us a message</h4>
-                    <form>
+                    <form id="contact-form" name="contact-form" action="savemessage" method="POST">
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Subject</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Message</label>
-                            <textarea class="form-control" rows="4" required></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         <button type="submit" class="btn btn-primary w-100">Send Message</button>

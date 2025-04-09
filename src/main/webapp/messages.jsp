@@ -47,6 +47,7 @@
        <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${message.timestamp}" /></td>
       <td><form method="post" action="deletemessage">
       		<input name="MessageId"  value="${message.messageId}" readonly="true" style="display:none;"/>
+      		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
       		<input class ="btn btn-primary" type="submit" value="Delete" />
       		</form>
       </td>
