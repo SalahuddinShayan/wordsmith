@@ -177,6 +177,11 @@ V 1.078
 V 1.079
 -> Corrected the form for messages and delete comments.
 
+V 1.080
+-> Created an RSS Feed for novel updates.
+-> Corrected the title of all users and all comments.
+
+
 
 
 
