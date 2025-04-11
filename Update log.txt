@@ -181,6 +181,10 @@ V 1.080
 -> Created an RSS Feed for novel updates.
 -> Corrected the title of all users and all comments.
 
+V 1.081
+-> Corrected the format of the date in RSS feed.
+
+
 
 
 

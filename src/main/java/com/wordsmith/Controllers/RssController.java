@@ -4,14 +4,14 @@ import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Repositories.ChapterRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.PrintWriter;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -39,6 +39,9 @@ public class RssController {
             writer.println("<item>");
             writer.println("<title><![CDATA[" + chapter.getNovelName() + " - " + chapter.getChapterNo() + "]]></title>");
             writer.println("<link>https://easternwordsmith.com/chapter/" + chapter.getChapterId() + "</link>");
+            Date postedOnDate = chapter.getPostedOn();
+            ZonedDateTime zonedDateTime = postedOnDate.toInstant().atZone(ZoneId.systemDefault());
+            writer.println("<pubDate>" + formatter.format(zonedDateTime) + "</pubDate>");
             writer.println("<pubDate>" +  chapter.getPostedOn()+ "</pubDate>");
             writer.println("</item>");
         }
