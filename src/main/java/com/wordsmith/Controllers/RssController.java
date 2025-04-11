@@ -32,6 +32,7 @@ public class RssController {
         writer.println("<link>https://easternwordsmith.com</link>");
         writer.println("<description>Latest chapters posted on Eastern Wordsmith</description>");
         writer.println("<language>en-us</language>");
+        writer.println("<atom:link href=\"https://easternwordsmith.com/rss.xml\" rel=\"self\" type=\"application/rss+xml\" xmlns:atom=\"http://www.w3.org/2005/Atom\"/>");
 
         DateTimeFormatter formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
 
@@ -42,7 +43,7 @@ public class RssController {
             Date postedOnDate = chapter.getPostedOn();
             ZonedDateTime zonedDateTime = postedOnDate.toInstant().atZone(ZoneId.systemDefault());
             writer.println("<pubDate>" + formatter.format(zonedDateTime) + "</pubDate>");
-            writer.println("<pubDate>" +  chapter.getPostedOn()+ "</pubDate>");
+            writer.println("<guid>https://easternwordsmith.com/chapter/" + chapter.getChapterId() + "</guid>");
             writer.println("</item>");
         }
 
