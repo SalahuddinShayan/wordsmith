@@ -64,7 +64,7 @@
             <div class="col-md-6">
                 <div class="card bg-dark text-white p-4 rounded">
                     <h4>Other Contact Methods</h4>
-                    <p>Email: <a href="mailto:contact@easternwordsmith.com" class="text-info">easternwordsmith@gmail.com</a></p>
+                    <p>Email: <a href="mailto:contact@easternwordsmith.com" class="text-info">contact@easternwordsmith.com</a></p>
                     <!-- <p>Follow us on:</p>
                     <a href="#" class="btn btn-outline-light btn-sm">Twitter</a>
                     <a href="#" class="btn btn-outline-light btn-sm">Discord</a> -->
