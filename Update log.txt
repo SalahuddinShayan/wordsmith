@@ -187,7 +187,8 @@ V 1.081
 V 1.081.2
 -> Corrected the format of the date in RSS feed.
 
-
+V 1.082
+-> Updated the contact us form with a professional email.
 
 
 
