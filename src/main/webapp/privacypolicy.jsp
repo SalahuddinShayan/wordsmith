@@ -108,7 +108,7 @@
 
 <p>If you have any questions about this Privacy Policy, please contact us:</p>
 <ul>
-    <li><strong>Email:</strong> <a href="mailto:easternwordsmith@gmail.com">easternwordsmith@gmail.com</a></li>
+    <li><strong>Email:</strong> <a href="mailto:contact@easternwordsmith.com">contact@easternwordsmith.com</a></li>
     <li><strong>Contact Page:</strong> <a href="https://easternwordsmith.com/contactus" target="_blank" rel="noopener noreferrer">https://easternwordsmith.com/contactus</a></li>
     <li><strong>Website:</strong> <a href="https://easternwordsmith.com" target="_blank" rel="noopener noreferrer">https://easternwordsmith.com</a></li>
 </ul>

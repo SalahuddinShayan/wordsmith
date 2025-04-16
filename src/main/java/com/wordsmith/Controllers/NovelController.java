@@ -166,6 +166,11 @@ public class NovelController {
 			return "privacypolicy";
 	}
 	
+	@RequestMapping("/disclaimer")
+	public String disclaimer() {
+			return "disclaimer";
+	}
+	
 	@RequestMapping("/aboutus")
 	public String aboutUs() {
 			return "aboutus";

@@ -191,7 +191,9 @@ V 1.082
 -> Updated the contact us form with a professional email.
 
 
-
+V 1.083
+-> Updated the about us and policy page with a professional email.
+-> Created a Disclaimer page.
 
 
 
