@@ -201,6 +201,8 @@ V 1.084
 -> changed the datatype of the posted on in the chapter to zoned date time.
 -> Created the auto-release system for chapters.
 
+V 1.085
+-> Created a system so that the users do not come into contact with unreleased chapters.
 
 
 

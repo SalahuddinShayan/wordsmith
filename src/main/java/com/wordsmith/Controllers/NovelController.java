@@ -106,7 +106,7 @@ public class NovelController {
 	public String Novel(@PathVariable String novelName, Model m) {
 		Novel novel = NovelRepo.byNovelName(novelName);
 		m.addAttribute("novel",novel);
-		List<Chapter> chapters = cr.byNovelName(novelName);
+		List<Chapter> chapters = cr.byNovelNameReleased(novelName);
 		for (Chapter chapter : chapters) {
 	        if (chapter.getReleasedOn() != null) {
 	        	chapter.setTimeAgo(getTimeDifference(chapter.getReleasedOn()));

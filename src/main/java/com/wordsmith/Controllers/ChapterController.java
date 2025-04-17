@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,8 +19,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Entity.Comment;
 import com.wordsmith.Enum.CommentEntityType;
+import com.wordsmith.Enum.ReleaseStatus;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Services.CommentService;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ChapterController {
@@ -97,8 +102,17 @@ public class ChapterController {
 		}
 	
 	@RequestMapping("/chapter/{chapterId}")
-	public String Chapter(@PathVariable long chapterId, Model m) {
+	public String Chapter(@PathVariable long chapterId, Model m, HttpServletRequest request) {
 		Chapter chapter = cr.getReferenceById(chapterId);
+		
+		// ✅ Check if the chapter is released
+	    if (chapter.getReleaseStatus() != ReleaseStatus.RELEASED) {
+	        // Manually forward to error handler with 404
+	        request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND.value());
+	        return "forward:/error";
+	    }
+
+		
 		m.addAttribute("chapter",chapter);
 		CommentEntityType type = CommentEntityType.CHAPTER;
 		List<Comment> comments = commentService.getCommentsByEntity(type, chapterId);
