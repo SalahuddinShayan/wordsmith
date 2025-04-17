@@ -195,6 +195,12 @@ V 1.083
 -> Updated the about us and policy page with a professional email.
 -> Created a Disclaimer page.
 
+V 1.084
+-> Added scroll to keywords in chapter list and all chapters.
+-> corrected the link for the stylesheet in the novel list.
+-> changed the datatype of the posted on in the chapter to zoned date time.
+-> Created the auto-release system for chapters.
+
 
 
 

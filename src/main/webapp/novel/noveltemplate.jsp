@@ -81,7 +81,7 @@
          <c:forEach var="chapter" items="${Chapters}">
          <div  class = "row">
          <div class="col-8  py-3 stm"><a href="../chapter/${chapter.chapterId}">Chapter ${chapter.chapterNo} : ${chapter.title}</a></div>
-         <div class="col-4  py-3 right"><a><fmt:formatDate type="date" value="${chapter.postedOn}" /></a></div>
+         <div class="col-4  py-3 right"><a>${chapter.timeAgo}</a></div>
          </div>
          </c:forEach>
          </div>

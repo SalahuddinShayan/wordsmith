@@ -37,6 +37,8 @@
      <th>Chapter Title</th>
      <th>Posted On</th>
      <th>Keywords</th>
+     <th>Release Status</th>
+     <th>Released On</th>
      <th class="center">Chapter Content</th>
      <th>Preview</th>
      <th>Delete</th>
@@ -48,8 +50,10 @@
       <td>${chapter.novelName}</td>
       <td>${chapter.chapterNo}</td>
       <td>${chapter.title}</td>
-      <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${chapter.postedOn}" /></td>
-      <td>${chapter.keywords}</td>
+      <td>${chapter.postedOn}</td>
+      <td class ="Dscroll">${chapter.keywords}</td>
+      <td>${chapter.releaseStatus}</td>
+      <td>${chapter.releasedOn}</td>
       <td class ="Dscroll">${chapter.content}</td>
       <td><a href="chapter/${chapter.chapterId}" class="btn btn-primary"> View</a></td> 
       <td><form method="post" action="deletechapter2">

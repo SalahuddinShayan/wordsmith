@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.wordsmith.Entity.Chapter;
+import com.wordsmith.Enum.ReleaseStatus;
 
 @Repository
 public interface ChapterRepository extends JpaRepository<Chapter, Long> {
@@ -38,5 +39,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	
 	@Query(value = "SELECT * FROM chapter order by chapter_id desc limit 20;", nativeQuery = true)
     List<Chapter>  Latest20();
+	
+	Chapter findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus status, String novelName);
 
 }

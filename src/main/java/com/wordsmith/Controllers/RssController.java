@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.PrintWriter;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,9 +37,12 @@ public class RssController {
             writer.println("<item>");
             writer.println("<title><![CDATA[" + chapter.getNovelName() + " - " + chapter.getChapterNo() + "]]></title>");
             writer.println("<link>https://easternwordsmith.com/chapter/" + chapter.getChapterId() + "</link>");
-            Date postedOnDate = chapter.getPostedOn();
-            ZonedDateTime zonedDateTime = postedOnDate.toInstant().atZone(ZoneId.systemDefault());
-            writer.println("<pubDate>" + formatter.format(zonedDateTime) + "</pubDate>");
+            if (chapter.getReleasedOn() != null) {
+            	writer.println("<pubDate>" + formatter.format(chapter.getReleasedOn()) + "</pubDate>");
+            }
+            else {
+            	writer.println("<pubDate>" + formatter.format(chapter.getPostedOn()) + "</pubDate>");
+            }
             writer.println("<guid>https://easternwordsmith.com/chapter/" + chapter.getChapterId() + "</guid>");
             writer.println("</item>");
         }

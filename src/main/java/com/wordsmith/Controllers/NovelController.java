@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.Duration;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -105,7 +106,16 @@ public class NovelController {
 	public String Novel(@PathVariable String novelName, Model m) {
 		Novel novel = NovelRepo.byNovelName(novelName);
 		m.addAttribute("novel",novel);
-		m.addAttribute("Chapters", cr.byNovelName(novelName));
+		List<Chapter> chapters = cr.byNovelName(novelName);
+		for (Chapter chapter : chapters) {
+	        if (chapter.getReleasedOn() != null) {
+	        	chapter.setTimeAgo(getTimeDifference(chapter.getReleasedOn()));
+	        }
+	        else {
+	        	chapter.setTimeAgo(getTimeDifference(chapter.getPostedOn()));
+	        }
+		}
+		m.addAttribute("Chapters", chapters);
 		CommentEntityType type = CommentEntityType.NOVEL;
 		List<Comment> comments = commentService.getCommentsByEntity(type, (long) novel.getNovelId());
 
@@ -131,7 +141,8 @@ public class NovelController {
 	    } else if (duration.toDays() < 7) {
 	        return duration.toDays() + " days ago";
 	    } else {
-	        return pastTime.toLocalDate().toString(); // Show full date if older than a week
+	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+	        return formatter.format(pastTime).toString(); // Show full date if older than a week
 	    }
 	    
 	}

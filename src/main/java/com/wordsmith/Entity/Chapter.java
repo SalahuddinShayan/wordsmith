@@ -1,90 +1,128 @@
 package com.wordsmith.Entity;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
+import com.wordsmith.Enum.ReleaseStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Chapter {
 	
 	@Id
 	@Column
-	private long ChapterId;
+	private long chapterId;
 	
 	@Column
-	private String NovelName;
+	private String novelName;
 	
 	@Column
-	private String ChapterNo;
+	private String chapterNo;
 	
 	@Column
-	private String Title;
+	private String title;
 	
 	@Column(columnDefinition = "text")
-	private String Keywords;
+	private String keywords;
 	
 	@Column
-	private Date PostedOn;
+	private ZonedDateTime postedOn;
 	
 	@Column(columnDefinition="longtext")
-	private String Content;
+	private String content;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "release_status", nullable = false)
+	private ReleaseStatus releaseStatus = ReleaseStatus.STOCKPILE;
 
+	@Column
+	private ZonedDateTime releasedOn;
+	
+	@Transient // ✅ Not stored in the database
+    private String timeAgo;
+	
 	public long getChapterId() {
-		return ChapterId;
+		return chapterId;
 	}
 
 	public void setChapterId(long chapterId) {
-		ChapterId = chapterId;
+		this.chapterId = chapterId;
 	}
 
 	public String getNovelName() {
-		return NovelName;
+		return novelName;
 	}
 
 	public void setNovelName(String novelName) {
-		NovelName = novelName;
+		this.novelName = novelName;
 	}
 
 	public String getChapterNo() {
-		return ChapterNo;
+		return chapterNo;
 	}
 
 	public void setChapterNo(String chapterNo) {
-		ChapterNo = chapterNo;
+		this.chapterNo = chapterNo;
 	}
 
 	public String getKeywords() {
-		return Keywords;
+		return keywords;
 	}
 
 	public void setKeywords(String keywords) {
-		Keywords = keywords;
+		this.keywords = keywords;
 	}
 
 	public String getTitle() {
-		return Title;
+		return title;
 	}
 
 	public void setTitle(String title) {
-		Title = title;
+		this.title = title;
 	}
 
 	public String getContent() {
-		return Content;
+		return content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
 	}
 
-	public Date getPostedOn() {
-		return PostedOn;
+	public ZonedDateTime getPostedOn() {
+		return postedOn;
 	}
 
-	public void setPostedOn(Date postedOn) {
-		PostedOn = postedOn;
+	public void setPostedOn(ZonedDateTime postedOn) {
+		this.postedOn = postedOn;
+	}
+
+	public ReleaseStatus getReleaseStatus() {
+		return releaseStatus;
+	}
+
+	public void setReleaseStatus(ReleaseStatus releaseStatus) {
+		this.releaseStatus = releaseStatus;
+	}
+	
+	public ZonedDateTime getReleasedOn() {
+		return releasedOn;
+	}
+
+	public void setReleasedOn(ZonedDateTime releasedOn) {
+		this.releasedOn = releasedOn;
+	}
+
+	public String getTimeAgo() {
+		return timeAgo;
+	}
+
+	public void setTimeAgo(String timeAgo) {
+		this.timeAgo = timeAgo;
 	}
 	
 	

@@ -1,9 +1,9 @@
 package com.wordsmith.Controllers;
 
-import java.sql.Timestamp;
 import java.time.Duration;
-import java.time.Instant;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -49,8 +49,8 @@ public class ChapterController {
 		if (cid == 0) {
 		long id = cr.Last() + 1;
 		chapter.setChapterId(id);
-		Timestamp instant= Timestamp.from(Instant.now());
-		chapter.setPostedOn(instant);
+		ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
+		chapter.setPostedOn(serverTime);
 		}
 		else {
 			Chapter chapter2= cr.getReferenceById(cid);
@@ -68,8 +68,8 @@ public class ChapterController {
 		if (cid == 0) {
 		long id = cr.Last() + 1;
 		chapter.setChapterId(id);
-		Timestamp instant= Timestamp.from(Instant.now());
-		chapter.setPostedOn(instant);
+		ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
+		chapter.setPostedOn(serverTime);
 		}
 		else {
 			Chapter chapter2= cr.getReferenceById(cid);
@@ -140,7 +140,8 @@ public class ChapterController {
 	    } else if (duration.toDays() < 7) {
 	        return duration.toDays() + " days ago";
 	    } else {
-	        return pastTime.toLocalDate().toString(); // Show full date if older than a week
+	    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+	        return formatter.format(pastTime).toString(); // Show full date if older than a week
 	    }
 	    
 	}
@@ -162,7 +163,16 @@ public class ChapterController {
 	
 	@RequestMapping("/latest/{novelname}")
 	public String latestChapters(@PathVariable String novelname, Model model) {
-		model.addAttribute("Chapters", cr.Latest(novelname));
+		List<Chapter> chapters = cr.Latest(novelname);
+		for (Chapter chapter : chapters) {
+	        if (chapter.getReleasedOn() != null) {
+	        	chapter.setTimeAgo(getTimeDifference(chapter.getReleasedOn()));
+	        }
+	        else {
+	        	chapter.setTimeAgo(getTimeDifference(chapter.getPostedOn()));
+	        }
+		}
+		model.addAttribute("Chapters", chapters);
 		return "lc";
 	
 	}
