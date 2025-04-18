@@ -40,7 +40,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	@Query(value = "SELECT chapter_id FROM chapter order by chapter_id desc limit 1;", nativeQuery = true)
     long  Last();
 	
-	@Query(value = "SELECT * FROM chapter order by chapter_id desc limit 20;", nativeQuery = true)
+	@Query(value = "SELECT * FROM chapter WHERE release_status = 'RELEASED' order by chapter_id desc limit 20;", nativeQuery = true)
     List<Chapter>  Latest20();
 	
 	Chapter findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus status, String novelName);
