@@ -47,7 +47,7 @@
     <c:forEach var="chapter" items="${Chapters}">
      <tr>
       <td>${chapter.chapterId}</td>
-      <td>${chapter.novelName}</td>
+      <td class ="Dscroll">${chapter.novelName}</td>
       <td>${chapter.chapterNo}</td>
       <td>${chapter.title}</td>
       <td>${chapter.postedOn}</td>

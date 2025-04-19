@@ -45,7 +45,7 @@
     <c:forEach var="novel" items="${Novels}">
      <tr>
       <td>${novel.novelId}</td>
-      <td>${novel.novelName}</td>
+      <td class ="Dscroll">${novel.novelName}</td>
       <td><img width="100" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" alt="images/No_image_available.svg.png" onerror="this.src='images/No_image_available.svg.png';"></td>
       <td>${novel.author}</td>
       <td>${novel.originalLanguage}</td>
