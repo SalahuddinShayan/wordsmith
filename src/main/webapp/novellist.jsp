@@ -50,9 +50,9 @@
       <td>${novel.author}</td>
       <td>${novel.originalLanguage}</td>
       <td>${novel.genre}</td>
-      <td><div class = "Dscroll">${novel.description}</div></td>
+      <td class ="Dscroll">${novel.description}</td>
       <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${novel.addedOn}" /></td>
-      <td>${novel.keywords}</td>
+      <td class ="Dscroll">${novel.keywords}</td>
       <td>${novel.status}</td>
       <td><form method="post" action="chapterlist">
       		<input name="NovelName"  value="${novel.novelName}" readonly="true" style="display:none;"/>

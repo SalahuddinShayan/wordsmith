@@ -81,6 +81,10 @@
   <form:input path="title"/>
   <form:label path="keywords">Keywords</form:label>
   <form:input path="keywords"/>
+  <form:select path="releaseStatus">
+    <form:option value="RELEASED">Released</form:option>
+    <form:option value="STOCKPILE">Stockpile</form:option>
+  </form:select>
   <form:label path="content">Content</form:label>
   <form:textarea path="content" rows = "5" cols = "180"/>
   <input type="submit" value="post Chapter" />

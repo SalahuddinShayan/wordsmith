@@ -206,9 +206,12 @@ V 1.085
 -> edit: corrected the queries in the novel repository so that the stockpile chapter does not affect the latest order.
 -> edit2: coquetry for RSS feed.
 
-V 1.085
+V 1.086
 -> Updated the query for the RSS feed to correct the order of the chapters released.
--> updated the jsp pages so the novel name is scrollable/
+-> updated the jsp pages so the novel name is scrollable
 
-
+V 1.087
+-> Added Epsilon Entries in the ads.txt file.
+-> Updated the form for adding the chapter so that release status can be set manually
+-> Updated the table for the novels so that scrolling can be more natural.
 
