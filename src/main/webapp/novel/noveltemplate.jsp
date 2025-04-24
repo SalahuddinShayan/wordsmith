@@ -29,6 +29,38 @@
 <body>
 
 <%@ include file="../nav2.jsp" %>
+
+        <!-- Conversant Media CODE for Eastern Wordsmith (Placement 953273c1) -->
+          <div class="d-block d-lg-none text-center my-3" id="pubCodeContainer-id-245979-953273c1">
+            <script type="text/javascript"
+              src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+            <script>
+              conversant.pubcode.loadOneAd({
+                sid: 245979,
+                id: "953273c1",
+                location: "pubCodeContainer-id-245979-953273c1",
+                format: [{ w: 320, h: 100 }]
+              })
+            </script>
+          </div>
+          <!-- Conversant Media CODE for Eastern Wordsmith (Placement 953273c1) -->
+
+
+	<!-- Conversant Media CODE for Eastern Wordsmith (Placement fdb866a2) -->
+	<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-fdb866a2">
+		<script type="text/javascript"
+			src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+		<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "fdb866a2",
+            location: "pubCodeContainer-id-245979-fdb866a2",
+            format: [{w:970,h:250}]
+        })
+    </script>
+	</div>
+	<!-- Conversant Media CODE for Eastern Wordsmith (Placement fdb866a2) -->
+        
         
         <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 py-3 "></div>
@@ -69,13 +101,82 @@
          <div class="col-1 py-3 "><a></a></div>
          <div class="col-11  py-3 ">${novel.description}</div>
          </div>
+         <div  class = "row">
+         <div class="col-6 py-3 text-center">
+         	<a href="../chapter/${frist}" class="btn bg-az"><i class="fas fa-book-open"></i> Read First Chapter</a>
+    	</div>
+         <div class="col-6 py-3 text-center"><a href="../chapter/${last}" class="btn bg-az"><i class="fas fa-book-open"></i> Read Last Chapter</a></div>
+         </div>
          </div>
          <div class="col-1 col-lg-2 py-3 "></div>
          </div>
          
          
+         <!-- Conversant Media CODE for Eastern Wordsmith (Placement d3468b89) -->
+			<div class="text-center my-3" id="pubCodeContainer-id-245979-d3468b89">
+				<script type="text/javascript"
+					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+				<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "d3468b89",
+            location: "pubCodeContainer-id-245979-d3468b89",
+            format: [{w:300,h:250}]
+        })
+    </script>
+			</div>
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement d3468b89) -->
+			
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement efe28409) -->
+          <div class="text-center my-3" id="pubCodeContainer-id-245979-efe28409">
+            <script type="text/javascript"
+              src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+            <script>
+              conversant.pubcode.loadOneAd({
+                sid: 245979,
+                id: "efe28409",
+                location: "pubCodeContainer-id-245979-efe28409",
+                format: [{ w: 728, h: 90 }]
+              })
+            </script>
+          </div>
+          <!-- Conversant Media CODE for Eastern Wordsmith (Placement efe28409) -->
+         
+         
          <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-1 col-lg-3 py-3 "></div>
+         <div class="col-1 col-lg-3 py-3">
+         <div class = "sticky-ad">
+         <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
+              <div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-2964d05d">
+                <script type="text/javascript"
+                  src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+                <script>
+                  conversant.pubcode.loadOneAd({
+                    sid: 245979,
+                    id: "2964d05d",
+                    location: "pubCodeContainer-id-245979-2964d05d",
+                    format: [{ w: 160, h: 600 }]
+                  })
+                </script>
+              </div>
+              <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
+
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
+			<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-210e6523">
+				<script type="text/javascript"
+					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+				<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "210e6523",
+            location: "pubCodeContainer-id-245979-210e6523",
+            format: [{w:300,h:600}]
+        })
+    </script>
+			</div>
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
+			</div>
+         </div>
          <div class="col-10 col-lg-6 py-3 ">
          <h4 class="center">Table Of Content</h4>
          <c:forEach var="chapter" items="${Chapters}">
@@ -85,8 +186,41 @@
          </div>
          </c:forEach>
          </div>
-         <div class="col-1 col-lg-3 py-3 "></div>
+         <div class="col-1 col-lg-3 py-3">
+         <!-- Conversant Media CODE for Eastern Wordsmith (Placement 1d89bbaf) -->
+			<div class="d-none d-lg-block text-center my-3 sticky-ad"
+				id="pubCodeContainer-id-245979-1d89bbaf">
+				<script type="text/javascript"
+					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+				<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "1d89bbaf",
+            location: "pubCodeContainer-id-245979-1d89bbaf",
+            format: [{w:300,h:1050}]
+        })
+    </script>
+			</div>
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 1d89bbaf) -->
          </div>
+         </div>
+         
+         
+         <!-- Conversant Media CODE for Eastern Wordsmith (Placement ce1af472) -->
+	<div class="text-center my-4" id="pubCodeContainer-id-245979-ce1af472">
+		<script type="text/javascript"
+			src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+		<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "ce1af472",
+            location: "pubCodeContainer-id-245979-ce1af472",
+            format: [{w:336,h:280}]
+        })
+    </script>
+	</div>
+	<!-- Conversant Media CODE for Eastern Wordsmith (Placement ce1af472) -->
+         
         
         <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-3 py-3 "></div>
@@ -183,6 +317,21 @@
          </div>
          <div class="col-1 col-lg-3 py-3 "></div>
          </div>
+         
+         <!-- Conversant Media CODE for Eastern Wordsmith (Placement e1f0d2e7) -->
+      <div class="d-block text-center my-4" id="pubCodeContainer-id-245979-e1f0d2e7">
+        <script type="text/javascript"
+          src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+        <script>
+          conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "e1f0d2e7",
+            location: "pubCodeContainer-id-245979-e1f0d2e7",
+            format: [{ w: 320, h: 50 }]
+          })
+        </script>
+      </div>
+      <!-- Conversant Media CODE for Eastern Wordsmith (Placement e1f0d2e7) -->
         
         <%@ include file="../footer2.jsp" %>
        

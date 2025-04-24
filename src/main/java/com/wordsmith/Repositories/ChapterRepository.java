@@ -40,6 +40,12 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	@Query(value = "SELECT chapter_id FROM chapter order by chapter_id desc limit 1;", nativeQuery = true)
     long  Last();
 	
+	@Query(value = "SELECT chapter_id FROM chapter WHERE novel_name = :novelname AND release_status = 'RELEASED' order by chapter_id desc limit 1;", nativeQuery = true)
+    long  LastReleased(@Param("novelname") String novelname);
+	
+	@Query(value = "SELECT chapter_id FROM chapter WHERE novel_name = :novelname AND release_status = 'RELEASED' order by chapter_id limit 1;", nativeQuery = true)
+    long  First(@Param("novelname") String novelname);
+	
 	@Query(value = "SELECT * FROM chapter WHERE release_status = 'RELEASED' order by COALESCE( released_on, posted_on) desc limit 20;", nativeQuery = true)
     List<Chapter>  Latest20();
 	

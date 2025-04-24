@@ -215,3 +215,6 @@ V 1.087
 -> Updated the form for adding the chapter so that release status can be set manually
 -> Updated the table for the novels so that scrolling can be more natural.
 
+V 1.088
+-> First experiment with Epsilon ad placements.
+-> Created Rads first chapter and read last chapter button in the novel template.

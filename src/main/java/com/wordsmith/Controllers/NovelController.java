@@ -125,6 +125,8 @@ public class NovelController {
 		        }
 		    }
 		m.addAttribute("comments", comments);
+		m.addAttribute("frist", cr.First(novelName));
+		m.addAttribute("last", cr.LastReleased(novelName));
 		return "noveltemplate";
 	}
 	
