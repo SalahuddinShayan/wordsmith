@@ -28,7 +28,7 @@
 	<%@ include file="nav1.jsp" %>
         
         
-        <div class="container mt-5 text-white">
+        <div class="container-fluid mt-5 text-white">
         <h2 class="text-center">Contact Us</h2>
         <p class="text-center">Have a question? Feel free to reach out!</p>
         

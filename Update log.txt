@@ -218,3 +218,7 @@ V 1.087
 V 1.088
 -> First experiment with Epsilon ad placements.
 -> Created Rads first chapter and read last chapter button in the novel template.
+
+V 1.089
+-> Edited the left-hand half page ad in home page
+-> Edited the nav bar code to make it more responsive on mobile screens.

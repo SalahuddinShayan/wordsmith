@@ -145,7 +145,8 @@
 
       <div class="row">
         <div class="col-1 col-lg-2 py-3 ">
-              <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
+              <div class = "sticky-ad">
+         	  <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
               <div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-2964d05d">
                 <script type="text/javascript"
                   src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
@@ -161,7 +162,7 @@
               <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
 
 			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
-			<div id="pubCodeContainer-id-245979-210e6523">
+			<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-210e6523">
 				<script type="text/javascript"
 					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
 				<script>
@@ -174,10 +175,7 @@
     </script>
 			</div>
 			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
-
-
-
-
+			</div>
 		</div>
         <div class="col-10 col-lg-8 py-3 bd-az">
           <div class="row">
