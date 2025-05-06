@@ -222,3 +222,7 @@ V 1.088
 V 1.089
 -> Edited the left-hand half page ad in home page
 -> Edited the nav bar code to make it more responsive on mobile screens.
+
+V 1.090
+-> Updated the two novels in the auto updates.
+-> Removed half-page ad from home page.

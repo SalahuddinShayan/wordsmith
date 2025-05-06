@@ -161,20 +161,7 @@
               </div>
               <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
 
-			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
-			<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-210e6523">
-				<script type="text/javascript"
-					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-				<script>
-        conversant.pubcode.loadOneAd({
-            sid: 245979,
-            id: "210e6523",
-            location: "pubCodeContainer-id-245979-210e6523",
-            format: [{w:300,h:600}]
-        })
-    </script>
-			</div>
-			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
+			
 			</div>
 		</div>
         <div class="col-10 col-lg-8 py-3 bd-az">
@@ -201,7 +188,7 @@
         </div>
 		<div class="col-1 col-lg-2 py-3 ">
 			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 1d89bbaf) -->
-<div id="pubCodeContainer-id-245979-1d89bbaf">
+<div class="d-none d-lg-block text-center my-3 sticky-ad" id="pubCodeContainer-id-245979-1d89bbaf">
     <script type="text/javascript" src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
     <script>
         conversant.pubcode.loadOneAd({

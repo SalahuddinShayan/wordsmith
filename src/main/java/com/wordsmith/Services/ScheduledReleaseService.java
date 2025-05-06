@@ -124,7 +124,7 @@ public class ScheduledReleaseService {
     @Transactional
     @Scheduled(cron = "0 0 13 * * ?", zone = "UTC") // Every day at 1 PM UTC/ 6:30PM IST
     public void autoRelease1pm() {
-        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "I was bullied and wanted to die, but then I inherited the power of a great magician and started traveling between another world and Japan.");
+        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "The Skill Collector");
            
 
         if (nextChapter != null) {
@@ -132,9 +132,9 @@ public class ScheduledReleaseService {
             ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
             nextChapter.setReleasedOn(serverTime);
             chapterRepository.save(nextChapter);
-            System.out.println("✅ Auto-released - I was bullied and wanted to die, but then I inherited the power of a great magician and started traveling between another world and Japan.: " + nextChapter.getTitle());
+            System.out.println("✅ Auto-released - The Skill Collector: " + nextChapter.getTitle());
         } else {
-            System.out.println("ℹ️ I was bullied and wanted to die, but then I inherited the power of a great magician and started traveling between another world and Japan. has no chapters scheduled for release.");
+            System.out.println("ℹ️ The Skill Collector has no chapters scheduled for release.");
         }
     }
     
@@ -158,7 +158,7 @@ public class ScheduledReleaseService {
     @Transactional
     @Scheduled(cron = "0 0 15 * * ?", zone = "UTC") // Every day at 3 PM UTC/ 8:30PM IST
     public void autoRelease3pm() {
-        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "The Villainous Aristocrat's Second Chance: A Life of Self-Restraint After Being Executed for Overstepping Boundaries");
+        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "Tower Defense is the Ultimate Defense Technique");
            
 
         if (nextChapter != null) {
@@ -166,9 +166,9 @@ public class ScheduledReleaseService {
             ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
             nextChapter.setReleasedOn(serverTime);
             chapterRepository.save(nextChapter);
-            System.out.println("✅ Auto-released - The Villainous Aristocrat's Second Chance: A Life of Self-Restraint After Being Executed for Overstepping Boundaries: " + nextChapter.getTitle());
+            System.out.println("✅ Auto-released - Tower Defense is the Ultimate Defense Technique: " + nextChapter.getTitle());
         } else {
-            System.out.println("ℹ️ The Villainous Aristocrat's Second Chance: A Life of Self-Restraint After Being Executed for Overstepping Boundaries has no chapters scheduled for release.");
+            System.out.println("ℹ️ Tower Defense is the Ultimate Defense Technique has no chapters scheduled for release.");
         }
     }
     
