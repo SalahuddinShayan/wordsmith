@@ -226,3 +226,6 @@ V 1.089
 V 1.090
 -> Updated the two novels in the auto updates.
 -> Removed half-page ad from home page.
+
+V 1.091
+-> Created a frontend implementation for ShareID.
