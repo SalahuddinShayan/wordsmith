@@ -229,3 +229,6 @@ V 1.090
 
 V 1.091
 -> Created a frontend implementation for ShareID.
+
+V 1.092
+-> Increased the Hikari pool connections.
