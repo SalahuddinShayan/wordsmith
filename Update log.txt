@@ -232,3 +232,7 @@ V 1.091
 
 V 1.092
 -> Increased the Hikari pool connections.
+
+V 1.093
+-> Increased the Hikari pool connections to 150.
+-> Installed spring actuator 
