@@ -235,4 +235,8 @@ V 1.092
 
 V 1.093
 -> Increased the Hikari pool connections to 150.
--> Installed spring actuator 
+-> Installed spring actuator
+
+V 1.094
+-> Remove Epsilon from ads.txt
+-> added the responsive ads from AdSense to the web pages

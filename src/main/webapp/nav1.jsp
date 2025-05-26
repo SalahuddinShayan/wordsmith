@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<nav class="navbar navbar-light bg-az navbar-expand-md sticky-top">
+<nav class="navbar navbar-light bg-az navbar-expand-md sticky-top container-fluid">
     <div class="container-fluid">
         <a href="https://easternwordsmith.com/" class="navbar-brand d-flex align-items-center">
             <img src="images/logo2.png" width="40" height="40" alt="">
