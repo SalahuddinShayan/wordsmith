@@ -104,13 +104,11 @@
          <div class="col-1 col-lg-2 py-3 ">
          <div class="d-none d-lg-block text-center my-3 sticky-ad">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
-					<!-- Responsive Vertical -->
+					<!-- Wide SkyScraper -->
 					<ins class="adsbygoogle"
-     				style="display:block"
+     				style="display:inline-block;width:160px;height:600px"
      				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9033506582"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+     				data-ad-slot="6212425217"></ins>
 				<script>
      				(adsbygoogle = window.adsbygoogle || []).push({});
 				</script>
@@ -121,16 +119,14 @@
         
         <div class="d-none d-lg-block text-center my-3 sticky-ad">
     			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
-					<!-- Responsive Vertical -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9033506582"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
-				<script>
-     				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
+				<!-- Billboard - Rising Star -->
+				<ins class="adsbygoogle"
+     				style="display:inline-block;width:970px;height:250px"
+     			data-ad-client="ca-pub-3020770276580291"
+     			data-ad-slot="8159931703"></ins>
+			<script>
+     			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
 		</div>
         
         

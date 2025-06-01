@@ -240,3 +240,6 @@ V 1.093
 V 1.094
 -> Remove Epsilon from ads.txt
 -> added the responsive ads from AdSense to the web pages
+
+V 1.094
+-> Experimenting with fixed size ads.
