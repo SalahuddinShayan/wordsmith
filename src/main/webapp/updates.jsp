@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://fpyf8.com/88/tag.min.js" data-zone="115765" async data-cfasync="false"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
 <script>
