@@ -104,6 +104,25 @@ public class ScheduledReleaseService {
         }
     }
     
+    
+    @Transactional
+    @Scheduled(cron = "0 0 5 * * ?", zone = "UTC") // Every day at 5 AM UTC/ 10:30AM IST
+    public void autoRelease5am() {
+        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "The Crazy Villain Regains His Sanity");
+           
+
+        if (nextChapter != null) {
+            nextChapter.setReleaseStatus(ReleaseStatus.RELEASED);
+            ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
+            nextChapter.setReleasedOn(serverTime);
+            chapterRepository.save(nextChapter);
+            System.out.println("✅ Auto-released- The Crazy Villain Regains His Sanity " + nextChapter.getChapterNo());
+        } else {
+            System.out.println("ℹ️ The Crazy Villain Regains His Sanity has no chapters scheduled for release.");
+        }
+    }
+    
+    
     @Transactional
     @Scheduled(cron = "0 0 12 * * ?", zone = "UTC") // Every day at 12 Noon UTC/ 5:30PM IST
     public void autoReleasenoon() {
@@ -203,6 +222,24 @@ public class ScheduledReleaseService {
             System.out.println("✅ Auto-released - The Sword Saint Reincarnated as a Shota Prince Absolutely Refuses to Let His Former Disciple Find Out!: " + nextChapter.getTitle());
         } else {
             System.out.println("ℹ️ The Sword Saint Reincarnated as a Shota Prince Absolutely Refuses to Let His Former Disciple Find Out! has no chapters scheduled for release.");
+        }
+    }
+    
+    
+    @Transactional
+    @Scheduled(cron = "0 0 18 * * ?", zone = "UTC") // Every day at 6 PM UTC/ 11:30PM IST
+    public void autoRelease6pm() {
+        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "The Magician Kunon Sees Everything");
+           
+
+        if (nextChapter != null) {
+            nextChapter.setReleaseStatus(ReleaseStatus.RELEASED);
+            ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
+            nextChapter.setReleasedOn(serverTime);
+            chapterRepository.save(nextChapter);
+            System.out.println("✅ Auto-released - The Magician Kunon Sees Everything: " + nextChapter.getTitle());
+        } else {
+            System.out.println("ℹ️ The Magician Kunon Sees Everything has no chapters scheduled for release.");
         }
     }
 }
