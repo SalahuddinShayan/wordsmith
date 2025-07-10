@@ -243,3 +243,15 @@ V 1.094
 
 V 1.094
 -> Experimenting with fixed size ads.
+
+V 1.095
+-> added monetag.
+
+V 1.096
+-> added auto release for two new novels.
+-> added anti-AdBlock code
+
+V 1.97
+-> removed Monetag.
+-> Removed all the custom ad units
+-> Increased the limit in the latest update to 12.
