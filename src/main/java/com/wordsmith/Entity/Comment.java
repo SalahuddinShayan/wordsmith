@@ -1,6 +1,7 @@
 package com.wordsmith.Entity;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -50,6 +51,22 @@ public class Comment {
     
     @Transient // ✅ Not stored in the database
     private String timeAgo;
+
+	@Transient
+	private List<Comment> replies; // For nested comments
+
+	public Comment() {
+		// Default constructor
+	}
+
+	public Comment(CommentEntityType entityType, Long entityId, String userName, String content) {
+		this.entityType = entityType;
+		this.entityId = entityId;
+		this.userName = userName;
+		this.content = content;
+	}
+
+	// Getters and Setters
 
 
 
@@ -132,7 +149,14 @@ public class Comment {
 	public void setTimeAgo(String timeAgo) {
 		this.timeAgo = timeAgo;
 	}
-    
+
+	public List<Comment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Comment> replies) {
+		this.replies = replies;
+	}
     
     
 }

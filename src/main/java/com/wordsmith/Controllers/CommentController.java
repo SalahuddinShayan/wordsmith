@@ -69,6 +69,13 @@ public class CommentController {
         comment.setCreatedAt(serverTime);
         comment.setUpdatedAt(null);
         comment.setContent(content);
+        if(comment.getEntityType() == (CommentEntityType.COMMENT)){
+            System.out.println("Adding a reply to comment with ID: " + entityId);
+            Comment parentComment = commentService.getCommentById(entityId);
+
+            parentComment.setHasReplies(true);
+            commentService.saveComment(parentComment);
+        }
 
         commentService.saveComment(comment);
         String referer = request.getHeader("Referer");

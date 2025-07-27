@@ -44,6 +44,7 @@ public class ChapterController {
 		model.addAttribute("Chapters", cr.byNovelName(novelname));
 		model.addAttribute("command", new Chapter());
 		model.addAttribute("novelname", novelname);
+		model.addAttribute("stock", cr.countByReleaseStatusAndNovelName(ReleaseStatus.STOCKPILE, novelname));
 		return "chapterlist";
 	}
 	
@@ -60,6 +61,9 @@ public class ChapterController {
 		else {
 			Chapter chapter2= cr.getReferenceById(cid);
 			chapter.setPostedOn(chapter2.getPostedOn());
+			if (chapter.getReleaseStatus() == ReleaseStatus.RELEASED) {
+				chapter.setReleasedOn(chapter2.getReleasedOn()); // Keep the original released date if it was already set
+			}
 		}
 		cr.save(chapter);
 		RedirectView redirectView= new RedirectView("/chapterlist",true);
@@ -120,6 +124,15 @@ public class ChapterController {
 		        if (comment.getCreatedAt() != null) {
 		            comment.setTimeAgo(getTimeDifference(comment.getCreatedAt()));
 		        }
+				if (comment.isHasReplies()){
+					comment.setReplies(commentService.getCommentsByEntity(CommentEntityType.COMMENT, comment.getId()));
+					for (Comment reply : comment.getReplies()) {
+						if (reply.getCreatedAt() != null) {
+							reply.setTimeAgo(getTimeDifference(reply.getCreatedAt()));
+						}
+					}
+				}
+				
 		    }
 		m.addAttribute("comments", comments);
 		return "chaptertemplate";

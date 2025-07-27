@@ -27,9 +27,22 @@
 
 <div class="starter-template">
    <h1>List of All The Chapter in the Novel:</h1>
-   <a class="btn btn-primary" href="novellist">Novel List</a>
-   <table
-    class="table table-striped table-hover table-condensed table-bordered">
+   <a class="btn btn-primary" href="novellist">Novel List</a> 
+   <br>
+   <a><b>Stock:</b>${stock}</a><br>
+   <a><b>Change the novel Status:</b></a><br>
+   <form method="post" action="novelstatus">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    <input readonly="true" style="display:none;" name="novelname" value="${novelname}" />
+    <select name="status">
+      <option value="ONGOING">Ongoing</option>
+      <option value="COMPLETED">Completed</option>
+      <option value="HIATUS">Hiatus</option>
+      <option value="Dropped">Dropped</option>
+    </select>
+    <input type="submit" value="Change Status" class="btn btn-primary"/> 
+    </form>
+   <table class="table table-striped table-hover table-condensed table-bordered">
     <tr>
      <th>Chapter Id</th>
      <th>Novel Name</th>

@@ -11,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -38,6 +39,14 @@ public class User {
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
+
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
+	private byte[] ProfilePicture;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_login_time")
+	private Date lastLoginTime;
     
     
     public Long getId() {
@@ -86,6 +95,22 @@ public class User {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public byte[] getProfilePicture() {
+		return ProfilePicture;
+	}
+
+	public void setProfilePicture(byte[] profilePicture) {
+		ProfilePicture = profilePicture;
+	}
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
 }
 

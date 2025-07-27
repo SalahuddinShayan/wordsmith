@@ -34,6 +34,7 @@
      <th>password</th>
      <th>Role</th>
      <th>User since</th>
+     <th>Last Login</th>
      <th>Delete</th>
      
     </tr>
@@ -44,7 +45,8 @@
       <td>${user.email}</td>
       <td>${user.password}</td>
       <td>${user.role}</td>
-       <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${user.createdAt}" /></td>
+      <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${user.createdAt}" /></td>
+      <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short"  value="${user.lastLoginTime}" /></td>
       <td><form method="post" action="deletemessage">
       		<input name="MessageId"  value="${user.id}" readonly="true" style="display:none;"/>
       		<input class ="btn btn-primary" type="submit" value="Delete" />

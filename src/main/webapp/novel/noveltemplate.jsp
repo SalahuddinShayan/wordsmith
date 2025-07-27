@@ -157,37 +157,50 @@
                     <button type="submit" class="icon-btn"><i class="fa-solid fa-flag"></i></button>
                 </form>
 
-                <!--<c:if test="${not empty loggedInUser}">
+                <c:if test="${not empty loggedInUser}">
                     <button class="icon-btn reply-btn" onclick="toggleReplyForm('${comment.id}')">
                         <i class="fa-solid fa-reply"></i>
                     </button>
-                </c:if>-->
+                </c:if>
+            </div>
+            <!-- 🔹 Reply Form -->
+            <div id="reply-form-${comment.id}" class="reply-form" style="display:none; margin-top:10px;">
+                <form action="/comments/add" method="post">
+                    <input type="hidden" name="entityType" value="comment">
+                    <input type="hidden" name="entityId" value="${comment.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <textarea name="content" required class="form-control" placeholder="Write a reply..."></textarea>
+                    <button type="submit" class="btn btn-secondary mt-2">Reply</button>
+                    <button type="button" class="btn btn-link mt-2" onclick="toggleReplyForm('${comment.id}')">Cancel</button>
+                </form>
             </div>
 
             <!-- 🔹 Display Replies (Nested Comments) -->
-            <!--<c:if test="${comment.hasReplies}">
+            <c:if test="${comment.hasReplies}">
                 <div class="replies" style="margin-left: 30px;">
                     <c:forEach var="reply" items="${comment.replies}">
                         <div class="comment">
-                            <strong>${reply.user.username}</strong>
+                            <strong>${reply.userName}</strong>
+                            <small>${reply.timeAgo}</small>
                             <p>${reply.content}</p>
-                            <small>Posted on: ${reply.createdAt}</small>
 
-                            <c:if test="${loggedInUser.id == reply.user.id || loggedInUser.role == 'ADMIN'}">
-                                <form action="/comments/delete" method="post">
+                            <c:if test="${loggedInUser.username == reply.userName || loggedInUser.role == 'ADMIN'}">
+                                <form action="/comments/delete" method="post" class="comment-action-form">
                                     <input type="hidden" name="commentId" value="${reply.id}">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <button type="submit" class="icon-btn"><i class="fa-solid fa-trash"></i></button>
                                 </form>
                             </c:if>
 
-                            <form action="/comments/flag" method="post">
-                                <input type="hidden" name="commentId" value="${reply.id}">
-                                <button type="submit" class="btn btn-warning btn-sm">Flag</button>
+                            <form action="/comments/flag" method="post" class="comment-action-form">
+                                <input type="hidden" name="commentId" value="${comment.id}">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <button type="submit" class="icon-btn"><i class="fa-solid fa-flag"></i></button>
                             </form>
                         </div>
                     </c:forEach>
                 </div>
-            </c:if>-->
+            </c:if>
         </div>
         <br>
     </c:forEach>

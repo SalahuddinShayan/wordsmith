@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.wordsmith.Entity.Chapter;
@@ -62,6 +63,14 @@ public class NovelController {
 		    return "novellist";
 	    
 	}
+	
+	@RequestMapping("/activenovellist")
+	public String activenovellist(Model model) {
+			model.addAttribute("Novels",NovelRepo.findOngoing());
+			model.addAttribute("command",new Novel());
+		    return "novellist";
+	}		
+	
 	
 	@GetMapping("/novel-image/{id}")
 	@ResponseBody
@@ -123,6 +132,15 @@ public class NovelController {
 		        if (comment.getCreatedAt() != null) {
 		            comment.setTimeAgo(getTimeDifference(comment.getCreatedAt()));
 		        }
+				if (comment.isHasReplies()){
+					comment.setReplies(commentService.getCommentsByEntity(CommentEntityType.COMMENT, comment.getId()));
+					for (Comment reply : comment.getReplies()) {
+						if (reply.getCreatedAt() != null) {
+							reply.setTimeAgo(getTimeDifference(reply.getCreatedAt()));
+						}
+					}
+				}
+				
 		    }
 		m.addAttribute("comments", comments);
 		m.addAttribute("frist", cr.First(novelName));
@@ -191,8 +209,15 @@ public class NovelController {
 	
 	@RequestMapping("/dashboard")
 	public String dashboard() {
-		System.out.println("dashboard");
 			return "dashboard";
+	}
+
+	@RequestMapping("/novelstatus")
+	public RedirectView updateNovelStatus(@RequestParam("novelname") String novelname, @RequestParam("status") String status, RedirectAttributes redirectAttributes) {
+		NovelRepo.updateNovelStatus(status, novelname);
+		RedirectView redirectView = new RedirectView("/chapterlist", true);
+		redirectAttributes.addAttribute("NovelName", novelname);
+		return redirectView;
 	}
 
 }

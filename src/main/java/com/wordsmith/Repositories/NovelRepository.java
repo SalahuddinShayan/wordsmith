@@ -2,11 +2,14 @@ package com.wordsmith.Repositories;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.wordsmith.Entity.Novel;
+
+import jakarta.transaction.Transactional;
 
 @Repository
 public interface NovelRepository extends JpaRepository<Novel,Integer> {
@@ -25,5 +28,13 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 	
 	@Query(value = "SELECT novel_name FROM novel WHERE status = 'Ongoing' order by novel_id;", nativeQuery = true)
 	List<String>  allNovelName();
+
+	@Query(value = "SELECT * FROM novel WHERE status = 'Ongoing' order by novel_id;", nativeQuery = true)
+	List<Novel> findOngoing();
+
+	@Transactional
+	@Modifying
+	@Query(value = "Update novel set status = :status where novel_name = :novelname", nativeQuery = true)
+	void updateNovelStatus(@Param("status") String status, @Param("novelname") String novelname);
 
 }

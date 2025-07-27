@@ -1,5 +1,6 @@
 package com.wordsmith.Controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wordsmith.Entity.User;
 import com.wordsmith.Enum.Role;
+import com.wordsmith.Repositories.UserRepository;
 import com.wordsmith.Services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +29,9 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     // ✅ Serve the login page when accessed via browser
     @GetMapping("/loginpage")
@@ -54,6 +59,8 @@ public class LoginController {
         if (user != null && userService.authenticateUser(identifier, password)) {
             session.setAttribute("loggedInUser", user);
             session.setAttribute("userRole", user.getRole().toString());
+            user.setLastLoginTime(new Date());
+            userRepository.save(user);
             
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, 
             	    List.of(new SimpleGrantedAuthority(user.getRole().toString().toUpperCase())));

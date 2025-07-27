@@ -67,11 +67,15 @@ function ChapStyle(){
 		}
 }
 
-function toggleReplyForm(commentId) {
-        var replyForm = document.getElementById("reply-form-" + commentId);
-        if (replyForm.style.display === "none") {
-            replyForm.style.display = "block";
-        } else {
-            replyForm.style.display = "none";
-        }
-    }
+
+            function toggleReplyForm(commentId) {
+                var form = document.getElementById('reply-form-' + commentId);
+                if (form.style.display === 'none' || form.style.display === '') {
+					console.log('if block"');
+                    form.style.display = 'block';
+                } else {
+					console.log('else block"');
+                    form.style.display = 'none';
+                }
+            }
+            

@@ -51,4 +51,6 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	
 	Chapter findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus status, String novelName);
 
+	int countByReleaseStatusAndNovelName(ReleaseStatus status, String novelName);
+
 }

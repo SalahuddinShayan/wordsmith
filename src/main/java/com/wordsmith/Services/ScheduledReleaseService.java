@@ -126,7 +126,7 @@ public class ScheduledReleaseService {
     @Transactional
     @Scheduled(cron = "0 0 12 * * ?", zone = "UTC") // Every day at 12 Noon UTC/ 5:30PM IST
     public void autoReleasenoon() {
-        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "Outdoor Shop in Another World: Opening in the Adventurers' Starting Town!");
+        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "Sword of Beelzebuth");
            
 
         if (nextChapter != null) {
@@ -134,9 +134,9 @@ public class ScheduledReleaseService {
             ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
             nextChapter.setReleasedOn(serverTime);
             chapterRepository.save(nextChapter);
-            System.out.println("✅ Auto-released - Outdoor Shop in Another World: Opening in the Adventurers' Starting Town!: " + nextChapter.getTitle());
+            System.out.println("✅ Auto-released - Sword of Beelzebuth: " + nextChapter.getTitle());
         } else {
-            System.out.println("ℹ️ Outdoor Shop in Another World: Opening in the Adventurers' Starting Town! has no chapters scheduled for release.");
+            System.out.println("ℹ️ Sword of Beelzebuth has no chapters scheduled for release.");
         }
     }
     
