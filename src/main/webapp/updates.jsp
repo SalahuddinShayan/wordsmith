@@ -31,9 +31,88 @@
 <%@ include file="nav1.jsp" %>
         
         
+        <!-- Conversant Media CODE for Eastern Wordsmith (Placement 953273c1) -->
+          <div class="d-block d-lg-none text-center my-3" id="pubCodeContainer-id-245979-953273c1">
+            <script type="text/javascript"
+              src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+            <script>
+              conversant.pubcode.loadOneAd({
+                sid: 245979,
+                id: "953273c1",
+                location: "pubCodeContainer-id-245979-953273c1",
+                format: [{ w: 320, h: 100 }]
+              })
+            </script>
+          </div>
+          <!-- Conversant Media CODE for Eastern Wordsmith (Placement 953273c1) -->
+
+
+	<!-- Conversant Media CODE for Eastern Wordsmith (Placement fdb866a2) -->
+	<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-fdb866a2">
+		<script type="text/javascript"
+			src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+		<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "fdb866a2",
+            location: "pubCodeContainer-id-245979-fdb866a2",
+            format: [{w:970,h:250}]
+        })
+    </script>
+	</div>
+	<!-- Conversant Media CODE for Eastern Wordsmith (Placement fdb866a2) -->
+	
+		
+		<!-- Conversant Media CODE for Eastern Wordsmith (Placement efe28409) -->
+          <div class="text-center my-3" id="pubCodeContainer-id-245979-efe28409">
+            <script type="text/javascript"
+              src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+            <script>
+              conversant.pubcode.loadOneAd({
+                sid: 245979,
+                id: "efe28409",
+                location: "pubCodeContainer-id-245979-efe28409",
+                format: [{ w: 728, h: 90 }]
+              })
+            </script>
+          </div>
+          <!-- Conversant Media CODE for Eastern Wordsmith (Placement efe28409) -->
+        
         
         <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-1 col-lg-2 py-3 "></div>
+         <div class="col-1 col-lg-2 py-3 ">
+         <div class = "sticky-ad">
+         	  <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
+              <div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-2964d05d">
+                <script type="text/javascript"
+                  src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+                <script>
+                  conversant.pubcode.loadOneAd({
+                    sid: 245979,
+                    id: "2964d05d",
+                    location: "pubCodeContainer-id-245979-2964d05d",
+                    format: [{ w: 160, h: 600 }]
+                  })
+                </script>
+              </div>
+              <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
+
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
+			<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-210e6523">
+				<script type="text/javascript"
+					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+				<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "210e6523",
+            location: "pubCodeContainer-id-245979-210e6523",
+            format: [{w:300,h:600}]
+        })
+    </script>
+			</div>
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
+			</div>
+         </div>
          <div class="col-10 col-lg-8 py-3 bd">
           <h2>Latest Updates:</h2>
           <div class = "row">
@@ -56,21 +135,54 @@
            </c:forEach>
           </div> 
          </div>
-         <div class="col-1 col-lg-2 py-3 "></div>
+         <div class="col-1 col-lg-2 py-3 ">
+         <!-- Conversant Media CODE for Eastern Wordsmith (Placement 1d89bbaf) -->
+			<div class="d-none d-lg-block text-center my-3 sticky-ad" id="pubCodeContainer-id-245979-1d89bbaf">
+				<script type="text/javascript"
+					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+				<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "1d89bbaf",
+            location: "pubCodeContainer-id-245979-1d89bbaf",
+            format: [{w:300,h:1050}]
+        })
+    </script>
+			</div>
+			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 1d89bbaf) -->
+         </div>
         </div>
         
         
-        <div class="d-none d-lg-block text-center my-3 sticky-ad">
-    			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
-				<!-- Billboard - Rising Star -->
-				<ins class="adsbygoogle"
-     				style="display:inline-block;width:970px;height:250px"
-     			data-ad-client="ca-pub-3020770276580291"
-     			data-ad-slot="8159931703"></ins>
-			<script>
-     			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
-		</div>
+        <!-- Conversant Media CODE for Eastern Wordsmith (Placement ce1af472) -->
+	<div class="text-center my-4" id="pubCodeContainer-id-245979-ce1af472">
+		<script type="text/javascript"
+			src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+		<script>
+        conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "ce1af472",
+            location: "pubCodeContainer-id-245979-ce1af472",
+            format: [{w:336,h:280}]
+        })
+    </script>
+	</div>
+	<!-- Conversant Media CODE for Eastern Wordsmith (Placement ce1af472) -->
+        
+        <!-- Conversant Media CODE for Eastern Wordsmith (Placement e1f0d2e7) -->
+      <div class="d-block text-center my-4" id="pubCodeContainer-id-245979-e1f0d2e7">
+        <script type="text/javascript"
+          src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
+        <script>
+          conversant.pubcode.loadOneAd({
+            sid: 245979,
+            id: "e1f0d2e7",
+            location: "pubCodeContainer-id-245979-e1f0d2e7",
+            format: [{ w: 320, h: 50 }]
+          })
+        </script>
+      </div>
+      <!-- Conversant Media CODE for Eastern Wordsmith (Placement e1f0d2e7) -->
         
         
 <%@ include file="footer1.jsp" %>

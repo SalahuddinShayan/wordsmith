@@ -263,3 +263,7 @@ V 1.98
 -> Created a form in the chapter list page for updating the status of the novels.
 -> Updated the comment system so that Its now possible to reply to comments.
 -> Updated the Used entity to add last login and profile picture.
+
+V 1.99
+-> Gone back to Epsilon one last time in wake of the third Adsense suspention.
+-> created the backend ShareId server.
