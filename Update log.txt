@@ -251,12 +251,12 @@ V 1.096
 -> added auto release for two new novels.
 -> added anti-AdBlock code
 
-V 1.97
+V 1.097
 -> removed Monetag.
 -> Removed all the custom ad units
 -> Increased the limit in the latest update to 12.
 
-V 1.98
+V 1.098
 -> Created a page for active novels only.
 -> Updated the save code so that the realease time stamp does not gets nullified.
 -> Created a system for checking the number of the stockpile chapters.
@@ -264,6 +264,9 @@ V 1.98
 -> Updated the comment system so that Its now possible to reply to comments.
 -> Updated the Used entity to add last login and profile picture.
 
-V 1.99
+V 1.099
 -> Gone back to Epsilon one last time in wake of the third Adsense suspention.
--> created the backend ShareId server.
+-> created the backend PubCid server.
+
+V 1.100
+-> Created and Testing Prebid.js and ShareId module

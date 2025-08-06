@@ -2,6 +2,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script async src="/js/prebid.js"></script>
+<script>
+  var pbjs = pbjs || {};
+  pbjs.que = pbjs.que || [];
+
+  pbjs.que.push(function () {
+    pbjs.setConfig({
+      userSync: {
+        userIds: [{
+          name: "sharedId",
+          storage: {
+            type: "cookie",
+            name: "_sharedID",
+            expires: 365
+          },
+          params: {
+            syncTime: 0,
+            
+          }
+        }]
+      }
+    });
+
+    pbjs.addAdUnits([/* your ad units here */]);
+
+    pbjs.requestBids({
+      bidsBackHandler: function () {
+        console.log("Bids back");
+      }
+    });
+  });
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
 <script>
