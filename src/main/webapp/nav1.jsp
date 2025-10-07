@@ -35,7 +35,9 @@
                         <ul class="dropdown-menu dropdown-menu-end bg-az" aria-labelledby="userDropdown">
                             <% if ("ADMIN".equals(userRole) || "TRANSLATOR".equals(userRole) || "EDITOR".equals(userRole)) { %>
                                 <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
-                            <% } %>
+                            <% } else { %>
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <% } %>    
                             <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
                         </ul>
                     </div>

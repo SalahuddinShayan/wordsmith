@@ -20,7 +20,7 @@
         <link rel="icon" type="image/x-icon" href="../images/logo2.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
-        <style><%@include file="../css/stylesheet.css"%></style>
+        <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
          <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -30,36 +30,7 @@
 
 <%@ include file="../nav2.jsp" %>
 
-        <!-- Conversant Media CODE for Eastern Wordsmith (Placement 953273c1) -->
-          <div class="d-block d-lg-none text-center my-3" id="pubCodeContainer-id-245979-953273c1">
-            <script type="text/javascript"
-              src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-            <script>
-              conversant.pubcode.loadOneAd({
-                sid: 245979,
-                id: "953273c1",
-                location: "pubCodeContainer-id-245979-953273c1",
-                format: [{ w: 320, h: 100 }]
-              })
-            </script>
-          </div>
-          <!-- Conversant Media CODE for Eastern Wordsmith (Placement 953273c1) -->
-
-
-	<!-- Conversant Media CODE for Eastern Wordsmith (Placement fdb866a2) -->
-	<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-fdb866a2">
-		<script type="text/javascript"
-			src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-		<script>
-        conversant.pubcode.loadOneAd({
-            sid: 245979,
-            id: "fdb866a2",
-            location: "pubCodeContainer-id-245979-fdb866a2",
-            format: [{w:970,h:250}]
-        })
-    </script>
-	</div>
-	<!-- Conversant Media CODE for Eastern Wordsmith (Placement fdb866a2) -->
+        
         
         
         <div  Style = "margin-top: 30px;" class = "row">
@@ -68,6 +39,13 @@
          <div class="center">
          <a><img width="40%" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
                alt="images/No_image_available.svg.png" onerror="this.src='../images/No-Image.png';"></a><br>
+         <a>Views: ${totalViews}</a> <div id="favorite-section-${novel.novelId}">
+                <button class="favorite-btn ${novel.favorited ? 'active' : ''}" 
+            data-novel-id="${novel.novelId}">
+        ⭐ Favorite <span id="favorite-count-${novel.novelId}">${novel.favoriteCount}</span>
+    </button>
+</div>
+
          </div>
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-4  py-3 right"><a>Name</a><a> : </a></div>
@@ -98,7 +76,7 @@
          <div class="col-8  py-3 d-none d-md-block">${novel.description}</div>
          </div>
          <div  class = "row d-lg-none">
-         <div class="col-1 py-3 "><a></a></div>
+         <div class="col-1 py-3 "></div>
          <div class="col-11  py-3 ">${novel.description}</div>
          </div>
          <div  class = "row">
@@ -112,69 +90,13 @@
          </div>
          
          
-         <!-- Conversant Media CODE for Eastern Wordsmith (Placement d3468b89) -->
-			<div class="text-center my-3" id="pubCodeContainer-id-245979-d3468b89">
-				<script type="text/javascript"
-					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-				<script>
-        conversant.pubcode.loadOneAd({
-            sid: 245979,
-            id: "d3468b89",
-            location: "pubCodeContainer-id-245979-d3468b89",
-            format: [{w:300,h:250}]
-        })
-    </script>
-			</div>
-			<!-- Conversant Media CODE for Eastern Wordsmith (Placement d3468b89) -->
-			
-			<!-- Conversant Media CODE for Eastern Wordsmith (Placement efe28409) -->
-          <div class="text-center my-3" id="pubCodeContainer-id-245979-efe28409">
-            <script type="text/javascript"
-              src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-            <script>
-              conversant.pubcode.loadOneAd({
-                sid: 245979,
-                id: "efe28409",
-                location: "pubCodeContainer-id-245979-efe28409",
-                format: [{ w: 728, h: 90 }]
-              })
-            </script>
-          </div>
-          <!-- Conversant Media CODE for Eastern Wordsmith (Placement efe28409) -->
+         
          
          
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-3 py-3">
          <div class = "sticky-ad">
-         <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
-              <div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-2964d05d">
-                <script type="text/javascript"
-                  src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-                <script>
-                  conversant.pubcode.loadOneAd({
-                    sid: 245979,
-                    id: "2964d05d",
-                    location: "pubCodeContainer-id-245979-2964d05d",
-                    format: [{ w: 160, h: 600 }]
-                  })
-                </script>
-              </div>
-              <!-- Conversant Media CODE for Eastern Wordsmith (Placement 2964d05d) -->
-
-			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
-			<div class="d-none d-lg-block text-center my-3" id="pubCodeContainer-id-245979-210e6523">
-				<script type="text/javascript"
-					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-				<script>
-        conversant.pubcode.loadOneAd({
-            sid: 245979,
-            id: "210e6523",
-            location: "pubCodeContainer-id-245979-210e6523",
-            format: [{w:300,h:600}]
-        })
-    </script>
-			</div>
-			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 210e6523) -->
+         
 			</div>
          </div>
          <div class="col-10 col-lg-6 py-3 ">
@@ -187,45 +109,58 @@
          </c:forEach>
          </div>
          <div class="col-1 col-lg-3 py-3">
-         <!-- Conversant Media CODE for Eastern Wordsmith (Placement 1d89bbaf) -->
-			<div class="d-none d-lg-block text-center my-3 sticky-ad"
-				id="pubCodeContainer-id-245979-1d89bbaf">
-				<script type="text/javascript"
-					src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-				<script>
-        conversant.pubcode.loadOneAd({
-            sid: 245979,
-            id: "1d89bbaf",
-            location: "pubCodeContainer-id-245979-1d89bbaf",
-            format: [{w:300,h:1050}]
-        })
-    </script>
-			</div>
-			<!-- Conversant Media CODE for Eastern Wordsmith (Placement 1d89bbaf) -->
+         
          </div>
          </div>
          
          
-         <!-- Conversant Media CODE for Eastern Wordsmith (Placement ce1af472) -->
-	<div class="text-center my-4" id="pubCodeContainer-id-245979-ce1af472">
-		<script type="text/javascript"
-			src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-		<script>
-        conversant.pubcode.loadOneAd({
-            sid: 245979,
-            id: "ce1af472",
-            location: "pubCodeContainer-id-245979-ce1af472",
-            format: [{w:336,h:280}]
-        })
-    </script>
-	</div>
-	<!-- Conversant Media CODE for Eastern Wordsmith (Placement ce1af472) -->
+         
          
         
         <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-3 py-3 "></div>
          <div class="col-10 col-lg-6 py-3 ">
          <div class="comments-section" id="comment">
+
+            <div id="reaction-section-${novel.novelId}" class="chapter-reactions row">
+                <div class="col-4 col-lg-2">
+                    <button class="reaction-btn ${novel.userReaction == 'LOVE' ? 'active' : ''}" 
+                        data-entity-type="NOVEL" data-entity-id="${novel.novelId}" data-like-status="LOVE">
+                        ❤️ <br><span id="reaction-count-LOVE-${novel.novelId}">${novel.loveCount}</span>
+                    </button>
+                </div>
+                <div class="col-4 col-lg-2">
+                    <button class="reaction-btn ${novel.userReaction == 'ANGRY' ? 'active' : ''}" 
+                        data-entity-type="NOVEL" data-entity-id="${novel.novelId}" data-like-status="ANGRY">
+                        😡 <br><span id="reaction-count-ANGRY-${novel.novelId}">${novel.angryCount}</span>
+                    </button>
+                </div>
+                <div class="col-4 col-lg-2">
+                    <button class="reaction-btn ${novel.userReaction == 'LAUGH' ? 'active' : ''}" 
+                        data-entity-type="NOVEL" data-entity-id="${novel.novelId}" data-like-status="LAUGH">
+                        😂 <br><span id="reaction-count-LAUGH-${novel.novelId}">${novel.laughCount}</span>
+                    </button>
+                </div>    
+                <div class="col-4 col-lg-2">
+                    <button class="reaction-btn ${novel.userReaction == 'SAD' ? 'active' : ''}" 
+                        data-entity-type="NOVEL" data-entity-id="${novel.novelId}" data-like-status="SAD">
+                        😢 <br><span id="reaction-count-SAD-${novel.novelId}">${novel.sadCount}</span>
+                    </button>
+                </div>    
+                <div class="col-4 col-lg-2">
+                    <button class="reaction-btn ${novel.userReaction == 'WOW' ? 'active' : ''}" 
+                        data-entity-type="NOVEL" data-entity-id="${novel.novelId}" data-like-status="WOW">
+                        😲 <br><span id="reaction-count-WOW-${novel.novelId}">${novel.wowCount}</span>
+                    </button>
+                </div>    
+                <div class="col-4 col-lg-2">
+                    <button class="reaction-btn ${novel.userReaction == 'FIRE' ? 'active' : ''}" 
+                        data-entity-type="NOVEL" data-entity-id="${novel.novelId}" data-like-status="FIRE">
+                        🔥 <BR><span id="reaction-count-FIRE-${novel.novelId}">${novel.fireCount}</span>
+                    </button>
+                </div>    
+    
+            </div>
     <h3>Comments</h3>
 
     <div class= "cbox">
@@ -253,6 +188,7 @@
     <!-- 🔹 Display Comments and Nested Replies -->
     <c:forEach var="comment" items="${comments}">
         <div class="comment">
+            <img class="profile-pic" src ="<c:out value='${pageContext.request.contextPath}/user-image/${comment.userName}'/>" onerror="this.src='../images/No-Image.png';">
             <strong>${comment.userName}</strong>
             <small>${comment.timeAgo}</small>
             <p>${comment.content}</p>
@@ -263,6 +199,16 @@
             
             <!-- 🔹 Buttons for Delete, Flag, and Reply (Now in the same row) -->
             <div class="comment-actions">
+                <div id="like-section-${comment.id}">
+                <button class="like-btn ${comment.userReaction == 'LIKE' ? 'active' : ''}" data-entity-type="COMMENT" data-entity-id="${comment.id}" data-like-status="LIKE">
+                👍 <span id="like-count-${comment.id}">${comment.likeCount}</span>
+                </button>
+                <button class="dislike-btn ${comment.userReaction == 'DISLIKE' ? 'active' : ''}" data-entity-type="COMMENT" data-entity-id="${comment.id}" data-like-status="DISLIKE">
+                👎 <span id="dislike-count-${comment.id}">${comment.dislikeCount}</span>
+                </button>
+                </div>
+
+                
                 <c:if test="${loggedInUser.username == comment.userName || loggedInUser.role == 'ADMIN'}">
                     <form action="/comments/delete" method="post" class="comment-action-form">
                         <input type="hidden" name="commentId" value="${comment.id}">
@@ -278,37 +224,64 @@
                     <button type="submit" class="icon-btn"><i class="fa-solid fa-flag"></i></button>
                 </form>
 
-                <!--<c:if test="${not empty loggedInUser}">
+                <c:if test="${not empty loggedInUser}">
                     <button class="icon-btn reply-btn" onclick="toggleReplyForm('${comment.id}')">
                         <i class="fa-solid fa-reply"></i>
                     </button>
-                </c:if>-->
+                </c:if>
+            </div>
+            <!-- 🔹 Reply Form -->
+            <div id="reply-form-${comment.id}" class="reply-form" style="display:none; margin-top:10px;">
+                <form action="/comments/add" method="post">
+                    <input type="hidden" name="entityType" value="comment">
+                    <input type="hidden" name="entityId" value="${comment.id}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <textarea name="content" required class="form-control" placeholder="Write a reply..."></textarea>
+                    <button type="submit" class="btn btn-secondary mt-2">Reply</button>
+                    <button type="button" class="btn btn-link mt-2" onclick="toggleReplyForm('${comment.id}')">Cancel</button>
+                </form>
             </div>
 
             <!-- 🔹 Display Replies (Nested Comments) -->
-            <!--<c:if test="${comment.hasReplies}">
+            <c:if test="${comment.hasReplies}">
                 <div class="replies" style="margin-left: 30px;">
                     <c:forEach var="reply" items="${comment.replies}">
-                        <div class="comment">
-                            <strong>${reply.user.username}</strong>
+                        <div class="replied-comment">
+                            <img class="profile-pic" src ="<c:out value='${pageContext.request.contextPath}/user-image/${reply.userName}'/>" onerror="this.src='../images/No-Image.png';">
+                            <strong>${reply.userName}</strong>
+                            <small>${reply.timeAgo}</small>
                             <p>${reply.content}</p>
-                            <small>Posted on: ${reply.createdAt}</small>
 
-                            <c:if test="${loggedInUser.id == reply.user.id || loggedInUser.role == 'ADMIN'}">
-                                <form action="/comments/delete" method="post">
+                            <!-- 🔹 Buttons for Delete, Flag, and Like/Dislike (Now in the same row) -->
+                            <div class="comment-actions">
+                              <div id="like-section-${reply.id}">
+                                <button class="like-btn ${reply.userReaction == 'LIKE' ? 'active' : ''}" data-entity-type="COMMENT" data-entity-id="${reply.id}" data-like-status="LIKE">
+                                  👍 <span id="like-count-${reply.id}">${reply.likeCount}</span>
+                                </button>
+                                <button class="dislike-btn ${reply.userReaction == 'DISLIKE' ? 'active' : ''}" data-entity-type="COMMENT" data-entity-id="${reply.id}" data-like-status="DISLIKE">
+                                  👎 <span id="dislike-count-${reply.id}">${reply.dislikeCount}</span>
+                                </button>
+                              </div>
+                            
+                            
+                            <c:if test="${loggedInUser.username == reply.userName || loggedInUser.role == 'ADMIN'}">
+                                <form action="/comments/delete" method="post" class="comment-action-form">
                                     <input type="hidden" name="commentId" value="${reply.id}">
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                    <button type="submit" class="icon-btn"><i class="fa-solid fa-trash"></i></button>
                                 </form>
                             </c:if>
 
-                            <form action="/comments/flag" method="post">
-                                <input type="hidden" name="commentId" value="${reply.id}">
-                                <button type="submit" class="btn btn-warning btn-sm">Flag</button>
+                            <form action="/comments/flag" method="post" class="comment-action-form">
+                                <input type="hidden" name="commentId" value="${comment.id}">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <button type="submit" class="icon-btn"><i class="fa-solid fa-flag"></i></button>
                             </form>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>
-            </c:if>-->
+            </c:if>
         </div>
         <br>
     </c:forEach>
@@ -318,26 +291,15 @@
          <div class="col-1 col-lg-3 py-3 "></div>
          </div>
          
-         <!-- Conversant Media CODE for Eastern Wordsmith (Placement e1f0d2e7) -->
-      <div class="d-block text-center my-4" id="pubCodeContainer-id-245979-e1f0d2e7">
-        <script type="text/javascript"
-          src="https://secure.cdn.fastclick.net/js/cnvr-pubcode/latest/pubcode.min.js"></script>
-        <script>
-          conversant.pubcode.loadOneAd({
-            sid: 245979,
-            id: "e1f0d2e7",
-            location: "pubCodeContainer-id-245979-e1f0d2e7",
-            format: [{ w: 320, h: 50 }]
-          })
-        </script>
-      </div>
-      <!-- Conversant Media CODE for Eastern Wordsmith (Placement e1f0d2e7) -->
         
         <%@ include file="../footer2.jsp" %>
        
 
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>        
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
-<script type="text/javascript" src="../js/script.js"></script>  
+<script type="text/javascript" src="../js/script.js"></script>
+<input type="hidden" id="_csrf" 
+       name="${_csrf.parameterName}" 
+       value="${_csrf.token}" />  
 </body>
 </html>

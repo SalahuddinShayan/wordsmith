@@ -15,5 +15,13 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     
     @Query("SELECT MAX(c.id) FROM Comment c")
     Long findLastCommentId();
+
+    List<Comment> findByUserName(String userName);
+
+    List<Comment> findByUserNameAndEntityType(String userName, CommentEntityType type);
+
+    @Query(value = "select * from comments where user_name = :username and entity_type <> 'COMMENT'", nativeQuery = true)
+    List<Comment> findByUserNameExcludingReplies(String username);
+
     
 }

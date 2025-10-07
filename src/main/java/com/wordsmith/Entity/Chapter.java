@@ -1,6 +1,8 @@
 package com.wordsmith.Entity;
 
 import java.time.ZonedDateTime;
+
+import com.wordsmith.Enum.LikeEnum;
 import com.wordsmith.Enum.ReleaseStatus;
 
 import jakarta.persistence.Column;
@@ -44,6 +46,30 @@ public class Chapter {
 	
 	@Transient // ✅ Not stored in the database
     private String timeAgo;
+
+	@Transient
+	private Long views;
+
+	@Transient
+	private LikeEnum userReaction;
+	
+	@Transient
+	private long loveCount; // For storing the number of LOVE reactions
+
+	@Transient
+	private long angryCount; // For storing the number of ANGRY reactions
+
+	@Transient
+	private long laughCount; // For storing the number of LAUGH reactions
+
+	@Transient
+	private long sadCount; // For storing the number of SAD reactions
+
+	@Transient
+	private long wowCount; // For storing the number of WOW reactions
+
+	@Transient
+	private long fireCount; // For storing the number of FIRE reactions
 	
 	public long getChapterId() {
 		return chapterId;
@@ -123,6 +149,70 @@ public class Chapter {
 
 	public void setTimeAgo(String timeAgo) {
 		this.timeAgo = timeAgo;
+	}
+
+	public Long getViews() {
+		return views;
+	}
+
+	public void setViews(Long views) {
+		this.views = views;
+	}
+
+	public LikeEnum getUserReaction() {
+		return userReaction;
+	}
+
+	public void setUserReaction(LikeEnum userReaction) {
+		this.userReaction = userReaction;
+	}
+
+	public long getLoveCount() {
+		return loveCount;
+	}
+
+	public void setLoveCount(long loveCount) {
+		this.loveCount = loveCount;
+	}
+
+	public long getAngryCount() {
+		return angryCount;
+	}
+
+	public void setAngryCount(long angryCount) {
+		this.angryCount = angryCount;
+	}
+
+	public long getLaughCount() {
+		return laughCount;
+	}
+
+	public void setLaughCount(long laughCount) {
+		this.laughCount = laughCount;
+	}
+
+	public long getSadCount() {
+		return sadCount;
+	}
+
+	public void setSadCount(long sadCount) {
+		this.sadCount = sadCount;
+	}
+
+	public long getWowCount() {
+		return wowCount;
+	}
+
+	public void setWowCount(long wowCount) {
+		this.wowCount = wowCount;
+	}
+
+	public long getFireCount() {
+		return fireCount;
+	}
+
+	public void setFireCount(long fireCount) {
+		this.fireCount = fireCount;
 	}
 	
 	

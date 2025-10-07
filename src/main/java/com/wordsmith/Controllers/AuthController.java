@@ -1,5 +1,7 @@
 package com.wordsmith.Controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wordsmith.Entity.User;
 import com.wordsmith.Services.EmailService;
@@ -41,7 +44,7 @@ public class AuthController {
  // Step 1: Register user & send OTP
     @PostMapping("/register")
     public String registerUser(@RequestParam String email, @RequestParam String username, 
-                               @RequestParam String password, HttpSession session, Model model) {
+                               @RequestParam String password, @RequestParam MultipartFile Pic, HttpSession session, Model model) throws IOException {
         if (userService.findByEmail(email) != null) {
             model.addAttribute("error", "Email is already registered!");
             return "register"; // Stay on the register page
@@ -55,6 +58,8 @@ public class AuthController {
         session.setAttribute("tempUserEmail", email);
         session.setAttribute("tempUsername", username);
         session.setAttribute("tempPassword", password);
+        byte[] compressedBytes = userService.compressImage(Pic);
+        session.setAttribute("tempProfilePicture", compressedBytes); // Store profile picture
 
      // Generate OTP and store with timestamp
         String otp = OTPUtil.generateOTP();
@@ -96,9 +101,15 @@ public class AuthController {
 
         if (storedOtp.equals(otp)) {
             // OTP is correct and within time limit → Register user
-            userService.saveUser((String) session.getAttribute("tempUserEmail"),
-                                 (String) session.getAttribute("tempUsername"),
-                                 (String) session.getAttribute("tempPassword"));
+            try {
+                userService.saveUser((String) session.getAttribute("tempUserEmail"),
+                                     (String) session.getAttribute("tempUsername"),
+                                     (String) session.getAttribute("tempPassword"),
+                                     (byte[]) session.getAttribute("tempProfilePicture"));
+            } catch (java.io.IOException e) {
+                model.addAttribute("error", "An error occurred while saving the user. Please try again.");
+                return "verify";
+            }
 
             session.removeAttribute("otp");
             session.removeAttribute("otpTimestamp");

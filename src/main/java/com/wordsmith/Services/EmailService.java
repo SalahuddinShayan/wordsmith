@@ -19,6 +19,7 @@ public class EmailService {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
+            helper.setFrom("noreply@easternwordsmith.com"); // ✅ MUST match Zoho authenticated email
             helper.setTo(to);
             helper.setSubject("Verify Your Email - OTP");
             helper.setText("Your OTP for registration is: " + otp);

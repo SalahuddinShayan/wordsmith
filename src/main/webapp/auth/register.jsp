@@ -23,7 +23,7 @@
     <p style="color: red;">${error}</p>
 </c:if>
 
-    <form action="/auth/register" method="post">
+    <form action="/auth/register" method="post" onsubmit="return validateImageSize()" enctype="multipart/form-data">
      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
      <div class="mb-3">
     <label>Email:</label>
@@ -37,6 +37,10 @@
     <label>Password:</label>
     <input type="password" name="password" required />
     </div>
+    <div class="mb-3">
+            <lable for= "Pic">Profile Picture:</lable>
+            <input name="Pic" class="form-control" placeholder= "Upload Here" type= "file" accept="image/*" id="image">
+          </div>
     <button type="submit" class="btn btn-primary w-100">Register</button>
 </form>
 <p class="text-center mt-3">

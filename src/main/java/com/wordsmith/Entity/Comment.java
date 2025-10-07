@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.wordsmith.Enum.CommentEntityType;
+import com.wordsmith.Enum.LikeEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +34,6 @@ public class Comment {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
@@ -54,6 +54,24 @@ public class Comment {
 
 	@Transient
 	private List<Comment> replies; // For nested comments
+
+	@Transient
+	private long likeCount; // For storing the number of likes
+
+	@Transient
+	private long dislikeCount; // For storing the number of dislikes
+
+	@Transient
+	private LikeEnum userReaction; // For storing the user's reaction (LIKE or DISLIKE)
+
+	@Transient
+	private Chapter chapter; // For storing the associated chapter (if applicable)
+
+	@Transient
+	private Novel novel; // For storing the associated novel (if applicable)
+
+	@Transient
+	private Comment parentComment; // For storing the parent comment (if applicable)
 
 	public Comment() {
 		// Default constructor
@@ -157,6 +175,55 @@ public class Comment {
 	public void setReplies(List<Comment> replies) {
 		this.replies = replies;
 	}
+
+	public long getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(long likeCount) {
+		this.likeCount = likeCount;
+	}
+
+	public long getDislikeCount() {
+		return dislikeCount;
+	}
+
+	public void setDislikeCount(long dislikeCount) {
+		this.dislikeCount = dislikeCount;
+	}
+
+	public LikeEnum getUserReaction() {
+		return userReaction;
+	}
+
+	public void setUserReaction(LikeEnum userReaction) {
+		this.userReaction = userReaction;
+	}
+
+	public Chapter getChapter() {
+		return chapter;
+	}
+
+	public void setChapter(Chapter chapter) {
+		this.chapter = chapter;
+	}
+
+	public Novel getNovel() {
+		return novel;
+	}
+
+	public void setNovel(Novel novel) {
+		this.novel = novel;
+	}
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
     
     
 }

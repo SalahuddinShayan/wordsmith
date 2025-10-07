@@ -1,8 +1,17 @@
 package com.wordsmith.Services;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wordsmith.Entity.User;
 import com.wordsmith.Repositories.UserRepository;
@@ -66,11 +76,12 @@ public class UserService implements UserDetailsService{
         return userRepository.findAll();
     }
 
-    public void saveUser(String email, String username, String password) {
+    public void saveUser(String email, String username, String password, byte[] profilePicture) throws IOException {
         User user = new User();
         user.setEmail(email);
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
+        user.setProfilePicture(profilePicture);
         userRepository.save(user);
     }
     
@@ -92,4 +103,38 @@ public class UserService implements UserDetailsService{
             user.getUsername(), user.getPassword(), Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
         );
     }
+
+    public void updateProfilePicture(String username, MultipartFile profilePicture) throws IllegalStateException, IOException {
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user != null) {
+            byte[] compressedBytes = compressImage(profilePicture);
+            user.setProfilePicture(compressedBytes);
+            userRepository.save(user);
+        }
+    }
+
+    public byte[] compressImage(MultipartFile file) throws IOException {
+    BufferedImage originalImage = ImageIO.read(file.getInputStream());
+
+    // Convert to RGB to avoid "Bogus input colorspace"
+    BufferedImage newImage = new BufferedImage(
+            originalImage.getWidth(),
+            originalImage.getHeight(),
+            BufferedImage.TYPE_INT_RGB
+    );
+    newImage.createGraphics().drawImage(originalImage, 0, 0, java.awt.Color.WHITE, null);
+
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    ImageWriter jpgWriter = ImageIO.getImageWritersByFormatName("jpg").next();
+    ImageWriteParam jpgWriteParam = jpgWriter.getDefaultWriteParam();
+
+    jpgWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+    jpgWriteParam.setCompressionQuality(0.7f); // 70% quality
+
+    jpgWriter.setOutput(ImageIO.createImageOutputStream(baos));
+    jpgWriter.write(null, new IIOImage(newImage, null, null), jpgWriteParam);
+    jpgWriter.dispose();
+
+    return baos.toByteArray();
+}
 }

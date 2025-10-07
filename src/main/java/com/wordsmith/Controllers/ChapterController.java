@@ -19,9 +19,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Entity.Comment;
 import com.wordsmith.Enum.CommentEntityType;
+import com.wordsmith.Enum.LikeEnum;
 import com.wordsmith.Enum.ReleaseStatus;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Services.CommentService;
+import com.wordsmith.Services.LikeService;
+import com.wordsmith.Services.ViewsService;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,10 +36,14 @@ public class ChapterController {
 	private final ChapterRepository cr;
 	
 	private final CommentService commentService;
+	private final ViewsService viewsService;
+	private final LikeService likeService;
     
-	public ChapterController(CommentService commentService, ChapterRepository cr) {
+	public ChapterController(CommentService commentService, ChapterRepository cr, ViewsService viewsService, LikeService likeService) {
 		this.commentService = commentService;
 		this.cr=cr;
+		this.viewsService = viewsService;
+		this.likeService = likeService;
 	}
 	
 	@RequestMapping("/chapterlist")
@@ -61,6 +68,7 @@ public class ChapterController {
 		else {
 			Chapter chapter2= cr.getReferenceById(cid);
 			chapter.setPostedOn(chapter2.getPostedOn());
+			chapter.setReleaseStatus(chapter2.getReleaseStatus()); // Preserve the original release status
 			if (chapter.getReleaseStatus() == ReleaseStatus.RELEASED) {
 				chapter.setReleasedOn(chapter2.getReleasedOn()); // Keep the original released date if it was already set
 			}
@@ -116,6 +124,29 @@ public class ChapterController {
 	        return "forward:/error";
 	    }
 
+		viewsService.incrementViews(chapterId, CommentEntityType.CHAPTER);
+
+		chapter.setLoveCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.LOVE));
+		chapter.setAngryCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.ANGRY));
+		chapter.setLaughCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.LAUGH));
+		chapter.setSadCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.SAD));
+		chapter.setWowCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.WOW));
+		chapter.setFireCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.FIRE));
+		
+		var user = (com.wordsmith.Entity.User) request.getSession().getAttribute("loggedInUser");
+
+		if (user != null) {
+			var userReaction = likeService.getUserReaction("chapter", chapterId, user.getUsername());
+			chapter.setUserReaction(userReaction);
+		}
+		
+		if (chapter.getReleasedOn() != null) {
+			chapter.setTimeAgo(getTimeDifference(chapter.getReleasedOn()));
+		}
+		else {
+			chapter.setTimeAgo(getTimeDifference(chapter.getPostedOn()));
+		}
+
 		
 		m.addAttribute("chapter",chapter);
 		CommentEntityType type = CommentEntityType.CHAPTER;
@@ -124,12 +155,26 @@ public class ChapterController {
 		        if (comment.getCreatedAt() != null) {
 		            comment.setTimeAgo(getTimeDifference(comment.getCreatedAt()));
 		        }
+				comment.setLikeCount(likeService.getLikesCount(comment.getId(), "comment"));
+				comment.setDislikeCount(likeService.getDislikesCount(comment.getId(), "comment"));
+				
+				if (user != null) {
+					var userReaction = likeService.getUserReaction("comment", comment.getId(), user.getUsername());
+					comment.setUserReaction(userReaction);
+				}
 				if (comment.isHasReplies()){
 					comment.setReplies(commentService.getCommentsByEntity(CommentEntityType.COMMENT, comment.getId()));
 					for (Comment reply : comment.getReplies()) {
 						if (reply.getCreatedAt() != null) {
 							reply.setTimeAgo(getTimeDifference(reply.getCreatedAt()));
 						}
+						reply.setLikeCount(likeService.getLikesCount(reply.getId(), "comment"));
+						reply.setDislikeCount(likeService.getDislikesCount(reply.getId(), "comment"));
+						if (user != null) {
+							var userReaction = likeService.getUserReaction("comment", reply.getId(), user.getUsername());
+							reply.setUserReaction(userReaction);
+						}
+
 					}
 				}
 				

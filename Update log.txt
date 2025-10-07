@@ -270,3 +270,14 @@ V 1.099
 
 V 1.100
 -> Created and Testing Prebid.js and ShareId module
+
+V 1.101
+-> Created a profile page.
+-> Created a system to update profile picture.
+-> Added a feild for profile picture in the registration form.
+-> Made sure that profile pic is being displayed on the comments.
+-> The Reply system was distroyed deu to copy pasting older code in the frontend to reinstall Epsilon. fixed it.
+-> Added a Compressor for profile pics.
+-> Added a frame to the profile pic in the comment section.
+-> Added the system for views
+-> Removed Epsilon.

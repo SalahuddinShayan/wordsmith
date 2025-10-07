@@ -30,23 +30,31 @@ import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Repositories.NovelRepository;
 import com.wordsmith.Services.CommentService;
+import com.wordsmith.Services.FavoriteService;
+import com.wordsmith.Services.LikeService;
+import com.wordsmith.Services.ViewsService;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class NovelController {
 	
 	private final NovelRepository NovelRepo;
-	
 	private final ChapterRepository cr;
-	
 	private final CommentService commentService;
+	private final ViewsService viewsService;
+	private final LikeService likeService;
+	private final FavoriteService favoriteService;
 	
-	public NovelController(CommentService commentService, ChapterRepository cr, NovelRepository NovelRepo) {
+	public NovelController(CommentService commentService, ChapterRepository cr, NovelRepository NovelRepo, ViewsService viewsService, LikeService likeService, FavoriteService favoriteService) {
 		this.commentService = commentService;
 		this.cr=cr;
 		this.NovelRepo=NovelRepo;
+		this.viewsService = viewsService;
+		this.likeService = likeService;
+		this.favoriteService = favoriteService;
 	}
 	
 	@RequestMapping(value= { "/","/home"})                     
@@ -78,7 +86,9 @@ public class NovelController {
 			throws ServletException, IOException {
 		Novel = NovelRepo.findById(id);
 		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-		response.getOutputStream().write(Novel.get().getNovelImage());
+		byte[] image = Novel.get().getNovelImage();
+		if (image != null && image.length > 0) {
+		response.getOutputStream().write(image);}
 		response.getOutputStream().flush();
 	}
 	
@@ -112,8 +122,21 @@ public class NovelController {
 		}
 	
 	@RequestMapping("/novel/{novelName}")
-	public String Novel(@PathVariable String novelName, Model m) {
+	public String Novel(@PathVariable String novelName, Model m, HttpServletRequest request) {
 		Novel novel = NovelRepo.byNovelName(novelName);
+		var user = (com.wordsmith.Entity.User) request.getSession().getAttribute("loggedInUser");
+		if(user != null) {
+			var userReaction = likeService.getUserReaction("novel", novel.getNovelId(), user.getUsername());
+			novel.setUserReaction(userReaction);
+			novel.setFavorited(favoriteService.isFavorited(user.getUsername(), (long) novel.getNovelId()));
+		}
+		novel.setLoveCount(likeService.getReactionCount(novel.getNovelId(), "novel", com.wordsmith.Enum.LikeEnum.LOVE));
+		novel.setAngryCount(likeService.getReactionCount(novel.getNovelId(), "novel", com.wordsmith.Enum.LikeEnum.ANGRY));
+		novel.setLaughCount(likeService.getReactionCount(novel.getNovelId(), "novel", com.wordsmith.Enum.LikeEnum.LAUGH));
+		novel.setSadCount(likeService.getReactionCount(novel.getNovelId(), "novel", com.wordsmith.Enum.LikeEnum.SAD));
+		novel.setWowCount(likeService.getReactionCount(novel.getNovelId(), "novel", com.wordsmith.Enum.LikeEnum.WOW));
+		novel.setFireCount(likeService.getReactionCount(novel.getNovelId(), "novel", com.wordsmith.Enum.LikeEnum.FIRE));
+		novel.setFavoriteCount(favoriteService.getFavoriteCount((long) novel.getNovelId()));
 		m.addAttribute("novel",novel);
 		List<Chapter> chapters = cr.byNovelNameReleased(novelName);
 		for (Chapter chapter : chapters) {
@@ -124,6 +147,7 @@ public class NovelController {
 	        	chapter.setTimeAgo(getTimeDifference(chapter.getPostedOn()));
 	        }
 		}
+
 		m.addAttribute("Chapters", chapters);
 		CommentEntityType type = CommentEntityType.NOVEL;
 		List<Comment> comments = commentService.getCommentsByEntity(type, (long) novel.getNovelId());
@@ -132,16 +156,33 @@ public class NovelController {
 		        if (comment.getCreatedAt() != null) {
 		            comment.setTimeAgo(getTimeDifference(comment.getCreatedAt()));
 		        }
+				comment.setLikeCount(likeService.getLikesCount(comment.getId(), "comment"));
+				comment.setDislikeCount(likeService.getDislikesCount(comment.getId(), "comment"));
+				if (user != null) {
+					var userReaction = likeService.getUserReaction("comment", comment.getId(), user.getUsername());
+					comment.setUserReaction(userReaction);
+				}
 				if (comment.isHasReplies()){
 					comment.setReplies(commentService.getCommentsByEntity(CommentEntityType.COMMENT, comment.getId()));
 					for (Comment reply : comment.getReplies()) {
 						if (reply.getCreatedAt() != null) {
 							reply.setTimeAgo(getTimeDifference(reply.getCreatedAt()));
 						}
+						reply.setLikeCount(likeService.getLikesCount(reply.getId(), "comment"));
+						reply.setDislikeCount(likeService.getDislikesCount(reply.getId(), "comment"));
+						if (user != null) {
+							var userReaction = likeService.getUserReaction("comment", reply.getId(), user.getUsername());
+							reply.setUserReaction(userReaction);
+						}
 					}
 				}
 				
 		    }
+
+		viewsService.incrementViews(Long.valueOf(novel.getNovelId()), CommentEntityType.NOVEL);
+		long totalViews = viewsService.getTotalViewsByNovel(novelName, (long) novel.getNovelId());
+		m.addAttribute("totalViews", totalViews);
+			
 		m.addAttribute("comments", comments);
 		m.addAttribute("frist", cr.First(novelName));
 		m.addAttribute("last", cr.LastReleased(novelName));

@@ -27,7 +27,7 @@
 
 <div class="starter-template">
    <h1>List of All The Chapter in the Novel:</h1>
-   <a class="btn btn-primary" href="novellist">Novel List</a> 
+   <a class="btn btn-primary" href="novellist">Novel List</a>   <a class="btn btn-primary" href="activenovellist">Active Novel List</a> 
    <br>
    <a><b>Stock:</b>${stock}</a><br>
    <a><b>Change the novel Status:</b></a><br>

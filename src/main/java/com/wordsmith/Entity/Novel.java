@@ -2,10 +2,13 @@ package com.wordsmith.Entity;
 
 import java.util.Date;
 
+import com.wordsmith.Enum.LikeEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Novel {
@@ -41,6 +44,33 @@ public class Novel {
 	
 	@Column
 	private String Status;
+
+	@Transient
+	private LikeEnum userReaction;
+
+	@Transient
+	private long loveCount; // For storing the number of LOVE reactions
+
+	@Transient
+	private long angryCount; // For storing the number of ANGRY reactions
+
+	@Transient
+	private long laughCount; // For storing the number of LAUGH reactions
+
+	@Transient
+	private long sadCount; // For storing the number of SAD reactions
+
+	@Transient
+	private long wowCount; // For storing the number of WOW reactions
+
+	@Transient
+	private long fireCount; // For storing the number of FIRE reactions
+
+	@Transient
+	private long favoriteCount; // For storing the number of times favorited
+
+	@Transient
+	private boolean favorited; // For storing if the current user has favorited this novel
 
 	public int getNovelId() {
 		return NovelId;
@@ -122,6 +152,79 @@ public class Novel {
 	public void setStatus(String status) {
 		Status = status;
 	}
+
+	public LikeEnum getUserReaction() {
+		return userReaction;
+	}
+
+	public void setUserReaction(LikeEnum userReaction) {
+		this.userReaction = userReaction;
+	}
+
+	public long getLoveCount() {
+		return loveCount;
+	}
+
+	public void setLoveCount(long loveCount) {
+		this.loveCount = loveCount;
+	}
+
+	public long getAngryCount() {
+		return angryCount;
+	}
+
+	public void setAngryCount(long angryCount) {
+		this.angryCount = angryCount;
+	}
+
+	public long getLaughCount() {
+		return laughCount;
+	}
+
+	public void setLaughCount(long laughCount) {
+		this.laughCount = laughCount;
+	}
+
+	public long getSadCount() {
+		return sadCount;
+	}
+
+	public void setSadCount(long sadCount) {
+		this.sadCount = sadCount;
+	}
+
+	public long getWowCount() {
+		return wowCount;
+	}
+
+	public void setWowCount(long wowCount) {
+		this.wowCount = wowCount;
+	}
+
+	public long getFireCount() {
+		return fireCount;
+	}
+
+	public void setFireCount(long fireCount) {
+		this.fireCount = fireCount;
+	}
+
+	public long getFavoriteCount() {
+		return favoriteCount;
+	}
+
+	public void setFavoriteCount(long favoriteCount) {
+		this.favoriteCount = favoriteCount;
+	}
+
+	public boolean isFavorited() {
+		return favorited;
+	}
+
+	public void setFavorited(boolean favorited) {
+		this.favorited = favorited;
+	}
+
 	
 	
 

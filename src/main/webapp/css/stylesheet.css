@@ -267,3 +267,73 @@ table {
   position: sticky;
   top: 1px;
 }
+
+
+.profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;   /* Ensures image fills the frame without distortion */
+    border: 2px solid #ddd; /* Optional border */
+}
+
+/* Base button styles */
+.like-btn, .dislike-btn, .favorite-btn {
+    background-color: #2D3047;   /* match page bg */
+    color: white;                /* white text */
+    border: none;                /* clean look */
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;          /* small rounding */
+    cursor: pointer;
+    font-size: 14px;             /* base font size */
+    transition: all 0.2s ease;   /* smooth animation */
+}
+
+.reaction-btn {
+    background-color: #2D3047;   /* match page bg */
+    color: white;                /* white text */
+    border: none;                /* clean look */
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;          /* small rounding */
+    cursor: pointer;
+    font-size: 40px;             /* base font size */
+    text-align: center;
+    transition: all 0.2s ease;   /* smooth animation */
+}
+
+/* Hover effect */
+.like-btn:hover, .dislike-btn:hover, .reaction-btn:hover, .favorite-btn:hover {
+    background-color: #3a3d5a;   /* slightly lighter shade on hover */
+}
+
+/* Active state */
+.like-btn.active, .dislike-btn.active, .favorite-btn.active {
+    font-size: 16px;             /* +2px bigger */
+    font-weight: bold;
+    background-color: #3a3d5a;   /* keep hover-like shade */
+}
+
+/* Active state */
+.reaction-btn.active {
+    font-size: 40px;             /* +5px bigger */
+    background-color: #3a3d5a;   /* keep hover-like shade */
+}
+
+.bookmark-btn {
+    background-color: #2D3047;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.bookmark-btn.active {
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFD700;  /* gold star when active */
+}
