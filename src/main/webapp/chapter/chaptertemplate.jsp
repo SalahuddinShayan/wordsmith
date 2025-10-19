@@ -26,6 +26,7 @@
          <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 		 <script data-grow-initializer="">!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpjMzAxMTE4Mi1jZDdlLTRiYTMtOTkxNy1lMDZhMThiOGFiMjE=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();</script>
 </head>
 <body onload="ChapStyle()">
@@ -33,7 +34,33 @@
 <%@ include file="../nav2.jsp" %>
 
 
-
+        <!-- ✅ Top banner (728x90 for desktop / 320x50 for mobile) -->
+  <div class="container text-center mt-3">
+    <div class="d-none d-md-block">
+      <script type="text/javascript">
+        atOptions = {
+          'key': '909738982dd00f426ae61300a03dc401',
+          'format': 'iframe',
+          'height': 90,
+          'width': 728,
+          'params': {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/909738982dd00f426ae61300a03dc401/invoke.js"></script>
+    </div>
+    <div class="d-block d-md-none">
+      <script type="text/javascript">
+        atOptions = {
+          'key': 'faa56f41f1310cace7c00437b456859e',
+          'format': 'iframe',
+          'height': 50,
+          'width': 320,
+          'params': {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
+    </div>
+  </div>
         
         
         <div class= "center">
@@ -47,37 +74,55 @@
          <div class="col-1 col-lg-2 py-3"></div>
          </div>
          
-        <div  Style = "margin-top: 30px;" class = "row">
-        	<div class="col-1 col-lg-2 py-3 "></div>
-        	<div class="col-10 col-lg-8 bd-az">
-        	<h5>Update:</h5> 
-        	<p>Hey guys,<br>
-        	   As most of you probably know by now Disqus has stopped providing services to many sites and our site is one of them. Right now, 
-        	   we are in the middle of developing our independent comment system. As of today(26 March 2025), we are releasing the comment with 
-        	   Limited features. There are other features still under development and may take some time to roll out.
-        	</p>
-        	<p>As always, please continue to support us. You can show your support in the following ways:
-        	</p> 
-        	<ul> 
-        	<li><strong>Bookmark and Rate Your Favorite Novel:</strong> Head over to Novel Updates, bookmark your favorite stories, rate them, and leave a review. This simple action boosts our visibility and helps us reach more readers like you.</li> 
-        	<li><strong>Engage with Our Chapters:</strong> After reading a chapter, please leave a comment or reaction. Your feedback not only lets us know you’re enjoying the story, but it also keeps us motivated.</li> 
-        	<li><strong>Support Us on Ko-fi:</strong> As a small operation, we rely on your support to cover our costs. If you can, please consider donating on Ko-fi. Even a small contribution makes a huge difference!</li> 
-        	<li><strong>Help Us Improve the Website:</strong> Since we’re still in the early stages, we’d love your feedback on the website’s navigation, design, and user experience. What do you like? What could be better? Are there any features you'd like to see? Share your thoughts with us via the Contact Us form. Your insights are incredibly valuable to us!</li>
-        	<li><strong>Do not use Ad-Blocker:</strong> Please know that ads are our only source of revenue right now.</li> 
-        	</ul> 
-        	
-        	
-        	</div>
-        	<div class="col-1 col-lg-2 py-3 "></div>
-        </div>
+        <div style="margin-top: 30px;" class="row">
+    <div class="col-1 col-lg-2 py-3"></div>
+
+    <div class="col-10 col-lg-8 bd-az">
+        <c:if test="${not empty announcement}">
+            <h5>Announcement:</h5>
+            <h4>${announcement.title}</h4>
+            <p><small>${announcement.timeAgo}</small></p>
+            
+            <p>
+                <c:choose>
+                    <c:when test="${fn:length(announcement.content) > 300}">
+                        ${fn:substring(announcement.content, 0, 300)}...
+                    </c:when>
+                    <c:otherwise>
+                        ${announcement.content}
+                    </c:otherwise>
+                </c:choose>
+            </p>
+
+            <a href="../announcements/${announcement.id}" class="btn btn-outline-primary btn-sm">
+                Read More
+            </a>
+        </c:if>
+
+        <c:if test="${empty announcement}">
+            <h5>Announcement:</h5>
+            <p>No recent announcements available.</p>
+        </c:if>
+    </div>
+
+    <div class="col-1 col-lg-2 py-3"></div>
+    </div>
         
         
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 d-none d-md-block py-3">
-         	  <div class = "sticky-ad">
-         	  
-
-			
+         	<!-- ✅ Left Sidebar Ad (Load only on desktop) -->  
+            <div id="leftSidebarAd" class = "sticky-ad">
+          <script type="text/javascript">
+	          atOptions = {
+		          'key' : 'b9f5f7efab2763887c1ac6f86dcca5c8',
+		          'format' : 'iframe',
+		          'height' : 600,
+		          'width' : 160,
+		          'params' : {}
+	          };
+          </script>
+          <script type="text/javascript" src="//www.highperformanceformat.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
 			</div>
          </div>
          <div class="col-12 col-lg-8 py-3">
@@ -104,11 +149,37 @@
          <p><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Us on Ko-fi', '#1F8FFF', 'Y8Y2163B9B');kofiwidget2.draw();</script></p> 
          </div>
          </div>
-         <div class="col-1 col-lg-2 d-none d-md-block py-3">
-			
+         <div class="col-1 col-lg-2 py-3">
+			<!-- ✅ Right Sidebar: 160x300 -->
+            <div id="rightSidebarAd" class = "sticky-ad">
+            <script type="text/javascript">
+	            atOptions = {
+		            'key' : 'edd83a3d2aa632833a12fe13dff9971b',
+		            'format' : 'iframe',
+		            'height' : 300,
+		            'width' : 160,
+		            'params' : {}
+	            };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
+         </div>
 
 		</div>
          </div>
+
+         <!-- ✅ In-content 300x250 mid-section ad -->
+      <div class="text-center mt-4">
+        <script type="text/javascript">
+          atOptions = {
+            'key': 'e51cc6ba4468ff9ed2d28d4172eb88eb',
+            'format': 'iframe',
+            'height': 250,
+            'width': 300,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
+      </div>
 
 	
 
@@ -287,6 +358,50 @@
          </div>
          <div class="col-1 col-lg-3 py-3 "></div>
          </div>
+
+
+         <!-- ✅ In-content 300x250 mid-section ad -->
+      <div class="text-center mt-4">
+        <script type="text/javascript">
+          atOptions = {
+            'key': 'e51cc6ba4468ff9ed2d28d4172eb88eb',
+            'format': 'iframe',
+            'height': 250,
+            'width': 300,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
+      </div>
+
+
+        <!-- ✅ Bottom Ad (468x60 for desktop / 320x50 for mobile) -->
+  <div class="container text-center mt-3">
+    <div class="d-none d-md-block">
+      <script type="text/javascript">
+      atOptions = {
+        'key': 'c137bf5820b877dfb9f4df89a80f0236',
+        'format': 'iframe',
+        'height': 60,
+        'width': 468,
+        'params': {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/c137bf5820b877dfb9f4df89a80f0236/invoke.js"></script>
+    </div>
+    <div class="d-block d-md-none">
+      <script type="text/javascript">
+        atOptions = {
+          'key': 'faa56f41f1310cace7c00437b456859e',
+          'format': 'iframe',
+          'height': 50,
+          'width': 320,
+          'params': {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
+    </div>
+  </div>
          
         
         <%@ include file="../footer2.jsp" %>

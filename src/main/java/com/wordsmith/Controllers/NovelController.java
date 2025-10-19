@@ -6,9 +6,9 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
-
+import java.util.stream.Collectors;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -26,6 +26,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Entity.Comment;
 import com.wordsmith.Entity.Novel;
+import com.wordsmith.Entity.User;
 import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Repositories.NovelRepository;
@@ -124,7 +125,7 @@ public class NovelController {
 	@RequestMapping("/novel/{novelName}")
 	public String Novel(@PathVariable String novelName, Model m, HttpServletRequest request) {
 		Novel novel = NovelRepo.byNovelName(novelName);
-		var user = (com.wordsmith.Entity.User) request.getSession().getAttribute("loggedInUser");
+		var user = (User) request.getSession().getAttribute("loggedInUser");
 		if(user != null) {
 			var userReaction = likeService.getUserReaction("novel", novel.getNovelId(), user.getUsername());
 			novel.setUserReaction(userReaction);
@@ -139,6 +140,15 @@ public class NovelController {
 		novel.setFavoriteCount(favoriteService.getFavoriteCount((long) novel.getNovelId()));
 		m.addAttribute("novel",novel);
 		List<Chapter> chapters = cr.byNovelNameReleased(novelName);
+
+		// ✅ Collect IDs for batch query
+    	List<Long> chapterIds = chapters.stream()
+            .map(Chapter::getChapterId)
+            .collect(Collectors.toList());
+
+		// ✅ Fetch all view counts in one go
+    	Map<Long, Long> chapterViews = viewsService.getViewsForChapters(chapterIds);	
+
 		for (Chapter chapter : chapters) {
 	        if (chapter.getReleasedOn() != null) {
 	        	chapter.setTimeAgo(getTimeDifference(chapter.getReleasedOn()));
@@ -146,6 +156,8 @@ public class NovelController {
 	        else {
 	        	chapter.setTimeAgo(getTimeDifference(chapter.getPostedOn()));
 	        }
+
+			chapter.setViews(chapterViews.getOrDefault(chapter.getChapterId(), 0L));
 		}
 
 		m.addAttribute("Chapters", chapters);

@@ -31,10 +31,51 @@
 <%@ include file="../nav2.jsp" %>
 
         
+        <!-- ✅ Top banner (728x90 for desktop / 320x50 for mobile) -->
+  <div class="container text-center mt-3">
+    <div class="d-none d-md-block">
+      <script type="text/javascript">
+        atOptions = {
+          'key': '909738982dd00f426ae61300a03dc401',
+          'format': 'iframe',
+          'height': 90,
+          'width': 728,
+          'params': {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/909738982dd00f426ae61300a03dc401/invoke.js"></script>
+    </div>
+    <div class="d-block d-md-none">
+      <script type="text/javascript">
+        atOptions = {
+          'key': 'faa56f41f1310cace7c00437b456859e',
+          'format': 'iframe',
+          'height': 50,
+          'width': 320,
+          'params': {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
+    </div>
+  </div>
         
         
         <div  Style = "margin-top: 30px;" class = "row">
-         <div class="col-1 col-lg-2 py-3 "></div>
+         <div class="col-1 col-lg-2 py-3 ">
+            <!-- ✅ Left Sidebar Ad (Load only on desktop) -->
+            <div id="leftSidebarAd" class = "sticky-ad">
+          <script type="text/javascript">
+	          atOptions = {
+		          'key' : 'b9f5f7efab2763887c1ac6f86dcca5c8',
+		          'format' : 'iframe',
+		          'height' : 600,
+		          'width' : 160,
+		          'params' : {}
+	          };
+          </script>
+          <script type="text/javascript" src="//www.highperformanceformat.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
+         </div>
+         </div>
          <div class="col-10 col-lg-8 py-3">
          <div class="center">
          <a><img width="40%" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
@@ -86,35 +127,111 @@
          <div class="col-6 py-3 text-center"><a href="../chapter/${last}" class="btn bg-az"><i class="fas fa-book-open"></i> Read Last Chapter</a></div>
          </div>
          </div>
-         <div class="col-1 col-lg-2 py-3 "></div>
+         <div class="col-1 col-lg-2 py-3 ">
+            <!-- ✅ Right Sidebar: 160x300 -->
+                <div id="rightSidebarAd" class = "sticky-ad">
+            <script type="text/javascript">
+	            atOptions = {
+		            'key' : 'edd83a3d2aa632833a12fe13dff9971b',
+		            'format' : 'iframe',
+		            'height' : 300,
+		            'width' : 160,
+		            'params' : {}
+	            };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
+         </div>
          </div>
          
          
+        
+         <div  Style = "margin-top: 30px;" class = "row">
+            <div class="col-2 col-lg-3 py-3 "></div>
+            <div class="col-8 col-lg-6 py-3">
+                <!-- ✅ Native Ad Block between sections -->
+      <div class="text-center mt-4 mb-4">
+        <script async="async" data-cfasync="false" src="//pl27753416.effectivegatecpm.com/11fa4d751c9e2f84bf7803aec033c77f/invoke.js"></script>
+        <div id="container-11fa4d751c9e2f84bf7803aec033c77f"></div>
+      </div>
+            </div>
+            <div class="col-2 col-lg-3 py-3 ">
+            </div>
+         </div>
          
          
          
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-3 py-3">
-         <div class = "sticky-ad">
-         
-			</div>
+         <!-- ✅ Left Sidebar Ad (Load only on desktop) -->
+            <div id="leftSidebarAd2" class = "sticky-ad">
+          <script type="text/javascript">
+	          atOptions = {
+		          'key' : 'b9f5f7efab2763887c1ac6f86dcca5c8',
+		          'format' : 'iframe',
+		          'height' : 600,
+		          'width' : 160,
+		          'params' : {}
+	          };
+          </script>
+          <script type="text/javascript" src="//www.highperformanceformat.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
+            </div>
          </div>
          <div class="col-10 col-lg-6 py-3 ">
          <h4 class="center">Table Of Content</h4>
          <c:forEach var="chapter" items="${Chapters}">
-         <div  class = "row">
-         <div class="col-8  py-3 stm"><a href="../chapter/${chapter.chapterId}">Chapter ${chapter.chapterNo} : ${chapter.title}</a></div>
-         <div class="col-4  py-3 right"><a>${chapter.timeAgo}</a></div>
-         </div>
-         </c:forEach>
+  <div class="row align-items-center py-2">
+    <!-- Chapter title and number -->
+    <div class="col-7 col-lg-6 stm oneliner">
+      <a href="../chapter/${chapter.chapterId}">
+        Chapter ${chapter.chapterNo} : ${chapter.title}
+      </a>
+    </div>
+
+    <!-- Time ago and views -->
+    <div class="col-5 col-lg-3 text-end">
+      <small>
+        <i class="fa-regular fa-clock"></i> ${chapter.timeAgo}
+      </small>
+    </div>
+    <div class="col-12 col-lg-3 text-start">
+      <small>
+        <i class="fa-solid fa-eye"></i> ${chapter.views}
+      </small>
+    </div>
+  </div>
+</c:forEach>
          </div>
          <div class="col-1 col-lg-3 py-3">
-         
+         <!-- ✅ Right Sidebar: 160x300 -->
+                <div id="rightSidebarAd2" class = "sticky-ad">
+            <script type="text/javascript">
+	            atOptions = {
+		            'key' : 'edd83a3d2aa632833a12fe13dff9971b',
+		            'format' : 'iframe',
+		            'height' : 300,
+		            'width' : 160,
+		            'params' : {}
+	            };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
          </div>
          </div>
+         </div>
          
          
-         
+        <!-- ✅ In-content 300x250 mid-section ad -->
+      <div class="text-center mt-4">
+        <script type="text/javascript">
+          atOptions = {
+            'key': 'e51cc6ba4468ff9ed2d28d4172eb88eb',
+            'format': 'iframe',
+            'height': 250,
+            'width': 300,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
+      </div>
          
         
         <div  Style = "margin-top: 30px;" class = "row">
@@ -290,12 +407,54 @@
          </div>
          <div class="col-1 col-lg-3 py-3 "></div>
          </div>
+        
          
+        <!-- ✅ In-content 300x250 mid-section ad -->
+      <div class="text-center mt-4">
+        <script type="text/javascript">
+          atOptions = {
+            'key': 'e51cc6ba4468ff9ed2d28d4172eb88eb',
+            'format': 'iframe',
+            'height': 250,
+            'width': 300,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
+      </div>
+
+  <!-- ✅ Bottom Ad (468x60 for desktop / 320x50 for mobile) -->
+  <div class="container text-center mt-3">
+    <div class="d-none d-md-block">
+      <script type="text/javascript">
+      atOptions = {
+        'key': 'c137bf5820b877dfb9f4df89a80f0236',
+        'format': 'iframe',
+        'height': 60,
+        'width': 468,
+        'params': {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/c137bf5820b877dfb9f4df89a80f0236/invoke.js"></script>
+    </div>
+    <div class="d-block d-md-none">
+      <script type="text/javascript">
+        atOptions = {
+          'key': 'faa56f41f1310cace7c00437b456859e',
+          'format': 'iframe',
+          'height': 50,
+          'width': 320,
+          'params': {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
+    </div>
+  </div> 
         
         <%@ include file="../footer2.jsp" %>
        
 
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>        
+       
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
 <script type="text/javascript" src="../js/script.js"></script>
 <input type="hidden" id="_csrf" 

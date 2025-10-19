@@ -281,3 +281,12 @@ V 1.101
 -> Added a frame to the profile pic in the comment section.
 -> Added the system for views
 -> Removed Epsilon.
+-> Added a system to ensure that the reaslease status does not change when editing the chapters.
+-> Add the Active novel List button on the chapter's page.
+-> Created new system for saveing email credential in the database.
+-> Using new credentials for noreply.
+
+
+V 1.102
+-> Added a Adsetra.
+-> Added Views in the chapter list in novel.

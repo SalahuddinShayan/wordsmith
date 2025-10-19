@@ -1,5 +1,7 @@
 package com.wordsmith.Repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,6 +25,10 @@ public interface ViewsRepository extends JpaRepository<Views,Long>{
                "where v.entity_type='CHAPTER' and c.novel_name=:novelname",
        nativeQuery = true)
     public Long totalViewsBynovelName(String novelname);
+
+
+     @Query("SELECT v.entityId, v.views FROM Views v WHERE v.entityType = :type AND v.entityId IN :ids")
+    List<Object[]> findViewsForEntities(@Param("type") CommentEntityType type, @Param("ids") List<Long> ids);
 
 
 

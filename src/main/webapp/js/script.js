@@ -207,4 +207,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+// Remove sidebar ads on mobile devices
+document.addEventListener("DOMContentLoaded", function () {
+  function handleSidebarAds() {
+    const leftAd = document.getElementById("leftSidebarAd");
+    const rightAd = document.getElementById("rightSidebarAd");
+    const leftAd2 = document.getElementById("leftSidebarAd2");
+    const rightAd2 = document.getElementById("rightSidebarAd2");
 
+    if (window.innerWidth < 768) {
+      // Mobile breakpoint (Bootstrap 'md')
+      if (leftAd) leftAd.remove();
+      if (rightAd) rightAd.remove();
+      if (leftAd2) leftAd2.remove();
+      if (rightAd2) rightAd2.remove();
+    }
+  }
+
+  // Run once on load
+  handleSidebarAds();
+
+  // Optional: recheck if screen resizes (e.g., device rotation)
+  window.addEventListener("resize", function () {
+    handleSidebarAds();
+  });
+});

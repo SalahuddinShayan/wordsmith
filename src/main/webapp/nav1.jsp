@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<nav class="navbar navbar-light bg-az navbar-expand-md sticky-top container-fluid">
+<nav class="navbar navbar-light bg-az navbar-expand-md container-fluid">
     <div class="container-fluid">
         <a href="https://easternwordsmith.com/" class="navbar-brand d-flex align-items-center">
             <img src="images/logo2.png" width="40" height="40" alt="">
@@ -13,8 +13,9 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav">
                 <li class="nav-item"><a href="https://easternwordsmith.com/" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="../novels" class="nav-link">All Novels</a></li>
+                <li class="nav-item"><a href="novels" class="nav-link">All Novels</a></li>
                 <li class="nav-item"><a href="../updates" class="nav-link">Updates</a></li>
+                <li class="nav-item"><a href="../announcements" class="nav-link">Announcements</a></li>
                 <li class="nav-item"><a href="../contactus" class="nav-link">Contact Us</a></li>
             </ul>
 

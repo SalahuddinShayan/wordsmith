@@ -24,9 +24,10 @@ public class WebSecurityConfig {
             	.requestMatchers("/dashboard").hasAnyAuthority("ADMIN", "TRANSLATOR", "EDITOR")
                 .requestMatchers("/admin/**","/novellist","/deletenovel","/chapterlist","/deletechapter","/messages","/allchapters","/auth/users", 
                 		"/comments/allcomments","/deletemessage", "/actuator", "actuator/health", "actuator/health/*", "actuator/metrics",
-                		"actuator/metrics/*","actuator/scheduledtasks","/activenovellist").hasAnyAuthority("ADMIN")
+                		"actuator/metrics/*","actuator/scheduledtasks","/activenovellist", "/announcements/manage/**", "/announcements/add",
+                        "/announcements/edit", "/announcements/delete").hasAnyAuthority("ADMIN")
                 .requestMatchers("/auth/register", "/auth/verify-otp", "/auth/verify","/auth/forgot-password","/auth/verify-reset-otp",
-                		"/auth/reset-password","/actuator/prometheus").permitAll()
+                		"/auth/reset-password","/actuator/prometheus", "/announcements/**").permitAll()
                 .anyRequest().permitAll() // Allow unrestricted access to other pages
             )
             .formLogin(login -> login

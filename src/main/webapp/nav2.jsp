@@ -13,6 +13,7 @@
                 <li class="nav-item"><a href="https://easternwordsmith.com/" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="../novels" class="nav-link">All Novels</a></li>
                 <li class="nav-item"><a href="../updates" class="nav-link">Updates</a></li>
+                <li class="nav-item"><a href="../announcements" class="nav-link">Announcements</a></li>
                 <li class="nav-item"><a href="../contactus" class="nav-link">Contact Us</a></li>
             </ul>
 

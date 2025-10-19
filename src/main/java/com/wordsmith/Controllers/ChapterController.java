@@ -1,6 +1,7 @@
 package com.wordsmith.Controllers;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.wordsmith.Entity.Announcement;
 import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Entity.Comment;
 import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Enum.LikeEnum;
 import com.wordsmith.Enum.ReleaseStatus;
 import com.wordsmith.Repositories.ChapterRepository;
+import com.wordsmith.Services.AnnouncementService;
 import com.wordsmith.Services.CommentService;
 import com.wordsmith.Services.LikeService;
 import com.wordsmith.Services.ViewsService;
@@ -38,12 +41,14 @@ public class ChapterController {
 	private final CommentService commentService;
 	private final ViewsService viewsService;
 	private final LikeService likeService;
+	private final AnnouncementService announcementService;
     
-	public ChapterController(CommentService commentService, ChapterRepository cr, ViewsService viewsService, LikeService likeService) {
+	public ChapterController(CommentService commentService, ChapterRepository cr, ViewsService viewsService, LikeService likeService, AnnouncementService announcementService) {
 		this.commentService = commentService;
 		this.cr=cr;
 		this.viewsService = viewsService;
 		this.likeService = likeService;
+		this.announcementService = announcementService;
 	}
 	
 	@RequestMapping("/chapterlist")
@@ -180,6 +185,13 @@ public class ChapterController {
 				
 		    }
 		m.addAttribute("comments", comments);
+		m.addAttribute("newComment", new Comment());
+		Announcement announcement = announcementService.getLatestAnnouncement();
+		if (announcement != null && announcement.isVisible()){
+			announcement.setTimeAgo(getTimeDifference(announcement.getCreatedAt()));
+		}
+		m.addAttribute("announcement", announcementService.getLatestAnnouncement());
+
 		return "chaptertemplate";
 	}
 	
@@ -199,6 +211,24 @@ public class ChapterController {
 		}
 	}
 	
+	private String getTimeDifference(LocalDateTime pastTime) {
+    LocalDateTime now = LocalDateTime.now();
+    Duration duration = Duration.between(pastTime, now);
+
+    if (duration.toMinutes() < 1) {
+        return "Just now";
+    } else if (duration.toMinutes() < 60) {
+        return duration.toMinutes() + " minutes ago";
+    } else if (duration.toHours() < 24) {
+        return duration.toHours() + " hours ago";
+    } else if (duration.toDays() < 7) {
+        return duration.toDays() + " days ago";
+    } else {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return formatter.format(pastTime); // Show full date if older than a week
+    }
+}
+
 	private String getTimeDifference(ZonedDateTime pastTime) {
 	    ZonedDateTime now = ZonedDateTime.now();
 	    Duration duration = Duration.between(pastTime, now);

@@ -1,5 +1,10 @@
 package com.wordsmith.Services;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import com.wordsmith.Entity.Views;
@@ -41,6 +46,21 @@ public class ViewsService {
 
     public void saveViewRecord(Views view) {
         viewsRepository.save(view);
+    }
+
+    public Map<Long, Long> getViewsForChapters(List<Long> chapterIds) {
+        if (chapterIds == null || chapterIds.isEmpty()) {
+            return Collections.emptyMap();
+        }
+
+        List<Object[]> results = viewsRepository.findViewsForEntities(CommentEntityType.CHAPTER, chapterIds);
+
+        // Convert to Map<chapterId, views>
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> (Long) row[0],
+                        row -> (Long) row[1]
+                ));
     }
 
 }
