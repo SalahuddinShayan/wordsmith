@@ -232,3 +232,36 @@ document.addEventListener("DOMContentLoaded", function () {
     handleSidebarAds();
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const addFormSection = document.getElementById("add-form-section");
+    const editFormSection = document.getElementById("edit-form-section");
+    const editForm = document.getElementById("edit-form");
+
+    // Handle Edit button click
+    document.querySelectorAll(".edit-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            const title = btn.dataset.title;
+            const content = btn.dataset.content;
+
+            document.getElementById("edit-id").value = id;
+            document.getElementById("edit-title").value = title;
+            document.getElementById("edit-content").value = content;
+
+            editForm.action = `/announcements/edit`;
+
+            addFormSection.style.display = "none";
+            editFormSection.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    });
+
+    // Handle cancel button
+    document.getElementById("cancel-edit").addEventListener("click", () => {
+        editFormSection.style.display = "none";
+        addFormSection.style.display = "block";
+        editForm.reset();
+    });
+});

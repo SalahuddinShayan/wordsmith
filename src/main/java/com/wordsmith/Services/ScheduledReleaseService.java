@@ -177,7 +177,7 @@ public class ScheduledReleaseService {
     @Transactional
     @Scheduled(cron = "0 0 15 * * ?", zone = "UTC") // Every day at 3 PM UTC/ 8:30PM IST
     public void autoRelease3pm() {
-        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "Tower Defense is the Ultimate Defense Technique");
+        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "I Think My Glasses Could Probably Take Over the World");
            
 
         if (nextChapter != null) {
@@ -185,9 +185,9 @@ public class ScheduledReleaseService {
             ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
             nextChapter.setReleasedOn(serverTime);
             chapterRepository.save(nextChapter);
-            System.out.println("✅ Auto-released - Tower Defense is the Ultimate Defense Technique: " + nextChapter.getTitle());
+            System.out.println("✅ Auto-released - I Think My Glasses Could Probably Take Over the World: " + nextChapter.getTitle());
         } else {
-            System.out.println("ℹ️ Tower Defense is the Ultimate Defense Technique has no chapters scheduled for release.");
+            System.out.println("ℹ️ I Think My Glasses Could Probably Take Over the World has no chapters scheduled for release.");
         }
     }
     

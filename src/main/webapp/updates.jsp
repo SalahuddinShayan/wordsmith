@@ -30,50 +30,54 @@
 
 <%@ include file="nav1.jsp" %>
         
-        <!-- ✅ Top banner (728x90 for desktop / 320x50 for mobile) -->
-  <div class="container text-center mt-3">
-    <div class="d-none d-md-block">
-      <script type="text/javascript">
-        atOptions = {
-          'key': '909738982dd00f426ae61300a03dc401',
-          'format': 'iframe',
-          'height': 90,
-          'width': 728,
-          'params': {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/909738982dd00f426ae61300a03dc401/invoke.js"></script>
-    </div>
-    <div class="d-block d-md-none">
-      <script type="text/javascript">
-        atOptions = {
-          'key': 'faa56f41f1310cace7c00437b456859e',
-          'format': 'iframe',
-          'height': 50,
-          'width': 320,
-          'params': {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
-    </div>
-  </div>
+        
+        <div class="d-none d-lg-block text-center my-3 container-fluid">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
+				<!-- Responsive Horizontal -->
+					<ins class="adsbygoogle"
+     				style="display:block"
+     				data-ad-client="ca-pub-3020770276580291"
+     				data-ad-slot="9524461170"
+     				data-ad-format="auto"
+     				data-full-width-responsive="true"></ins>
+		  <script>
+     		(adsbygoogle = window.adsbygoogle || []).push({});
+		  </script>
+          </div>
+          
+          <div class="d-block d-lg-none text-center my-3 container-fluid">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
+				<!-- Responsive Square -->
+				<ins class="adsbygoogle"
+     				style="display:block"
+     				data-ad-client="ca-pub-3020770276580291"
+     				data-ad-slot="9826879355"
+     				data-ad-format="auto"
+     				data-full-width-responsive="true">
+     			</ins>
+			<script>
+     			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+          </div>
         
         
         <div  Style = "margin-top: 30px;" class = "row">
-          <!-- ✅ Left Sidebar Ad (Load only on desktop) -->
          <div class="col-1 col-lg-2 py-3 ">
-         <div id="leftSidebarAd" class="sticky-ad">
-        <script type="text/javascript">
-	          atOptions = {
-		          'key' : 'b9f5f7efab2763887c1ac6f86dcca5c8',
-		          'format' : 'iframe',
-		          'height' : 600,
-		          'width' : 160,
-		          'params' : {}
-	          };
-          </script>
-          <script type="text/javascript" src="//www.highperformanceformat.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
-      </div>
+         <div class = "sticky-ad">
+         	  <div class="d-none d-lg-block text-center my-3" >
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
+					<!-- Responsive Vertical -->
+					<ins class="adsbygoogle"
+     				style="display:block"
+     				data-ad-client="ca-pub-3020770276580291"
+     				data-ad-slot="9033506582"
+     				data-ad-format="auto"
+     				data-full-width-responsive="true"></ins>
+				<script>
+     				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+              </div>
+			</div>
          </div>
          <div class="col-10 col-lg-8 py-3 bd">
           <h2>Latest Updates:</h2>
@@ -97,66 +101,34 @@
            </c:forEach>
           </div> 
          </div>
-         <!-- ✅ Right Sidebar: 160x300 -->
          <div class="col-1 col-lg-2 py-3 ">
-          <div id="rightSidebarAd" class = "sticky-ad">
-            <script type="text/javascript">
-	            atOptions = {
-		            'key' : 'edd83a3d2aa632833a12fe13dff9971b',
-		            'format' : 'iframe',
-		            'height' : 300,
-		            'width' : 160,
-		            'params' : {}
-	            };
-            </script>
-            <script type="text/javascript" src="//www.highperformanceformat.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
-         </div>
+         <div class="d-none d-lg-block text-center my-3 sticky-ad">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
+					<!-- Wide SkyScraper -->
+					<ins class="adsbygoogle"
+     				style="display:inline-block;width:160px;height:600px"
+     				data-ad-client="ca-pub-3020770276580291"
+     				data-ad-slot="6212425217"></ins>
+				<script>
+     				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+</div>
          </div>
         </div>
         
-
-
-        <!-- ✅ In-content 300x250 mid-section ad -->
-      <div class="text-center mt-4">
-        <script type="text/javascript">
-          atOptions = {
-            'key': 'e51cc6ba4468ff9ed2d28d4172eb88eb',
-            'format': 'iframe',
-            'height': 250,
-            'width': 300,
-            'params': {}
-          };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
-      </div>
-
-        <!-- ✅ Bottom Ad (468x60 for desktop / 320x50 for mobile) -->
-  <div class="container text-center mt-3">
-    <div class="d-none d-md-block">
-      <script type="text/javascript">
-      atOptions = {
-        'key': 'c137bf5820b877dfb9f4df89a80f0236',
-        'format': 'iframe',
-        'height': 60,
-        'width': 468,
-        'params': {}
-      };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/c137bf5820b877dfb9f4df89a80f0236/invoke.js"></script>
-    </div>
-    <div class="d-block d-md-none">
-      <script type="text/javascript">
-        atOptions = {
-          'key': 'faa56f41f1310cace7c00437b456859e',
-          'format': 'iframe',
-          'height': 50,
-          'width': 320,
-          'params': {}
-        };
-      </script>
-      <script type="text/javascript" src="//www.highperformanceformat.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
-    </div>
-  </div>
+        
+        <div class="d-none d-lg-block text-center my-3 sticky-ad">
+    			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
+				<!-- Billboard - Rising Star -->
+				<ins class="adsbygoogle"
+     				style="display:inline-block;width:970px;height:250px"
+     			data-ad-client="ca-pub-3020770276580291"
+     			data-ad-slot="8159931703"></ins>
+			<script>
+     			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+		</div>
+        
         
 <%@ include file="footer1.jsp" %>
        
