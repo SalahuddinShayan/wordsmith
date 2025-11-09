@@ -301,3 +301,6 @@ V 1.103
 V 1.104
 -> Removed manual google Ads and added adesttra back with anti-adblock and popunders
 -> added solo sword master to the secdule release replacing the cop is too strong.
+
+V 1.104.1
+-> Update the Docker foile deu to an error.
