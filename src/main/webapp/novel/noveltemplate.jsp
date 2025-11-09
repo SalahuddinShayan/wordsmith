@@ -25,7 +25,7 @@
 		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 		 <script data-grow-initializer="">!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpjMzAxMTE4Mi1jZDdlLTRiYTMtOTkxNy1lMDZhMThiOGFiMjE=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();</script>
-        <script type='text/javascript' src='//gardeningcoercive.com/37/1a/ff/371aff38002eff53739fbcd82eac657f.js'></script>
+        <script type='text/javascript' src='//sparrowcanned.com/37/1a/ff/371aff38002eff53739fbcd82eac657f.js'></script>
 </head>
 <body>
 
@@ -44,7 +44,7 @@
           'params': {}
         };
       </script>
-      <script type="text/javascript" src="//www.gardeningcoercive.com/909738982dd00f426ae61300a03dc401/invoke.js"></script>
+      <script type="text/javascript" src="//www.sparrowcanned.com/909738982dd00f426ae61300a03dc401/invoke.js"></script>
     </div>
     <div class="d-block d-md-none">
       <script type="text/javascript">
@@ -56,7 +56,7 @@
           'params': {}
         };
       </script>
-      <script type="text/javascript" src="//www.gardeningcoercive.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
+      <script type="text/javascript" src="//www.sparrowcanned.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
     </div>
   </div>
         
@@ -74,7 +74,7 @@
 		          'params' : {}
 	          };
           </script>
-          <script type="text/javascript" src="//www.gardeningcoercive.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
+          <script type="text/javascript" src="//www.sparrowcanned.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
          </div>
          </div>
          <div class="col-10 col-lg-8 py-3">
@@ -140,7 +140,7 @@
 		            'params' : {}
 	            };
             </script>
-            <script type="text/javascript" src="//www.gardeningcoercive.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
+            <script type="text/javascript" src="//www.sparrowcanned.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
          </div>
          </div>
          
@@ -174,7 +174,7 @@
 		          'params' : {}
 	          };
           </script>
-          <script type="text/javascript" src="//www.gardeningcoercive.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
+          <script type="text/javascript" src="//www.sparrowcanned.com/b9f5f7efab2763887c1ac6f86dcca5c8/invoke.js"></script>
             </div>
          </div>
          <div class="col-10 col-lg-6 py-3 ">
@@ -214,7 +214,7 @@
 		            'params' : {}
 	            };
             </script>
-            <script type="text/javascript" src="//www.gardeningcoercive.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
+            <script type="text/javascript" src="//www.sparrowcanned.com/edd83a3d2aa632833a12fe13dff9971b/invoke.js"></script>
          </div>
          </div>
          </div>
@@ -231,7 +231,7 @@
             'params': {}
           };
         </script>
-        <script type="text/javascript" src="//www.gardeningcoercive.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
+        <script type="text/javascript" src="//www.sparrowcanned.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
       </div>
          
         
@@ -421,7 +421,7 @@
             'params': {}
           };
         </script>
-        <script type="text/javascript" src="//www.gardeningcoercive.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
+        <script type="text/javascript" src="//www.sparrowcanned.com/e51cc6ba4468ff9ed2d28d4172eb88eb/invoke.js"></script>
       </div>
 
   <!-- ✅ Bottom Ad (468x60 for desktop / 320x50 for mobile) -->
@@ -436,7 +436,7 @@
         'params': {}
       };
     </script>
-    <script type="text/javascript" src="//www.gardeningcoercive.com/c137bf5820b877dfb9f4df89a80f0236/invoke.js"></script>
+    <script type="text/javascript" src="//www.sparrowcanned.com/c137bf5820b877dfb9f4df89a80f0236/invoke.js"></script>
     </div>
     <div class="d-block d-md-none">
       <script type="text/javascript">
@@ -448,7 +448,7 @@
           'params': {}
         };
       </script>
-      <script type="text/javascript" src="//www.gardeningcoercive.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
+      <script type="text/javascript" src="//www.sparrowcanned.com/faa56f41f1310cace7c00437b456859e/invoke.js"></script>
     </div>
   </div> 
         

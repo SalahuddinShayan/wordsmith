@@ -303,4 +303,9 @@ V 1.104
 -> added solo sword master to the secdule release replacing the cop is too strong.
 
 V 1.104.1
--> Update the Docker foile deu to an error.
+-> Update the Docker file deu to an error.
+
+V 1.104.2
+-> Create the manual release button.
+-> Updated the chapter list page for syle and logic
+-> Updated the code for adesttra ads anti-adblock.

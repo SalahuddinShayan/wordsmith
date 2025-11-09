@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -285,5 +286,17 @@ public class ChapterController {
 		return "ch";
 	
 	}
+
+	@PostMapping("/ReleaseChapter")
+	public RedirectView releaseChapter(@RequestParam("ChapterId") long id, RedirectAttributes redirectAttributes){
+		Chapter chapter= cr.getReferenceById(id);
+		ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
+		chapter.setReleasedOn(serverTime);
+		chapter.setReleaseStatus(ReleaseStatus.RELEASED);
+		cr.save(chapter);
+		RedirectView redirectView= new RedirectView("/chapterlist",true);
+		redirectAttributes.addAttribute("NovelName",chapter.getNovelName());
+		return redirectView;
+		}
 
 }
