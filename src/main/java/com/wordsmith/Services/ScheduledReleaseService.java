@@ -56,7 +56,7 @@ public class ScheduledReleaseService {
     @Transactional
     @Scheduled(cron = "0 0 2 * * ?", zone = "UTC") // Every day at 2 AM UTC/ 7:30AM IST
     public void autoRelease2am() {
-        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "The Cop Is Too Strong");
+        Chapter nextChapter = chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(ReleaseStatus.STOCKPILE, "Solo Sword Master");
            
 
         if (nextChapter != null) {
@@ -64,9 +64,9 @@ public class ScheduledReleaseService {
             ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
             nextChapter.setReleasedOn(serverTime);
             chapterRepository.save(nextChapter);
-            System.out.println("✅ Auto-released- The Cop Is Too Strong: " + nextChapter.getChapterNo());
+            System.out.println("✅ Auto-released- Solo Sword Master: " + nextChapter.getChapterNo());
         } else {
-            System.out.println("ℹ️ The Cop Is Too Strong has no chapters scheduled for release.");
+            System.out.println("ℹ️ Solo Sword Master has no chapters scheduled for release.");
         }
     }
     

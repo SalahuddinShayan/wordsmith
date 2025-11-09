@@ -297,3 +297,7 @@ V 1.103
 -> Edited title and headder in the chapter page and added discription tag.
 -> Repalced tower Defense with I Think My Glasses Could Probably Take Over the World in Secdule realese.
 -> Remove adesttra ads and added manual google Ads.
+
+V 1.104
+-> Removed manual google Ads and added adesttra back with anti-adblock and popunders
+-> added solo sword master to the secdule release replacing the cop is too strong.
