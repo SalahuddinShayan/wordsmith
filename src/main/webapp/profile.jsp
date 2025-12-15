@@ -32,7 +32,7 @@
 
   </head>
 
-  <body>
+<body>
 
     <%@ include file="nav1.jsp" %>
 
@@ -64,6 +64,97 @@
 
         <hr/>
 
+        <!-- 🟩 Membership Information -->
+        <h3>Membership Information</h3>
+
+        <!-- ========================================================= -->
+        <!-- ACTIVE MEMBERSHIP -->
+        <!-- ========================================================= -->
+        <c:if test="${topMembership != null && topMembership.status == 'ACTIVE' }">
+            <div class="card bg-secondary text-light mb-4">
+                <div class="card-body">
+                    <h5>Active Membership</h5>
+
+                    <p><b>Status:</b> ${topMembership.status}</p>
+                    <p><b>Plan:</b> ${topMembership.planId}</p>
+                    <p><b>Start Date:</b> ${topMembership.startDate}</p>
+                    <p><b>Next Billing Date:</b> ${topMembership.endDate}</p>
+
+                    <p><b>Auto-Renew:</b>
+                        <c:out value="${topMembership.autoRenew ? 'Enabled' : 'Disabled'}" />
+                    </p>
+
+                    <form method="post" action="/membership/cancel">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <input type="hidden" name="subscriptionId" value="${topMembership.subscriptionId}" />
+                        <button type="submit" class="btn btn-warning">Cancel Membership</button>
+                    </form>
+                </div>
+            </div>
+        </c:if>
+
+        <!-- ========================================================= -->
+        <!-- PENDING MEMBERSHIP -->
+        <!-- ========================================================= -->
+        <c:if test="${topMembership.status == 'PENDING'  }">
+            <div class="card bg-warning text-dark mb-4">
+                <div class="card-body">
+                    <h5>Membership Activation In Progress</h5>
+                    <p>
+                        We have received your subscription request and are waiting for PayPal to confirm activation.
+                        This usually takes <strong>5–30 seconds</strong>.
+                    </p>
+                    <p>
+                        If your membership does not activate automatically within <strong>5 minutes</strong>,
+                        please <a href="/contactus">contact us</a>.
+                    </p>
+                    <p><b>Plan:</b> ${topMembership.planId}</p>
+                    <p><b>Status:</b> ${topMembership.status}</p>
+                </div>
+            </div>
+        </c:if>
+
+        <!-- ========================================================= -->
+        <!-- NO ACTIVE MEMBERSHIP + NO PENDING MEMBERSHIP -->
+        <!-- ========================================================= -->
+        <c:if test="${topMembership == null && topMembership.status != 'PENDING' && topMembership.status != 'ACTIVE' }">
+            <div class="card bg-info text-dark mb-4">
+                <div class="card-body">
+                    <h5>No Active Membership</h5>
+                    <p>You currently do not have an active membership.</p>
+                    <a href="/membership" class="btn btn-success">Join Membership</a>
+                </div>
+            </div>
+        </c:if>
+
+        <!-- ========================================================= -->
+        <!-- MEMBERSHIP HISTORY -->
+        <!-- ========================================================= -->
+        <c:if test="${not empty membershipHistory}">
+            <h4>Membership History</h4>
+
+            <div class="card bg-dark text-light mb-4">
+                <div class="card-body">
+                    <c:forEach var="m" items="${membershipHistory}">
+                        <div class="mb-3 p-2 border-bottom">
+                            <p><b>Plan:</b> ${m.planId}</p>
+                            <p><b>Status:</b> ${m.status}</p>
+                            <p><b>Start:</b> ${m.startDate}</p>
+                            <p><b>End:</b> ${m.endDate}</p>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </c:if>
+
+        <c:if test="${empty membershipHistory}">
+            <p>No past membership records.</p>
+        </c:if>
+
+        <hr/>
+
+
+
         <!-- Favorite Novels -->
         <h3>Favorite Novels</h3>
         <c:if test="${not empty favorites}">
@@ -86,29 +177,31 @@
                 <c:forEach var="comment" items="${comments}">
                     <li>
                         <c:if test="${not empty comment.chapter}">
-                            <p><b>On:</b> <a href="/chapter/${comment.chapter.chapterId}">${comment.chapter.novelName} Chapter: ${comment.chapter.chapterNo}</a>
-                        <br>"${comment.content}"
+                            <p><b>On:</b> <a href="/chapter/${comment.chapter.chapterId}">${comment.chapter.novelName} Chapter: ${comment.chapter.chapterNo}</a><br>
+                            "${comment.content}"
 
-                        <!-- Show replies if exist -->
-                        <c:if test="${not empty comment.replies}">
-                            <ul>
-                                <c:forEach var="reply" items="${comment.replies}">
-                                    <li><b>Reply by <i>${reply.userName}:</i></b> ${reply.content}</li>
-                                </c:forEach>
-                            </ul></p>
+                            <!-- Show replies if exist -->
+                            <c:if test="${not empty comment.replies}">
+                                <ul>
+                                    <c:forEach var="reply" items="${comment.replies}">
+                                        <li><b>Reply by <i>${reply.userName}:</i></b> ${reply.content}</li>
+                                    </c:forEach>
+                                </ul>
+                            </c:if>
+                            </p>
                         </c:if>
-                        </c:if>
+
                         <c:if test="${not empty comment.novel}">
-                            <p><b>On Novel:</b> <a href="/novel/${comment.novel.novelName}">${comment.novel.novelName}</a>
-                        <br>"${comment.content}"
-                        <!-- Show replies if exist -->
-                        <c:if test="${not empty comment.replies}">
-                            <ul>
-                                <c:forEach var="reply" items="${comment.replies}">
-                                    <li><b>Reply by <i>${reply.userName}:</i></b> ${reply.content}</li>
-                                </c:forEach>
-                            </ul></p>
-                        </c:if>
+                            <p><b>On Novel:</b> <a href="/novel/${comment.novel.novelName}">${comment.novel.novelName}</a><br>
+                            "${comment.content}"
+                            <c:if test="${not empty comment.replies}">
+                                <ul>
+                                    <c:forEach var="reply" items="${comment.replies}">
+                                        <li><b>Reply by <i>${reply.userName}:</i></b> ${reply.content}</li>
+                                    </c:forEach>
+                                </ul>
+                            </c:if>
+                            </p>
                         </c:if>
                     </li>
                 </c:forEach>
@@ -125,16 +218,19 @@
         <c:if test="${not empty replies}">
             <ul>
                 <c:forEach var="reply" items="${replies}">
-                    <c:if test = "${not empty reply.chapter}">
-                    <li>
-                        <p><b>To ${reply.parentComment.userName} On:</b> <a href="/chapter/${reply.chapter.chapterId}">${reply.chapter.novelName} Chapter: ${reply.chapter.chapterNo}</a>
-                        <br>"${reply.content}"</p>
-                    </li>
+                    <c:if test="${not empty reply.chapter}">
+                        <li>
+                            <p><b>To ${reply.parentComment.userName} On:</b> 
+                            <a href="/chapter/${reply.chapter.chapterId}">${reply.chapter.novelName} Chapter: ${reply.chapter.chapterNo}</a><br>
+                            "${reply.content}"</p>
+                        </li>
                     </c:if>
-                    <c:if test = "${not empty reply.novel}">
-                    <li>
-                        <p><b>To ${reply.parentComment.userName} On Novel:</b> <a href="/novel/${reply.novel.novelName}">${reply.novel.novelName}</a>
-                        <br>"${reply.content}"</p>
+                    <c:if test="${not empty reply.novel}">
+                        <li>
+                            <p><b>To ${reply.parentComment.userName} On Novel:</b> 
+                            <a href="/novel/${reply.novel.novelName}">${reply.novel.novelName}</a><br>
+                            "${reply.content}"</p>
+                        </li>
                     </c:if>
                 </c:forEach>
             </ul>
@@ -147,46 +243,46 @@
 
         <!-- Comments You Liked/Disliked -->
         <h3>Comments You Liked/Disliked</h3>
-            <c:forEach var="likedComment" items="${likedComments}">
-    <ul>
-        <c:choose>
-            <c:when test="${not empty likedComment.parentComment}">
+        <c:forEach var="likedComment" items="${likedComments}">
+            <ul>
                 <c:choose>
-                <c:when test="${not empty likedComment.chapter}">
-                <p><b>You ${likedComment.userReaction}D Reply By User: ${likedComment.userName} On:</b> 
-                <a href="/chapter/${likedComment.chapter.chapterId}">
-                    ${likedComment.chapter.novelName} Chapter: ${likedComment.chapter.chapterNo}
-                </a><br>
-                "${likedComment.content}"</p>
-            </c:when>
+                    <c:when test="${not empty likedComment.parentComment}">
+                        <c:choose>
+                            <c:when test="${not empty likedComment.chapter}">
+                                <p><b>You ${likedComment.userReaction}D Reply By User: ${likedComment.userName} On:</b> 
+                                <a href="/chapter/${likedComment.chapter.chapterId}">
+                                    ${likedComment.chapter.novelName} Chapter: ${likedComment.chapter.chapterNo}
+                                </a><br>
+                                "${likedComment.content}"</p>
+                            </c:when>
 
-            <c:when test="${not empty likedComment.novel}">
-                <p><b>You ${likedComment.userReaction}D Reply By User: ${likedComment.userName} On Novel:</b> 
-                <a href="/novel/${likedComment.novel.novelName}">${likedComment.novel.novelName}</a><br>
-                "${likedComment.content}"</p>
-            </c:when>
+                            <c:when test="${not empty likedComment.novel}">
+                                <p><b>You ${likedComment.userReaction}D Reply By User: ${likedComment.userName} On Novel:</b> 
+                                <a href="/novel/${likedComment.novel.novelName}">${likedComment.novel.novelName}</a><br>
+                                "${likedComment.content}"</p>
+                            </c:when>
+                        </c:choose>
+                    </c:when>
+
+                    <c:when test="${not empty likedComment.chapter}">
+                        <p><b>You ${likedComment.userReaction}D Comment By User: ${likedComment.userName} On:</b> 
+                        <a href="/chapter/${likedComment.chapter.chapterId}">
+                            ${likedComment.chapter.novelName} Chapter: ${likedComment.chapter.chapterNo}
+                        </a><br>
+                        "${likedComment.content}"</p>
+                    </c:when>
+
+                    <c:when test="${not empty likedComment.novel}">
+                        <p><b>You ${likedComment.userReaction}D Comment By User: ${likedComment.userName} On Novel:</b> 
+                        <a href="/novel/${likedComment.novel.novelName}">${likedComment.novel.novelName}</a><br>
+                        "${likedComment.content}"</p>
+                    </c:when>
                 </c:choose>
-            </c:when>
-
-            <c:when test="${not empty likedComment.chapter}">
-                <p><b>You ${likedComment.userReaction}D Comment By User: ${likedComment.userName} On:</b> 
-                <a href="/chapter/${likedComment.chapter.chapterId}">
-                    ${likedComment.chapter.novelName} Chapter: ${likedComment.chapter.chapterNo}
-                </a><br>
-                "${likedComment.content}"</p>
-            </c:when>
-
-            <c:when test="${not empty likedComment.novel}">
-                <p><b>You ${likedComment.userReaction}D Comment By User: ${likedComment.userName} On Novel:</b> 
-                <a href="/novel/${likedComment.novel.novelName}">${likedComment.novel.novelName}</a><br>
-                "${likedComment.content}"</p>
-            </c:when>
-        </c:choose>
-    </ul>
-</c:forEach>
-<c:if test="${empty likedComments}">
-    <p>You haven't liked or disliked any comments yet.</p>
-</c:if>
+            </ul>
+        </c:forEach>
+        <c:if test="${empty likedComments}">
+            <p>You haven't liked or disliked any comments yet.</p>
+        </c:if>
     </div>
 
     <!-- Profile Pic Modal -->
@@ -194,13 +290,11 @@
       <div class="modal-dialog">
         <div class="modal-content">
           
-          <!-- Modal Header -->
           <div class="modal-header">
             <h5 class="modal-title" id="popupFormLabel">Change Profile Picture</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <!-- Modal Body (Form) -->
           <div class="modal-body">
             <form method="post" action="/ChangeProfilePicture" enctype="multipart/form-data" onsubmit="return validateImageSize()">
               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

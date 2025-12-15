@@ -309,3 +309,10 @@ V 1.104.2
 -> Create the manual release button.
 -> Updated the chapter list page for syle and logic
 -> Updated the code for adesttra ads anti-adblock.
+
+V 1.105
+-> Upadated the code for the creating new uses so that the code works even if there is no profile pic.
+-> Created the system for logging so that the loggs for the website are save in a diffrent file on the server.
+-> Created a system for membership system for ad freee reading.
+-> Created a page to view likes.
+-> Changed the ad codes back to google.

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- ===== BASIC PATTERN ===== -->
+    <property name="LOG_PATTERN" 
+              value="%date{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n" />
+
+    <!-- ===== APPLICATION LOG ===== -->
+    <appender name="APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/app/logs/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/app/logs/app.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- ===== ERROR LOG ===== -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/app/logs/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/app/logs/error.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- ===== WEBHOOK SUCCESS LOG ===== -->
+    <appender name="WEBHOOK" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/app/logs/webhook.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/app/logs/webhook.%d{yyyy-MM-dd}.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- ===== WEBHOOK FAILURE LOG ===== -->
+    <appender name="WEBHOOK_FAIL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/app/logs/webhook-fail.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/app/logs/webhook-fail.%d{yyyy-MM-dd}.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- ===== SUBSCRIPTION LOG ===== -->
+    <appender name="SUBSCRIPTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/app/logs/subscription.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/app/logs/subscription.%d{yyyy-MM-dd}.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- ===== SCHEDULER LOG ===== -->
+    <appender name="SCHEDULER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/app/logs/scheduler.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/app/logs/scheduler.%d{yyyy-MM-dd}.gz</fileNamePattern>
+        </rollingPolicy>
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- ===== DEV CONSOLE OUTPUT (Keep for debugging) ===== -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- ===== LOGGERS ===== -->
+    <logger name="WEBHOOK_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="WEBHOOK" />
+    </logger>
+
+    <logger name="WEBHOOK_FAIL_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="WEBHOOK_FAIL" />
+    </logger>
+
+    <logger name="SUBSCRIPTION_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="SUBSCRIPTION" />
+    </logger>
+
+    <logger name="SCHEDULER_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="SCHEDULER" />
+    </logger>
+
+    <!-- ROOT LOG -->
+    <root level="INFO">
+        <appender-ref ref="APP" />
+        <appender-ref ref="ERROR_FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>

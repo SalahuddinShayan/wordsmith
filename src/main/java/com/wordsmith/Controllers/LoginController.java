@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.wordsmith.Entity.User;
 import com.wordsmith.Enum.Role;
 import com.wordsmith.Repositories.UserRepository;
+import com.wordsmith.Services.MembershipService;
 import com.wordsmith.Services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,8 @@ public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MembershipService membershipService;
 
     // ✅ Serve the login page when accessed via browser
     @GetMapping("/loginpage")
@@ -41,11 +44,12 @@ public class LoginController {
         }
     	
     	String referer = request.getHeader("Referer");
-        if (referer != null && !referer.contains("/auth/login")) {
-            session.setAttribute("PRE_LOGIN_URL", referer);
+        if (referer == null || referer.contains("/auth")) {
+            referer = "/home"; // default page
         }
-    	
-        return "login"; // This will return login.jsp
+        session.setAttribute("PRE_LOGIN_URL", referer);
+                
+                return "login"; // This will return login.jsp
     }
     	
 
@@ -59,6 +63,9 @@ public class LoginController {
         if (user != null && userService.authenticateUser(identifier, password)) {
             session.setAttribute("loggedInUser", user);
             session.setAttribute("userRole", user.getRole().toString());
+            session.setAttribute("hasMembership", membershipService.findByUsername(user.getUsername())
+                    .map(m -> "ACTIVE".equals(m.getStatus()))
+                    .orElse(false));
             user.setLastLoginTime(new Date());
             userRepository.save(user);
             
@@ -71,10 +78,14 @@ public class LoginController {
             
 
             // Redirect based on role
-            if (user.getRole() == Role.ADMIN || user.getRole() == Role.TRANSLATOR || user.getRole() == Role.EDITOR) {
-                return "redirect:/dashboard";
+            if (user.getRole() == Role.ADMIN) {
+                return "redirect:/admin/dashboard";
             } else {
-                return "redirect:"+ session.getAttribute("PRE_LOGIN_URL");
+                String targetUrl = (String) session.getAttribute("PRE_LOGIN_URL");
+                if (targetUrl == null || targetUrl.trim().isEmpty()) {
+                    targetUrl = "/home";
+                }
+                return "redirect:" + targetUrl;
             }
         } else {
             model.addAttribute("error", "Invalid username/email or password!");

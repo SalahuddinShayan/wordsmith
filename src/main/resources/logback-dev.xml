@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Simple dev-friendly format -->
+    <property name="LOG_PATTERN" value="%d{HH:mm:ss} %-5level %logger{36} - %msg%n"/>
+
+    <!-- Console only -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>
+
+    <!-- Optional: single file for debugging -->
+    <!--<appender name="DEV_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/dev.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/dev.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder><pattern>${LOG_PATTERN}</pattern></encoder>
+    </appender>-->
+
+    <!-- Root logs everything to console -->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <!-- Or uncomment below if you want dev log files -->
+        <!-- <appender-ref ref="DEV_FILE"/> -->
+    </root>
+
+</configuration>

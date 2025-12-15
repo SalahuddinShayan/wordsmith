@@ -155,7 +155,7 @@
                         <td>${chapter.chapterId}</td>
                         <td>${chapter.chapterNo}</td>
                         <td class ="Dscroll">${chapter.title}</td>
-                        <td>${chapter.keywords}</td>
+                        <td class ="Dscroll">${chapter.keywords}</td>
                         <td>
                             <div class ="Dscroll" style="white-space:pre-wrap; word-wrap:break-word;">
                                 ${chapter.content}
