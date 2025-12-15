@@ -316,3 +316,6 @@ V 1.105
 -> Created a system for membership system for ad freee reading.
 -> Created a page to view likes.
 -> Changed the ad codes back to google.
+
+V 1.105.1
+-> Applied the fixes to the booting problem in live env deu to the paypal sandbox credential loading problem.

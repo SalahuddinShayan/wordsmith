@@ -2,9 +2,9 @@ package com.wordsmith.Util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wordsmith.DevPayPalConfigProperties;
-import com.wordsmith.Entity.PayPalSettings;
 import com.wordsmith.Services.PayPalSettingsService;
+import com.wordsmith.DevPayPalConfigProperties;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Base64;
 import java.util.Map;
+import java.util.Arrays;
 
 @Component
 public class PayPalClient {
@@ -24,50 +25,45 @@ public class PayPalClient {
 
     public PayPalClient(
             PayPalSettingsService liveSettings,
-            DevPayPalConfigProperties devSettings,
+            ObjectProvider<DevPayPalConfigProperties> devSettingsProvider,
             Environment env
     ) {
         this.liveSettings = liveSettings;
-        this.devSettings = devSettings;
-        this.isDev = java.util.Arrays.asList(env.getActiveProfiles()).contains("dev"); // TRUE on local dev
-
-        System.out.println("======== PAYPAL CLIENT DEBUG ========");
-        System.out.println("Active Profiles → " + String.join(",", env.getActiveProfiles()));
-        System.out.println("isDev = " + isDev);
-
-        try {
-            System.out.println("devSettings.clientId = " + devSettings.getClientId());
-            System.out.println("devSettings.clientSecret = " + devSettings.getClientSecret());
-            System.out.println("devSettings.webhookId = " + devSettings.getWebhookId());
-        } catch (Exception ex) {
-            System.out.println("devSettings is NULL (not loaded!)");
-        }
-
-        try {
-            var live = liveSettings.getSettings();
-            System.out.println("live.clientId = " + live.getClientId());
-            System.out.println("live.clientSecret = " + live.getClientSecret());
-            System.out.println("live.webhookId = " + live.getWebhookId());
-        } catch (Exception ex) {
-            System.out.println("LIVE settings not found in DB!");
-        }
-        System.out.println("=======================================");
-
+        this.devSettings = devSettingsProvider.getIfAvailable();
+        this.isDev = Arrays.asList(env.getActiveProfiles()).contains("dev");
     }
 
     // ---------------------------------------------------------------------
-    // 🔹 SELECT CORRECT VALUES (Sandbox vs Live)
+    // 🔹 Credential Selection
     // ---------------------------------------------------------------------
     public String getClientId() {
-        return isDev ? devSettings.getClientId() : liveSettings.getSettings().getClientId();
+        if (isDev) {
+            if (devSettings == null) {
+                throw new IllegalStateException("Dev PayPal config missing while dev profile is active");
+            }
+            return devSettings.getClientId();
+        }
+        return liveSettings.getSettings().getClientId();
     }
 
     private String getClientSecret() {
-        return isDev ? devSettings.getClientSecret() : liveSettings.getSettings().getClientSecret();
+        if (isDev) {
+            if (devSettings == null) {
+                throw new IllegalStateException("Dev PayPal config missing while dev profile is active");
+            }
+            return devSettings.getClientSecret();
+        }
+        return liveSettings.getSettings().getClientSecret();
     }
 
     public String getWebhookId() {
-        return isDev ? devSettings.getWebhookId() : liveSettings.getSettings().getWebhookId();
+        if (isDev) {
+            if (devSettings == null) {
+                throw new IllegalStateException("Dev PayPal config missing while dev profile is active");
+            }
+            return devSettings.getWebhookId();
+        }
+        return liveSettings.getSettings().getWebhookId();
     }
 
     private String getApiBase() {
@@ -77,7 +73,7 @@ public class PayPalClient {
     }
 
     // ---------------------------------------------------------------------
-    // 🔹 Get OAuth Access Token
+    // 🔹 OAuth Token
     // ---------------------------------------------------------------------
     public String getAccessToken() {
         String credentials = getClientId() + ":" + getClientSecret();
@@ -87,7 +83,8 @@ public class PayPalClient {
         headers.set("Authorization", "Basic " + base64Creds);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        HttpEntity<String> request = new HttpEntity<>("grant_type=client_credentials", headers);
+        HttpEntity<String> request =
+                new HttpEntity<>("grant_type=client_credentials", headers);
 
         Map<String, Object> response = restTemplate.postForObject(
                 getApiBase() + "/v1/oauth2/token",
@@ -99,60 +96,59 @@ public class PayPalClient {
     }
 
     // ---------------------------------------------------------------------
-    // 🔹 Verify Webhook Signature
+    // 🔹 Webhook Signature Verification
     // ---------------------------------------------------------------------
     public boolean verifySignature(Map<String, Object> verificationPayload) {
-
-        String url = getApiBase() + "/v1/notifications/verify-webhook-signature";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(getAccessToken());
 
-        HttpEntity<Map<String, Object>> req = new HttpEntity<>(verificationPayload, headers);
+        HttpEntity<Map<String, Object>> req =
+                new HttpEntity<>(verificationPayload, headers);
 
-        Map<String, Object> response =
-                restTemplate.postForObject(url, req, Map.class);
+        Map<String, Object> response = restTemplate.postForObject(
+                getApiBase() + "/v1/notifications/verify-webhook-signature",
+                req,
+                Map.class
+        );
 
         String status = (String) response.get("verification_status");
-
         return "SUCCESS".equalsIgnoreCase(status);
     }
 
     // ---------------------------------------------------------------------
-    // 🔹 Fetch Subscription Details
+    // 🔹 Subscription APIs
     // ---------------------------------------------------------------------
     public JsonNode getSubscription(String subscriptionId) {
-
-        String url = getApiBase() + "/v1/billing/subscriptions/" + subscriptionId;
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(getAccessToken());
-
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<String> response =
-                restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
-
-        try {
-            return new ObjectMapper().readTree(response.getBody());
-        } catch (Exception e) {
-            throw new RuntimeException("Error parsing subscription JSON", e);
-        }
-    }
-
-    public JsonNode getSubscriptionTransactions(String subscriptionId) {
-
-        String url = getApiBase()
-                + "/v1/billing/subscriptions/"
-                + subscriptionId
-                + "/transactions?start_time=2000-01-01T00:00:00Z&end_time=2099-01-01T00:00:00Z";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(getAccessToken());
 
         ResponseEntity<String> response = restTemplate.exchange(
-                url,
+                getApiBase() + "/v1/billing/subscriptions/" + subscriptionId,
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                String.class
+        );
+
+        try {
+            return new ObjectMapper().readTree(response.getBody());
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to parse PayPal subscription response", e);
+        }
+    }
+
+    public JsonNode getSubscriptionTransactions(String subscriptionId) {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(getAccessToken());
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                getApiBase()
+                        + "/v1/billing/subscriptions/"
+                        + subscriptionId
+                        + "/transactions?start_time=2000-01-01T00:00:00Z&end_time=2099-01-01T00:00:00Z",
                 HttpMethod.GET,
                 new HttpEntity<>(headers),
                 String.class
@@ -164,5 +160,4 @@ public class PayPalClient {
             throw new RuntimeException("Failed to parse PayPal transactions response", e);
         }
     }
-
 }
