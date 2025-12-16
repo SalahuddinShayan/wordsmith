@@ -319,3 +319,8 @@ V 1.105
 
 V 1.105.1
 -> Applied the fixes to the booting problem in live env deu to the paypal sandbox credential loading problem.
+
+V 1.106
+-> Updated the chapter list so that the Form and the table work perfectly.
+-> Updated the auth pages so that they became responsive in mobile view.
+-> Added the code for traffic code to all the jsp pages

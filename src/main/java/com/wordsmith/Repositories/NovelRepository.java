@@ -37,4 +37,7 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 	@Query(value = "Update novel set status = :status where novel_name = :novelname", nativeQuery = true)
 	void updateNovelStatus(@Param("status") String status, @Param("novelname") String novelname);
 
+	@Query(value = "SELECT status FROM novel WHERE novel_name = :novelname", nativeQuery = true)
+	String novelStatus(String novelname);
+
 }

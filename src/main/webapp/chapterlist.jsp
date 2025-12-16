@@ -7,6 +7,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html lang="en">
 <head>
+    <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
 <script>
@@ -37,19 +38,34 @@
     <h2>Manage Chapters for <span class="text-primary">${novelname}</span></h2>
 
     <!-- 🔹 Novel Status Change Form -->
-    <form method="post" action="UpdateNovelStatus" class="my-3">
+    <form method="post" action="novelstatus" class="my-3">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <input type="hidden" name="novelName" value="${novelname}" />
+        <input type="hidden" name="novelname" value="${novelname}" />
         <div class="row g-3 align-items-center">
             <div class="col-auto">
                 <label for="status" class="col-form-label text-light">Change Novel Status:</label>
             </div>
             <div class="col-auto">
                 <select id="status" name="status" class="form-select">
-                    <option value="ONGOING" ${novelStatus == 'ONGOING' ? 'selected' : ''}>Ongoing</option>
-                    <option value="COMPLETED" ${novelStatus == 'COMPLETED' ? 'selected' : ''}>Completed</option>
-                    <option value="HIATUS" ${novelStatus == 'HIATUS' ? 'selected' : ''}>Hiatus</option>
-                    <option value="DROPPED" ${novelStatus == 'DROPPED' ? 'selected' : ''}>Dropped</option>
+                    <option value="ONGOING"
+                        <c:if test="${novelStatus eq 'ONGOING'}">selected</c:if>>
+                        Ongoing
+                    </option>
+
+                    <option value="COMPLETED"
+                        <c:if test="${novelStatus eq 'COMPLETED'}">selected</c:if>>
+                        Completed
+                    </option>
+
+                    <option value="HIATUS"
+                        <c:if test="${novelStatus eq 'HIATUS'}">selected</c:if>>
+                        Hiatus
+                    </option>
+
+                    <option value="DROPPED"
+                        <c:if test="${novelStatus eq 'DROPPED'}">selected</c:if>>
+                        Dropped
+                    </option>
                 </select>
             </div>
             <div class="col-auto">
@@ -154,13 +170,9 @@
                     <tr>
                         <td>${chapter.chapterId}</td>
                         <td>${chapter.chapterNo}</td>
-                        <td class ="Dscroll">${chapter.title}</td>
-                        <td class ="Dscroll">${chapter.keywords}</td>
-                        <td>
-                            <div class ="Dscroll" style="white-space:pre-wrap; word-wrap:break-word;">
-                                ${chapter.content}
-                            </div>
-                        </td>
+                        <td><div class ="Dscroll" >${chapter.title}</div></td>
+                        <td><div class ="Dscroll" >${chapter.keywords}</div></td>
+                        <td><div class ="Dscroll" >${chapter.content}</div></td>
                         <td>${chapter.postedOn}</td>
                         <td>${chapter.releaseStatus}</td>
                         <td>${chapter.releasedOn}</td>

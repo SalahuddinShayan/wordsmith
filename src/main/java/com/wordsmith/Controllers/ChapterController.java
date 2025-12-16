@@ -28,6 +28,7 @@ import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Enum.LikeEnum;
 import com.wordsmith.Enum.ReleaseStatus;
 import com.wordsmith.Repositories.ChapterRepository;
+import com.wordsmith.Repositories.NovelRepository;
 import com.wordsmith.Services.AnnouncementService;
 import com.wordsmith.Services.CommentService;
 import com.wordsmith.Services.LikeService;
@@ -47,17 +48,20 @@ public class ChapterController {
     private final ViewsService viewsService;
     private final LikeService likeService;
     private final AnnouncementService announcementService;
+    private final NovelRepository novelRepository;
 
     public ChapterController(CommentService commentService,
                              ChapterRepository cr,
                              ViewsService viewsService,
                              LikeService likeService,
-                             AnnouncementService announcementService) {
+                             AnnouncementService announcementService,
+                             NovelRepository novelRepository) {
         this.commentService = commentService;
         this.cr = cr;
         this.viewsService = viewsService;
         this.likeService = likeService;
         this.announcementService = announcementService;
+        this.novelRepository = novelRepository;
         logger.info("ChapterController initialized");
     }
 
@@ -68,6 +72,7 @@ public class ChapterController {
         model.addAttribute("Chapters", cr.byNovelName(novelname));
         model.addAttribute("command", new Chapter());
         model.addAttribute("novelname", novelname);
+        model.addAttribute("novelStatus", novelRepository.novelStatus(novelname));
         model.addAttribute("stock", cr.countByReleaseStatusAndNovelName(ReleaseStatus.STOCKPILE, novelname));
 
         logger.debug("chapterList loaded for novelName={}", novelname);

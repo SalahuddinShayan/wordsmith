@@ -351,7 +351,15 @@ public class NovelController {
 
         logger.warn("⚠️ Admin updating novel status — name={}, newStatus={}", novelname, status);
 
-        NovelRepo.updateNovelStatus(status, novelname);
+        Novel novel = NovelRepo.byNovelName(novelname);
+        if (novel == null) {
+            logger.error("❌ Novel not found for status update — name={}", novelname);
+            RedirectView redirectView = new RedirectView("/novellist", true);
+            return redirectView;
+        }
+        novel.setStatus(status);
+        NovelRepo.save(novel);
+
 
         RedirectView redirectView = new RedirectView("/chapterlist", true);
         redirectAttributes.addAttribute("NovelName", novelname);

@@ -8,6 +8,7 @@
 %>
 <html>
 <head>
+    <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
     <title>Dashboard</title>
 </head>
 <body>
