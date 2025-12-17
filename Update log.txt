@@ -324,3 +324,6 @@ V 1.106
 -> Updated the chapter list so that the Form and the table work perfectly.
 -> Updated the auth pages so that they became responsive in mobile view.
 -> Added the code for traffic code to all the jsp pages
+
+V 1.106.1
+->Test page for Traffic cop.

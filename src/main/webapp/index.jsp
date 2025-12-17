@@ -38,6 +38,8 @@
 
   <!-- ✅ Top banner (728x90 for desktop / 320x50 for mobile) -->
   <div class="d-none d-lg-block text-center my-3 container-fluid">
+    <c:if test="${not hasMembership}">
+
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Responsive Horizontal -->
 					<ins class="adsbygoogle"
@@ -47,8 +49,10 @@
      				data-ad-format="auto"
      				data-full-width-responsive="true"></ins>
 		  <script>
+        console.log("Adsense Top Banner Loaded");
      		(adsbygoogle = window.adsbygoogle || []).push({});
 		  </script>
+      </c:if>
           </div>
           
           <div class="d-block d-lg-none text-center my-3 container-fluid">
