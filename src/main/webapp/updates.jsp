@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
 <!DOCTYPE html>
 <html>
 <head>
+  <c:if test="${not hasMembership}">
 	<script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
+  <meta name="google-adsense-account" content="ca-pub-3020770276580291">
+		<script type="text/javascript">
+		(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-3020770276580291",
+		enable_page_level_ads: true
+		});
+		</script>
+    </c:if>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
 <script>
@@ -15,27 +27,18 @@
 
 		<meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="google-adsense-account" content="ca-pub-3020770276580291">
-		<script type="text/javascript">
-		(adsbygoogle = window.adsbygoogle || []).push({
-		google_ad_client: "ca-pub-3020770276580291",
-		enable_page_level_ads: true
-		});
-		</script>
+        
         <title>Eastern WordSmith</title>
         <link rel="shortcut icon" type="image/x-icon" href="images/logo2.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
-        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-         <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
-		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>		 
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css">	 
 </head>
 <body>
 
 <%@ include file="nav1.jsp" %>
         
-        
+        <c:if test="${not hasMembership}">
         <div class="d-none d-lg-block text-center my-3 container-fluid">
             
 				<!-- Responsive Horizontal -->
@@ -60,10 +63,12 @@
      			</ins>
 			
           </div>
+          </c:if>
         
         
         <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 py-3 ">
+          <c:if test="${not hasMembership}">
          <div class = "sticky-ad">
          	  <div class="d-none d-lg-block text-center my-3" >
                 
@@ -77,6 +82,7 @@
 				
               </div>
 			</div>
+      </c:if>
          </div>
          <div class="col-10 col-lg-8 py-3 bd">
           <h2>Latest Updates:</h2>
@@ -101,6 +107,7 @@
           </div> 
          </div>
          <div class="col-1 col-lg-2 py-3 ">
+          <c:if test="${not hasMembership}">
          <div class="d-none d-lg-block text-center my-3 sticky-ad">
     
 					<!-- Wide SkyScraper -->
@@ -110,11 +117,12 @@
      				data-ad-slot="6212425217"></ins>
 				
 </div>
+</c:if>
          </div>
         </div>
         
-        
-        <div class="d-none d-lg-block text-center my-3 sticky-ad">
+        <c:if test="${not hasMembership}">
+        <div class="d-none d-lg-block text-center my-3">
     			
 				<!-- Billboard - Rising Star -->
 				<ins class="adsbygoogle"
@@ -123,6 +131,7 @@
      			data-ad-slot="8159931703"></ins>
 			
 		</div>
+    </c:if>
         
         
 <%@ include file="footer1.jsp" %>

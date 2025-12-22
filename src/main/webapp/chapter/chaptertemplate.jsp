@@ -1,8 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
+<c:if test="${not hasMembership}">
 <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
+<meta name="google-adsense-account" content="ca-pub-3020770276580291">
+        <script type="text/javascript">
+		(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-3020770276580291",
+		enable_page_level_ads: true
+		});
+		</script>
+</c:if>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
 <script>
@@ -12,10 +25,8 @@
 
   gtag('config', 'G-0D3MMVLTED');
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="google-adsense-account" content="ca-pub-3020770276580291">
         <meta name="keywords" content="${chapter.keywords}">
         <meta name="description" content="Read ${chapter.novelName} Chapter ${chapter.chapterNo} online — English translation. Enjoy the latest chapters and updates only on Eastern Wordsmith.">
         <title>${chapter.novelName} - Chapter ${chapter.chapterNo}: ${chapter.title} | Read ${chapter.novelName} English Translation</title>
@@ -24,18 +35,13 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
         <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
-         <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
-		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-         <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     </head>
 <body onload="ChapStyle()">
 
 <%@ include file="../nav2.jsp" %>
 
-
+<c:if test="${not hasMembership}">
 <div class="d-none d-lg-block text-center my-3 container-fluid">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Responsive Horizontal -->
 					<ins class="adsbygoogle"
      				style="display:block"
@@ -43,13 +49,9 @@
      				data-ad-slot="9524461170"
      				data-ad-format="auto"
      				data-full-width-responsive="true"></ins>
-		  <script>
-     		(adsbygoogle = window.adsbygoogle || []).push({});
-		  </script>
           </div>
           
           <div class="d-block d-lg-none text-center my-3 container-fluid">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Responsive Square -->
 				<ins class="adsbygoogle"
      				style="display:block"
@@ -58,11 +60,8 @@
      				data-ad-format="auto"
      				data-full-width-responsive="true">
      			</ins>
-			<script>
-     			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
           </div>
-        
+</c:if>        
         
         <div class= "center">
         <h1>${chapter.novelName}-Chapter ${chapter.chapterNo}</h1>
@@ -109,9 +108,9 @@
     <div class="col-1 col-lg-2 py-3"></div>
     </div>
 
+    <c:if test="${not hasMembership}">
     <div Style="margin-top: 30px;" class="row container-fluid">
 	     <div class="col-12 col-lg-6 text-center my-3">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Responsive Square -->
 				<ins class="adsbygoogle"
      				style="display:block"
@@ -120,30 +119,23 @@
      				data-ad-format="auto"
      				data-full-width-responsive="true">
      			</ins>
-			<script>
-     			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
           </div>
         <div class="col-12 col-lg-6 text-center my-3">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Medium Rectangle -->
 				<ins class="adsbygoogle"
      			style="display:inline-block;width:300px;height:250px"
      			data-ad-client="ca-pub-3020770276580291"
      			data-ad-slot="8950269194"></ins>
      			</ins>
-			<script>
-     			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
           </div>
 	</div>
-        
+    </c:if>    
         
          <div  Style = "margin-top: 30px;" class = "row">
          <div class="col-1 col-lg-2 d-none d-md-block py-3">
-         	<!-- ✅ Left Sidebar Ad (Load only on desktop) -->  
+         	<c:if test="${not hasMembership}">
+            <!-- ✅ Left Sidebar Ad (Load only on desktop) -->  
             <div id="leftSidebarAd" class = "sticky-ad">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 					<!-- Responsive Vertical -->
 					<ins class="adsbygoogle"
      				style="display:block"
@@ -151,10 +143,8 @@
      				data-ad-slot="9033506582"
      				data-ad-format="auto"
      				data-full-width-responsive="true"></ins>
-				<script>
-     				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
 			</div>
+            </c:if>
          </div>
          <div class="col-12 col-lg-8 py-3">
          <div class ="center">
@@ -181,9 +171,9 @@
          </div>
          </div>
          <div class="col-1 col-lg-2 py-3">
-			<!-- ✅ Right Sidebar: 160x300 -->
+			<c:if test="${not hasMembership}">
+            <!-- ✅ Right Sidebar: 160x300 -->
             <div id="rightSidebarAd" class = "sticky-ad">
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 					<!-- Responsive Vertical -->
 					<ins class="adsbygoogle"
      				style="display:block"
@@ -191,18 +181,37 @@
      				data-ad-slot="9033506582"
      				data-ad-format="auto"
      				data-full-width-responsive="true"></ins>
-				<script>
-     				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
          </div>
+            </c:if>
 
 		</div>
          </div>
 
+        <c:if test="${not hasMembership}">
+        <div class = "row">
+        <div class=" col-2 col-lg-2-5"></div>
+        <div class=" col-10 col-lg-7">
+        <div class="container my-4">
+            <div class="alert alert-light border text-center shadow-sm ad-free">
+                <p class="mb-2">
+                    <strong>Enjoy an Ad-Free Reading Experience ❤️</strong><br>
+                    Go distraction-free and support Eastern WordSmith by becoming a member.
+                </p>
+                <a href="${pageContext.request.contextPath}/membership"
+                class="btn btn-primary btn-sm">
+                    Go Ad-Free / Become a Member
+                </a>
+            </div>
+        </div>
+        </div>
+        <div class=" col-0 col-lg-2-5"></div>
+        </div>
+        </c:if>
+
+        <c:if test="${not hasMembership}">
          <!-- ✅ In-content 300x250 mid-section ad -->
       <div Style="margin-top: 30px;" class="row container-fluid">
 	     <div class="col-12 col-lg-6 text-center my-3">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Responsive Square -->
 				<ins class="adsbygoogle"
      				style="display:block"
@@ -211,23 +220,17 @@
      				data-ad-format="auto"
      				data-full-width-responsive="true">
      			</ins>
-			<script>
-     			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
           </div>
         <div class="col-12 col-lg-6 text-center my-3">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Medium Rectangle -->
 				<ins class="adsbygoogle"
      			style="display:inline-block;width:300px;height:250px"
      			data-ad-client="ca-pub-3020770276580291"
      			data-ad-slot="8950269194"></ins>
      			</ins>
-			<script>
-     			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
           </div>
 	</div>
+        </c:if>
 
 	
 
@@ -408,23 +411,18 @@
          </div>
 
 
+        <c:if test="${not hasMembership}"> 
          <!-- ✅ In-content 300x250 mid-section ad -->
       <div class="text-center mt-4">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291"
-     crossorigin="anonymous"></script>
 <!-- Medium Rectangle -->
 <ins class="adsbygoogle"
      style="display:inline-block;width:300px;height:250px"
      data-ad-client="ca-pub-3020770276580291"
      data-ad-slot="8950269194"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
       </div>
 
 
         <div class="d-none d-lg-block text-center my-3 container-fluid">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 				<!-- Responsive Horizontal -->
 					<ins class="adsbygoogle"
      				style="display:block"
@@ -432,11 +430,8 @@
      				data-ad-slot="9524461170"
      				data-ad-format="auto"
      				data-full-width-responsive="true"></ins>
-		  <script>
-     		(adsbygoogle = window.adsbygoogle || []).push({});
-		  </script>
           </div>
-         
+         </c:if>
         
         <%@ include file="../footer2.jsp" %>
        

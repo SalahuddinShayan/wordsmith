@@ -364,3 +364,12 @@ table {
         padding: 0;
     }
 }
+
+.ad-free {
+    background-color: #2D3047;
+    color: white;
+}
+
+.col-lg-2-5 {
+  width: 20.83333333%;
+}

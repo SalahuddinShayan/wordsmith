@@ -326,4 +326,9 @@ V 1.106
 -> Added the code for traffic code to all the jsp pages
 
 V 1.106.1
-->Test page for Traffic cop.
+-> Test page for Traffic cop.
+
+V 1.107
+-> Applied the adfree logic to all the pages
+-> Applied the Traffic Cop settings to all the pages with ads.
+-> Add the Call to Action Button on the home, novel and chapter pages.
