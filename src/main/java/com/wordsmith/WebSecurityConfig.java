@@ -22,7 +22,7 @@ public class WebSecurityConfig {
         http
 
             .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/paypal/webhook", "/membership/confirm")
+                .ignoringRequestMatchers("/paypal/webhook", "/membership/confirm", "/paypal/create-coin-order")
             )
             .authorizeHttpRequests(auth -> auth
             	.requestMatchers("/dashboard").hasAnyAuthority("ADMIN", "TRANSLATOR", "EDITOR")

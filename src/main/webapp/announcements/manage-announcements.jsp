@@ -84,7 +84,7 @@
             <c:forEach var="a" items="${announcements}">
                 <tr>
                     <td>${a.title}</td>
-                    <td>${a.content}</td>
+                    <td><div>${a.content}</div></td>
                     <td>${a.createdAt}</td>
                     <td>${a.visible ? "Yes" : "No"}</td>
                     <td>

@@ -50,8 +50,8 @@
             <h2>How It Works</h2>
             <ul>
                 <li>✔️ Users can read free translations.</li>
-                <!--<li>🔒 Early access chapters are available via the **paywall system**.</li>
-                <li>💬 Readers can **comment and like** chapters.</li>-->
+                <li>🔒 Early access chapters are available via the **paywall system**.</li>
+                <li>💬 Readers can **comment and like** chapters.</li>
                 <li>🚀 Regular updates ensure a **steady stream of new content**.</li>
             </ul>
         </section>

@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.wordsmith.Entity.ChapterPurchase;
+import com.wordsmith.Entity.CoinLedger;
 import com.wordsmith.Entity.Membership;
 import com.wordsmith.Entity.PaymentTransaction;
 import com.wordsmith.Entity.User;
+import com.wordsmith.Services.ChapterPurchaseService;
 import com.wordsmith.Services.MembershipService;
 import com.wordsmith.Services.PaymentTransactionService;
 import com.wordsmith.Services.ProfileService;
@@ -33,16 +36,16 @@ public class ProfileController {
     private final ProfileService profileService;
     private final MembershipService membershipService;
     private final PaymentTransactionService paymentService;
+    private final ChapterPurchaseService chapterPurchaseService;
 
-    public ProfileController(UserService userService, 
-                             ProfileService profileService,
-                             MembershipService membershipService, 
-                             PaymentTransactionService paymentService) {
+    public ProfileController(UserService userService, ProfileService profileService,  MembershipService membershipService,  PaymentTransactionService paymentService,
+                             ChapterPurchaseService chapterPurchaseService) {
 
         this.userService = userService;
         this.profileService = profileService;
         this.membershipService = membershipService;
         this.paymentService = paymentService;
+        this.chapterPurchaseService = chapterPurchaseService;
     }
 
     // ======================================================
@@ -119,5 +122,44 @@ public class ProfileController {
         log.info("PROFILE PICTURE UPDATED — username={}", UserName);
 
         return "redirect:/profile";
+    }
+
+    @GetMapping("/profile/purchases")
+    public String profilePurchasesPage(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            log.warn("PROFILE PURCHASES ACCESS DENIED — No logged-in user in session");
+            return "redirect:/auth/loginpage";
+        }
+
+        String username = user.getUsername();
+        log.info("PROFILE PURCHASES VIEW — user={}", username);
+
+        List<ChapterPurchase> purchases = chapterPurchaseService.findPurchasesByUsername(username);
+
+        model.addAttribute("user", user);
+        model.addAttribute("purchases", purchases);
+
+        return "profile-purchases";
+    }
+
+    @GetMapping("/profile/coin-ledger")
+    public String profileCoinsLedgerPage(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null) {
+            log.warn("PROFILE COINS LEDGER ACCESS DENIED — No logged-in user in session");
+            return "redirect:/auth/loginpage";
+        }
+
+        String username = user.getUsername();
+        log.info("PROFILE COINS LEDGER VIEW — user={}", username);
+
+        model.addAttribute("coinLedger", profileService.getCoinLedger(username));
+
+        return "profile-coins-ledger";
     }
 }

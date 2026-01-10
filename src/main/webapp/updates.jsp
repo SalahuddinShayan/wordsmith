@@ -86,25 +86,83 @@
          </div>
          <div class="col-10 col-lg-8 py-3 bd">
           <h2>Latest Updates:</h2>
-          <div class = "row">
-           <c:forEach var="novel" items="${Novels}">
-            <div class="col-12 col-lg-6">
-             <div class = "row">
-              <div class="col-3  py-3 center">
-               <a href ="novel/${novel.novelName}">
-                 <img class= "icont" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
-                 alt="images/No_image_available.svg.png" onerror="this.src='images/No_image_available.svg.png';"> 
-               </a>
+          <div class="row mt-4">
+        <div class="col-12 text-center">
+          <button id="btn-free" class="btn btn-sm btn-primary me-2">
+            🆓 Free Chapters
+          </button>
+          <button id="btn-early" class="btn btn-sm btn-outline-primary">
+            <span class="ew-coin" style="height: 15px; width: 15px;">
+                                                <img src="/images/enso.svg" alt="EWS Coins">
+                                                </span> Early Access
+          </button>
+        </div>
+      </div>
+      <br>
+      <div id="free-chapters-section">
+      <!-- EXISTING Latest Updates HTML (unchanged) -->
+      <div class="row">
+        <c:forEach var="novel" items="${Novels}">
+          <div class="col-12 col-lg-6">
+            <div class="row">
+              <div class="col-3 py-lg-3 center" style="margin-top: 10px;">
+                <a href="novel/${novel.novelName}">
+                  <img class="icont"
+                    src="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>"
+                    alt="images/No_image_available.svg.png"
+                    onerror="this.src='images/No_image_available.svg.png';">
+                </a>
               </div>
-              <div class="col-9  py-3">
-               <h6 class ="stm oneliner"><a href ="novel/${novel.novelName}">${novel.novelName}</a></h6>
-               <c:import var="data" url="latest/${novel.novelName}" charEncoding="UTF-8"/>  
-			   <c:out value="${data}" escapeXml="false"/>
+              <div class="col-9 py-lg-3">
+                <h6 class="stm oneliner"><a href="novel/${novel.novelName}">${novel.novelName}</a></h6>
+                <c:forEach var="chapter" items="${novel.recentChapters}">
+                <div class = "row">
+                <div class="col-6 py-1 py-lg-2 stm oneliner"><a href="chapter/${chapter.chapterId}">C${chapter.chapterNo}: ${chapter.title}</a></div>
+                <div class="col-6 py-1 py-lg-2 right">${chapter.timeAgo}</div>
+                </div>
+                </c:forEach>
               </div>
-             </div>
             </div>
-           </c:forEach>
-          </div> 
+          </div>
+        </c:forEach>
+      </div>
+      </div>
+      <div id="early-access-section" style="display:none;">
+        <div class="row">
+          <c:forEach var="novel" items="${StockpileNovels}">
+          <div class="col-12 col-lg-6">
+            <div class="row">
+              <div class="col-3 py-lg-3 center" style="margin-top: 10px;">
+                <a href="novel/${novel.novelName}">
+                  <img class="icont"
+                    src="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>"
+                    alt="images/No_image_available.svg.png"
+                    onerror="this.src='images/No_image_available.svg.png';">
+                </a>
+              </div>
+              <div class="col-9 py-lg-3">
+                <h6 class="stm oneliner"><a href="novel/${novel.novelName}">${novel.novelName}</a></h6>
+                <c:forEach var="chapter" items="${novel.stockpileChapters}">
+                <div class = "row">
+                <div class="col-6 py-1 py-lg-2 stm oneliner"><a href="chapter/${chapter.chapterId}" class = "early-access-link" data-owned="${chapter.owned}">
+                  <c:choose>
+                    <c:when test="${chapter.owned}">
+                      🔓 C${chapter.chapterNo}: ${chapter.title}
+                    </c:when>
+                    <c:otherwise>
+                      🔒 C${chapter.chapterNo}: ${chapter.title}
+                    </c:otherwise>
+                  </c:choose>
+                </a></div>
+                <div class="col-6 py-1 py-lg-2 right">${chapter.timeAgo}</div>
+                </div>
+                </c:forEach>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+        </div>
+      </div> 
          </div>
          <div class="col-1 col-lg-2 py-3 ">
           <c:if test="${not hasMembership}">
@@ -138,6 +196,16 @@
        
         
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
+<script>
+      <c:choose>
+          <c:when test="${not empty loggedInUser}">
+              const IS_LOGGED_IN = true;
+          </c:when>
+          <c:otherwise>
+              const IS_LOGGED_IN = false;
+          </c:otherwise>
+      </c:choose>
+  </script>
 <script type="text/javascript" src="js/script.js"></script>  
 </body>
 </html>

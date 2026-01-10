@@ -6,8 +6,10 @@ import com.wordsmith.Entity.Membership;
 import com.wordsmith.Entity.PaymentTransaction;
 import com.wordsmith.Entity.WebhookEventLog;
 import com.wordsmith.Repositories.WebhookEventLogRepository;
+import com.wordsmith.Services.CoinPackService;
 import com.wordsmith.Services.MembershipService;
 import com.wordsmith.Services.PaymentTransactionService;
+import com.wordsmith.Services.WalletService;
 import com.wordsmith.Services.WebhookFailureService;
 import com.wordsmith.Util.EmailMasker;
 import com.wordsmith.Util.PayPalClient;
@@ -22,9 +24,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.transaction.Transactional;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -41,6 +45,8 @@ public class PayPalWebhookController {
     private final WebhookFailureService webhookFailureService;
     private final PayPalClient payPalClient;
     private final WebhookEventLogRepository eventLogRepo;
+    private final CoinPackService coinPackService;
+    private final WalletService walletService;
 
     
     private final String webhookId;
@@ -49,12 +55,14 @@ public class PayPalWebhookController {
     private final ObjectMapper mapper = new ObjectMapper();
 
     public PayPalWebhookController(MembershipService membershipService, PaymentTransactionService paymentService, WebhookFailureService webhookFailureService,
-                                   PayPalClient payPalClient, WebhookEventLogRepository eventLogRepo) {
+                                   PayPalClient payPalClient, WebhookEventLogRepository eventLogRepo, CoinPackService coinPackService, WalletService walletService) {
         this.membershipService = membershipService;
         this.paymentService = paymentService;
         this.webhookFailureService = webhookFailureService;
         this.payPalClient = payPalClient;
         this.eventLogRepo = eventLogRepo;
+        this.coinPackService = coinPackService;
+        this.walletService = walletService;
 
         // 🔥 Load webhookId based on active profile (dev → sandbox, prod → DB)
         this.webhookId = payPalClient.getWebhookId();
@@ -196,7 +204,7 @@ public class PayPalWebhookController {
             // BUSINESS LOGIC
             // -------------------------------------------------
 
-            processEvent(eventType, rawBody);
+            processEvent(eventType, webhookEventJson);
 
             // -------------------------------------------------
             // ✅ MARK SUCCESS ONLY HERE
@@ -245,21 +253,22 @@ public class PayPalWebhookController {
     // ===============================================================
     // 🔥 Event Router
     // ===============================================================
-    private void processEvent(String eventType, String rawBody) {
+    private void processEvent(String eventType, JsonNode webhookEventJson) {
         logger.info("📡 Processing Webhook Event: {}", eventType);
 
         try {
             switch (eventType) {
-                case "BILLING.SUBSCRIPTION.CREATED":      handleSubscriptionCreated(rawBody); break;
-                case "BILLING.SUBSCRIPTION.ACTIVATED":    handleSubscriptionActivated(rawBody); break;
-                case "BILLING.SUBSCRIPTION.CANCELLED":    handleSubscriptionCancelled(rawBody); break;
-                case "BILLING.SUBSCRIPTION.EXPIRED":      handleSubscriptionExpired(rawBody); break;
-                case "PAYMENT.SALE.COMPLETED":            handlePaymentCompleted(rawBody); break;
-                case "BILLING.SUBSCRIPTION.PAYMENT.FAILED": handlePaymentFailed(rawBody); break;
-                case "BILLING.SUBSCRIPTION.SUSPENDED":    handleSubscriptionSuspended(rawBody); break;
-                case "BILLING.SUBSCRIPTION.RE-ACTIVATED": handleSubscriptionReactivated(rawBody); break;
-                case "BILLING.SUBSCRIPTION.UPDATED":      handleSubscriptionUpdated(rawBody); break;
-                case "PAYMENT.SALE.DENIED":               handlePaymentDenied(rawBody); break;
+                case "BILLING.SUBSCRIPTION.CREATED":      handleSubscriptionCreated(webhookEventJson); break;
+                case "BILLING.SUBSCRIPTION.ACTIVATED":    handleSubscriptionActivated(webhookEventJson); break;
+                case "BILLING.SUBSCRIPTION.CANCELLED":    handleSubscriptionCancelled(webhookEventJson); break;
+                case "BILLING.SUBSCRIPTION.EXPIRED":      handleSubscriptionExpired(webhookEventJson); break;
+                case "PAYMENT.SALE.COMPLETED":            handlePaymentCompleted(webhookEventJson); break;
+                case "BILLING.SUBSCRIPTION.PAYMENT.FAILED": handlePaymentFailed(webhookEventJson); break;
+                case "BILLING.SUBSCRIPTION.SUSPENDED":    handleSubscriptionSuspended(webhookEventJson); break;
+                case "BILLING.SUBSCRIPTION.RE-ACTIVATED": handleSubscriptionReactivated(webhookEventJson); break;
+                case "BILLING.SUBSCRIPTION.UPDATED":      handleSubscriptionUpdated(webhookEventJson); break;
+                case "PAYMENT.SALE.DENIED":               handlePaymentDenied(webhookEventJson); break;
+                case "PAYMENT.CAPTURE.COMPLETED":         handleCoinPurchase(webhookEventJson); break;
 
                 default:
                     logger.warn("⚠️ Unhandled PayPal Event Type: {}", eventType);
@@ -271,7 +280,7 @@ public class PayPalWebhookController {
             webhookFailureService.logFailure(
                     eventType + "_ERROR",
                     ex.getMessage(),
-                    rawBody
+                    webhookEventJson.toString()
             );
         }
     }
@@ -280,14 +289,14 @@ public class PayPalWebhookController {
     // 🔥 EVENT HANDLERS (All rewritten with real logging)
     // ===============================================================
 
-    private void handleSubscriptionCreated(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handleSubscriptionCreated(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) {
-            logger.error("WEBHOOK_SUB_CREATED_MISSING_RESOURCE raw={}", rawBody);
+            logger.error("WEBHOOK_SUB_CREATED_MISSING_RESOURCE raw={}", webhookEventJson.toString());
             webhookFailureService.logFailure(
-                    "UNKNOWN", "SUB_CREATED", null, rawBody, "N/A",
+                    "UNKNOWN", "SUB_CREATED", null, webhookEventJson.toString(), "N/A",
                     "Missing resource object during Subscription Created"
             );
             return;
@@ -298,7 +307,7 @@ public class PayPalWebhookController {
         String email = optText(resource, "subscriber", "email_address");
 
         if (subscriptionId == null) {
-            logger.error("WEBHOOK_SUB_CREATED_NO_SUB_ID raw={}", rawBody);
+            logger.error("WEBHOOK_SUB_CREATED_NO_SUB_ID raw={}", webhookEventJson.toString());
             return;
         }
 
@@ -322,12 +331,12 @@ public class PayPalWebhookController {
         logger.info("SUB_CREATED_SAVED subscriptionId={}", subscriptionId);
     }
 
-    private void handleSubscriptionActivated(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handleSubscriptionActivated(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) {
-            logger.error("WEBHOOK_SUB_ACTIVATED_MISSING_RESOURCE raw={}", rawBody);
+            logger.error("WEBHOOK_SUB_ACTIVATED_MISSING_RESOURCE raw={}", webhookEventJson.toString());
             return;
         }
 
@@ -335,7 +344,7 @@ public class PayPalWebhookController {
         String nextBilling = optText(resource, "billing_info", "next_billing_time");
 
         if (subscriptionId == null) {
-            logger.error("WEBHOOK_SUB_ACTIVATED_NO_SUB_ID raw={}", rawBody);
+            logger.error("WEBHOOK_SUB_ACTIVATED_NO_SUB_ID raw={}", webhookEventJson.toString());
             return;
         }
 
@@ -352,8 +361,8 @@ public class PayPalWebhookController {
     }
 
 
-    private void handleSubscriptionCancelled(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handleSubscriptionCancelled(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) return;
@@ -367,8 +376,8 @@ public class PayPalWebhookController {
     }
 
 
-    private void handleSubscriptionExpired(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handleSubscriptionExpired(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) return;
@@ -382,12 +391,12 @@ public class PayPalWebhookController {
     }
 
 
-    private void handlePaymentCompleted(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handlePaymentCompleted(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) {
-            logger.error("WEBHOOK_PAY_COMPLETE_NO_RESOURCE raw={}", rawBody);
+            logger.error("WEBHOOK_PAY_COMPLETE_NO_RESOURCE raw={}", webhookEventJson.toString());
             return;
         }
 
@@ -405,7 +414,7 @@ public class PayPalWebhookController {
                 tempAmount = amountNode.get("total").asDouble(0.0);
                 tempCurrency = optText(amountNode, "currency");
             } catch (Exception e) {
-                logger.warn("WEBHOOK_PAY_AMOUNT_PARSE_FAIL orderId={} raw={}", orderId, rawBody);
+                logger.warn("WEBHOOK_PAY_AMOUNT_PARSE_FAIL orderId={} raw={}", orderId, webhookEventJson.toString());
             }
             amount = tempAmount;
             currency = tempCurrency;
@@ -423,7 +432,7 @@ public class PayPalWebhookController {
         logger.info("PAYMENT_COMPLETED orderId={} subscriptionId={}", orderId, subscriptionId);
 
         if (subscriptionId == null) {
-            logger.warn("PAYMENT_COMPLETE_NO_SUB_ID orderId={} raw={}", orderId, rawBody);
+            logger.warn("PAYMENT_COMPLETE_NO_SUB_ID orderId={} raw={}", orderId, webhookEventJson.toString());
             return;
         }
 
@@ -447,8 +456,8 @@ public class PayPalWebhookController {
     }
 
 
-    private void handlePaymentFailed(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handlePaymentFailed(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) return;
@@ -462,8 +471,8 @@ public class PayPalWebhookController {
     }
 
 
-    private void handleSubscriptionSuspended(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handleSubscriptionSuspended(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) return;
@@ -477,8 +486,8 @@ public class PayPalWebhookController {
     }
 
 
-    private void handleSubscriptionReactivated(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handleSubscriptionReactivated(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) return;
@@ -492,8 +501,8 @@ public class PayPalWebhookController {
     }
 
 
-    private void handleSubscriptionUpdated(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handleSubscriptionUpdated(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) return;
@@ -509,8 +518,8 @@ public class PayPalWebhookController {
     }
 
 
-    private void handlePaymentDenied(String rawBody) throws Exception {
-        JsonNode root = mapper.readTree(rawBody);
+    private void handlePaymentDenied(JsonNode webhookEventJson) throws Exception {
+        JsonNode root = webhookEventJson;
         JsonNode resource = safeGet(root, "resource");
 
         if (resource == null) return;
@@ -637,6 +646,59 @@ public class PayPalWebhookController {
         return current;
     }
 
+
+    @Transactional
+    public void handleCoinPurchase(JsonNode webhookJson) {
+
+        JsonNode resource = webhookJson.path("resource");
+
+        String paypalOrderId = resource.path("id").asText();
+        String status = resource.path("status").asText();
+        String currency = resource.path("amount").path("currency_code").asText();
+        BigDecimal usdAmount = new BigDecimal(
+            resource.path("amount").path("value").asText()
+        );
+        String username = resource.path("custom_id").asText(null);
+
+        // 1️⃣ Validate
+        if (!"COMPLETED".equals(status)) return;
+
+        if (!"USD".equals(currency)) {
+            throw new IllegalArgumentException("Non-USD payment rejected");
+        }
+
+        if (username == null || username.isBlank()) {
+            throw new IllegalStateException("Missing username in custom_id");
+        }
+
+        // 2️⃣ Idempotency
+        if (paymentService.existsByPaypalOrderId(paypalOrderId)) {
+            return;
+        }
+
+        // 3️⃣ USD → Coins
+        long coins = coinPackService.mapUsdToCoins(usdAmount);
+
+        // 4️⃣ Credit wallet
+        walletService.creditCoins(
+            username,
+            coins,
+            "COIN_PURCHASE",
+            "PAYPAL",
+            paypalOrderId
+        );
+
+        // 5️⃣ Record payment
+        PaymentTransaction tx = new PaymentTransaction();
+        tx.setPaypalOrderId(paypalOrderId);
+        tx.setUsername(username);
+        tx.setAmount(usdAmount.doubleValue());
+        tx.setCurrency(currency);
+        tx.setTransactionType("COIN_PURCHASE");
+        tx.setStatus("COMPLETED");
+
+        paymentService.save(tx);
+    }
 
 
 }

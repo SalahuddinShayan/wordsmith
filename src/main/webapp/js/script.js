@@ -265,3 +265,119 @@ document.addEventListener("DOMContentLoaded", () => {
         editForm.reset();
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const freeBtn = document.getElementById("btn-free");
+    const earlyBtn = document.getElementById("btn-early");
+
+    const freeSection = document.getElementById("free-chapters-section");
+    const earlySection = document.getElementById("early-access-section");
+
+    // Default state (Free selected)
+    function selectFree() {
+        freeSection.style.display = "block";
+        earlySection.style.display = "none";
+
+        freeBtn.classList.remove("btn-outline-primary");
+        freeBtn.classList.add("btn-primary");
+
+        earlyBtn.classList.remove("btn-primary");
+        earlyBtn.classList.add("btn-outline-primary");
+    }
+
+    function selectEarly() {
+        freeSection.style.display = "none";
+        earlySection.style.display = "block";
+
+        earlyBtn.classList.remove("btn-outline-primary");
+        earlyBtn.classList.add("btn-primary");
+
+        freeBtn.classList.remove("btn-primary");
+        freeBtn.classList.add("btn-outline-primary");
+    }
+
+    freeBtn.addEventListener("click", selectFree);
+    earlyBtn.addEventListener("click", selectEarly);
+
+    // Chevron toggle
+    const section = document.getElementById("earlyAccessSection");
+    const icon = document.getElementById("earlyAccessToggleIcon");
+
+    if (section && icon) {
+        section.addEventListener("show.bs.collapse", () => {
+            icon.classList.replace("fa-chevron-down", "fa-chevron-up");
+        });
+        section.addEventListener("hide.bs.collapse", () => {
+            icon.classList.replace("fa-chevron-up", "fa-chevron-down");
+        });
+    }
+
+    // Early Access click handling — LOGIN REQUIRED only
+    document.querySelectorAll(".early-access-link").forEach(link => {
+        link.addEventListener("click", function (e) {
+
+            if (!IS_LOGGED_IN) {
+                e.preventDefault();
+                showLoginRequiredPopup();
+            }
+
+        });
+    });
+
+});
+
+
+// --------------------------------------------------
+// Login Required Popup
+// --------------------------------------------------
+function showLoginRequiredPopup() {
+
+    // Prevent duplicate popups
+    if (document.getElementById("login-required-modal")) return;
+
+    const modal = document.createElement("div");
+    modal.id = "login-required-modal";
+    modal.className = "modal fade show";
+    modal.style.display = "block";
+    modal.style.backgroundColor = "#2D3047";
+    modal.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Required</h5>
+                    <button type="button" class="btn-close" onclick="closeLoginPopup()"></button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <p>You need to log in to access Early Access chapters.</p>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <a href="/auth/loginpage" class="btn btn-primary">
+                        Log In
+                    </a>
+                    <button class="btn btn-secondary" onclick="closeLoginPopup()">
+                        Cancel
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.classList.add("modal-open");
+}
+
+// --------------------------------------------------
+function closeLoginPopup() {
+    const modal = document.getElementById("login-required-modal");
+    if (modal) {
+        modal.remove();
+        document.body.classList.remove("modal-open");
+    }
+}
+

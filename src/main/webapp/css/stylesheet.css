@@ -373,3 +373,75 @@ table {
 .col-lg-2-5 {
   width: 20.83333333%;
 }
+
+
+.ew-coin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: radial-gradient(circle at top left, #2b2b2b, #141414);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 193, 7, 0.4);
+
+  opacity: 0.9;
+}
+
+.ew-coin img,
+.ew-coin svg {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+
+  /* gold symbol */
+  filter: invert(1) brightness(1.1);
+}
+
+
+.coin-price-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.coin-price-line .coin-amount,
+.coin-price-line .coin-for {
+  line-height: 1;
+}
+
+.coin-inline {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+/* ===========================
+   Dark Theme Modal Fix
+   =========================== */
+
+.modal-content {
+    background-color: #2D3047;
+    color: #ffffff;
+    border: 1px solid #444;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: #444;
+}
+
+.modal-title {
+    color: #ffffff;
+}
+
+.modal-body {
+    color: #eaeaea;
+}
+
+/* Buttons spacing & visibility */
+.modal-footer .btn {
+    min-width: 100px;
+}
+

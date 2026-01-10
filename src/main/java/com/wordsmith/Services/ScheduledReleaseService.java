@@ -1,156 +1,137 @@
 package com.wordsmith.Services;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-
+import com.wordsmith.Entity.NovelReleasePolicy;
+import com.wordsmith.Repositories.ChapterRepository;
+import com.wordsmith.Repositories.NovelReleasePolicyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.wordsmith.Entity.Chapter;
-import com.wordsmith.Enum.ReleaseStatus;
-import com.wordsmith.Repositories.ChapterRepository;
+import com.wordsmith.Enum.ReleaseType;
 
-import jakarta.transaction.Transactional;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.List;
 
 @Service
 public class ScheduledReleaseService {
 
-    private static final Logger log = LoggerFactory.getLogger(ScheduledReleaseService.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(ScheduledReleaseService.class);
 
-    private final ChapterRepository chapterRepository;
+    private final NovelReleasePolicyRepository policyRepo;
+    private final ChapterReleaseService chapterReleaseService;
+    private final ChapterRepository chapterRepo;
 
-    public ScheduledReleaseService(ChapterRepository chapterRepository) {
-        this.chapterRepository = chapterRepository;
+    public ScheduledReleaseService(
+            NovelReleasePolicyRepository policyRepo,
+            ChapterReleaseService chapterReleaseService,
+            ChapterRepository chapterRepo
+
+    ) {
+        this.policyRepo = policyRepo;
+        this.chapterReleaseService = chapterReleaseService;
+        this.chapterRepo = chapterRepo;
     }
 
     // --------------------------------------------------
-    //  Helper: Release next STOCKPILE chapter for novel
+    // 🕒 Master Scheduler (Hourly, UTC)
     // --------------------------------------------------
-    private void releaseNextChapter(String novelName, String slotLabel) {
-        log.info("SCHEDULE_RELEASE_START slot={} novel=\"{}\"", slotLabel, novelName);
+    @Transactional
+    @Scheduled(cron = "0 0 * * * ?", zone = "UTC") // Top of every hour (UTC)
+    public void runReleaseScheduler() {
 
-        try {
-            Chapter nextChapter =
-                    chapterRepository.findFirstByReleaseStatusAndNovelNameOrderByChapterIdAsc(
-                            ReleaseStatus.STOCKPILE,
-                            novelName
-                    );
+        ZonedDateTime nowUtc = ZonedDateTime.now(ZoneId.of("UTC"));
+        int currentHourUtc = nowUtc.getHour();
 
-            if (nextChapter == null) {
-                log.info("SCHEDULE_NO_STOCKPILE slot={} novel=\"{}\"", slotLabel, novelName);
-                return;
+        log.info(
+            "AUTO_RELEASE_TICK utcTime={} utcHour={}",
+            nowUtc,
+            currentHourUtc
+        );
+
+        // 🔥 Only fetch policies meant for THIS hour
+        List<NovelReleasePolicy> policies =
+                policyRepo.findByActiveTrueAndReleaseHour(currentHourUtc);
+
+        for (NovelReleasePolicy policy : policies) {
+            try {
+                evaluatePolicy(policy, nowUtc);
+            } catch (Exception ex) {
+                log.error(
+                        "AUTO_RELEASE_POLICY_ERROR novelName={} msg={}",
+                        policy.getNovelName(),
+                        ex.getMessage(),
+                        ex
+                );
             }
-
-            nextChapter.setReleaseStatus(ReleaseStatus.RELEASED);
-            ZonedDateTime serverTime = ZonedDateTime.now(ZoneId.systemDefault());
-            nextChapter.setReleasedOn(serverTime);
-            chapterRepository.save(nextChapter);
-
-            log.info("SCHEDULE_RELEASED slot={} novel=\"{}\" chapterId={} chapterNo={} releasedOn={}",
-                    slotLabel,
-                    novelName,
-                    nextChapter.getChapterId(),
-                    nextChapter.getChapterNo(),
-                    serverTime);
-
-        } catch (Exception e) {
-            log.error("SCHEDULE_RELEASE_ERROR slot={} novel=\"{}\" message={}",
-                    slotLabel, novelName, e.getMessage(), e);
         }
     }
 
     // --------------------------------------------------
-    //  Night / Morning slots (UTC)
+    // 🔍 Policy Evaluation
     // --------------------------------------------------
+    private void evaluatePolicy(
+            NovelReleasePolicy policy,
+            ZonedDateTime nowUtc
+    ) {
 
-    @Transactional
-    @Scheduled(cron = "0 0 0 * * ?", zone = "UTC") // Every day at Midnight UTC / 5:30AM IST
-    public void autoReleaseMidNight() {
-        releaseNextChapter("The Demon God Wants to Live Peacefully", "00:00-UTC");
-    }
-
-    @Transactional
-    @Scheduled(cron = "0 0 1 * * ?", zone = "UTC") // Every day at 1 AM UTC / 6:30AM IST
-    public void autoRelease1am() {
-        releaseNextChapter("Regression: I Alone Possess Infinite Traits", "01:00-UTC");
-    }
-
-    @Transactional
-    @Scheduled(cron = "0 0 2 * * ?", zone = "UTC") // Every day at 2 AM UTC / 7:30AM IST
-    public void autoRelease2am() {
-        releaseNextChapter("Solo Sword Master", "02:00-UTC");
-    }
-
-    @Transactional
-    @Scheduled(cron = "0 0 3 * * ?", zone = "UTC") // Every day at 3 AM UTC / 8:30AM IST
-    public void autoRelease3am() {
-        releaseNextChapter("Ability User from a Parallel Dimension", "03:00-UTC");
-    }
-
-    @Transactional
-    @Scheduled(cron = "0 0 4 * * ?", zone = "UTC") // Every day at 4 AM UTC / 9:30AM IST
-    public void autoRelease4am() {
-        releaseNextChapter("The Demon King's Game", "04:00-UTC");
-    }
-
-    @Transactional
-    @Scheduled(cron = "0 0 5 * * ?", zone = "UTC") // Every day at 5 AM UTC / 10:30AM IST
-    public void autoRelease5am() {
-        releaseNextChapter("The Crazy Villain Regains His Sanity", "05:00-UTC");
-    }
-
-    // --------------------------------------------------
-    //  Noon / Evening slots (UTC)
-    // --------------------------------------------------
-
-    @Transactional
-    @Scheduled(cron = "0 0 12 * * ?", zone = "UTC") // Every day at 12 Noon UTC / 5:30PM IST
-    public void autoReleasenoon() {
-        releaseNextChapter("Sword of Beelzebuth", "12:00-UTC");
-    }
-
-    @Transactional
-    @Scheduled(cron = "0 0 13 * * ?", zone = "UTC") // Every day at 1 PM UTC / 6:30PM IST
-    public void autoRelease1pm() {
-        releaseNextChapter("The Skill Collector", "13:00-UTC");
-    }
-
-    @Transactional
-    @Scheduled(cron = "0 0 14 * * ?", zone = "UTC") // Every day at 2 PM UTC / 7:30PM IST
-    public void autoRelease2pm() {
-        releaseNextChapter(
-                "I Was Judged as Jobless and Banished After Choosing a Supercharged Growth Rate Skill. " +
-                "A Skill Maniac rescued me, but I Don’t Want to Get Too Involved",
-                "14:00-UTC"
+        log.info(
+            "EVALUATING_POLICY novel=\"{}\" releaseType={} lastReleaseAt={}",
+            policy.getNovelName(),
+            policy.getReleaseType(),
+            policy.getLastReleaseAt()
         );
+
+        // DAILY → always allowed at its slot
+        if (policy.getReleaseType() == ReleaseType.DAILY) {
+            chapterReleaseService.releaseChapters(policy, nowUtc);
+            return;
+        }
+
+        // WEEKLY / CUSTOM → interval check
+        if (!isIntervalSatisfied(policy, nowUtc)) {
+            log.info(
+                "RELEASE_SKIPPED_INTERVAL novel=\"{}\"",
+                policy.getNovelName()
+            );
+            return;
+        }
+
+        chapterReleaseService.releaseChapters(policy, nowUtc);
     }
 
-    @Transactional
-    @Scheduled(cron = "0 0 15 * * ?", zone = "UTC") // Every day at 3 PM UTC / 8:30PM IST
-    public void autoRelease3pm() {
-        releaseNextChapter("I Think My Glasses Could Probably Take Over the World", "15:00-UTC");
-    }
+    // --------------------------------------------------
+    // 📆 Interval logic
+    // --------------------------------------------------
+    private boolean isIntervalSatisfied(
+            NovelReleasePolicy policy,
+            ZonedDateTime nowUtc
+    ) {
+        Instant lastInstant = chapterRepo.findLastReleasedAt(policy.getNovelName());
+        ZonedDateTime lastReleasedAt = null;
 
-    @Transactional
-    @Scheduled(cron = "0 0 16 * * ?", zone = "UTC") // Every day at 4 PM UTC / 9:30PM IST
-    public void autoRelease4pm() {
-        releaseNextChapter("Left Behind Swordsman", "16:00-UTC");
-    }
+        if(lastInstant != null) {
+            lastReleasedAt = ZonedDateTime.ofInstant(lastInstant, ZoneId.of("UTC"));
+        }
 
-    @Transactional
-    @Scheduled(cron = "0 0 17 * * ?", zone = "UTC") // Every day at 5 PM UTC / 10:30PM IST
-    public void autoRelease5pm() {
-        releaseNextChapter(
-                "The Sword Saint Reincarnated as a Shota Prince Absolutely Refuses to Let His Former Disciple Find Out!",
-                "17:00-UTC"
-        );
-    }
+        return switch (policy.getReleaseType()) {
 
-    @Transactional
-    @Scheduled(cron = "0 0 18 * * ?", zone = "UTC") // Every day at 6 PM UTC / 11:30PM IST
-    public void autoRelease6pm() {
-        releaseNextChapter("The Magician Kunon Sees Everything", "18:00-UTC");
+            case WEEKLY ->
+                lastReleasedAt
+                      .plusWeeks(1)
+                      .isBefore(nowUtc);
+
+            case CUSTOM ->
+                lastReleasedAt
+                      .plusDays(policy.getCustomIntervalDays())
+                      .isBefore(nowUtc);
+
+            default ->
+                false;
+        };
     }
 }

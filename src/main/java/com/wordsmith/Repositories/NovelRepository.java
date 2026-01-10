@@ -19,9 +19,15 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 	
 	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name where c.release_status = 'RELEASED' order by COALESCE( c.released_on, c.posted_on) desc LIMIT 0,200) s group by s.novel_name LIMIT 0,12;", nativeQuery = true)
     List<Novel>  NovelUpdates();
+
+	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name where c.release_status = 'STOCKPILE' order by c.posted_on desc LIMIT 0,200) s group by s.novel_name LIMIT 0,12;", nativeQuery = true)
+	List<Novel>  StockpileUpdates();
 	
 	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name where c.release_status = 'RELEASED' order by COALESCE( c.released_on, c.posted_on) desc LIMIT 0,10000) s group by s.novel_name;", nativeQuery = true)
     List<Novel>  AllUpdates();
+
+	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name where c.release_status = 'STOCKPILE' order by c.posted_on desc LIMIT 0,10000) s group by s.novel_name;", nativeQuery = true)
+	List<Novel> AllStockpileUpdates();
 	
 	@Query(value = "SELECT * FROM novel WHERE LENGTH(Novel_image)>0 AND status = 'Ongoing' limit 4;", nativeQuery = true)
 	List<Novel>  popular();
@@ -39,5 +45,8 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 
 	@Query(value = "SELECT status FROM novel WHERE novel_name = :novelname", nativeQuery = true)
 	String novelStatus(String novelname);
+
+	@Query(value = "SELECT status FROM novel WHERE novel_name = :novelname", nativeQuery = true)
+	String findStatusByNovelName(@Param("novelname") String novelname);
 
 }

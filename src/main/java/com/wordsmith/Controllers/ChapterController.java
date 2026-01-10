@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,25 +19,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.wordsmith.Entity.Announcement;
 import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Entity.Comment;
+import com.wordsmith.Entity.User;
+import com.wordsmith.Enum.ChapterAccessResult;
 import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Enum.LikeEnum;
 import com.wordsmith.Enum.ReleaseStatus;
+import com.wordsmith.Repositories.ChapterPurchaseRepository;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Repositories.NovelRepository;
 import com.wordsmith.Services.AnnouncementService;
+import com.wordsmith.Services.ChapterAccessService;
+import com.wordsmith.Services.ChapterPurchaseService;
 import com.wordsmith.Services.CommentService;
 import com.wordsmith.Services.LikeService;
 import com.wordsmith.Services.ViewsService;
+import com.wordsmith.Services.WalletService;
 import com.wordsmith.Util.EmailMasker;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class ChapterController {
@@ -49,19 +59,24 @@ public class ChapterController {
     private final LikeService likeService;
     private final AnnouncementService announcementService;
     private final NovelRepository novelRepository;
+    private final ChapterPurchaseService chapterPurchaseService;
+    private final ChapterAccessService chapterAccessService;
+    private final WalletService walletService;
+    private final ChapterPurchaseRepository chapterPurchaseRepository;
 
-    public ChapterController(CommentService commentService,
-                             ChapterRepository cr,
-                             ViewsService viewsService,
-                             LikeService likeService,
-                             AnnouncementService announcementService,
-                             NovelRepository novelRepository) {
+    public ChapterController(CommentService commentService, ChapterRepository cr, ViewsService viewsService, LikeService likeService,
+                             AnnouncementService announcementService, NovelRepository novelRepository, ChapterPurchaseService chapterPurchaseService, 
+                             ChapterAccessService chapterAccessService, WalletService walletService, ChapterPurchaseRepository chapterPurchaseRepository) {
         this.commentService = commentService;
         this.cr = cr;
         this.viewsService = viewsService;
         this.likeService = likeService;
         this.announcementService = announcementService;
         this.novelRepository = novelRepository;
+        this.chapterPurchaseService = chapterPurchaseService;
+        this.chapterAccessService = chapterAccessService;
+        this.walletService = walletService;
+        this.chapterPurchaseRepository = chapterPurchaseRepository;
         logger.info("ChapterController initialized");
     }
 
@@ -80,7 +95,7 @@ public class ChapterController {
     }
 
     @RequestMapping("/savechapter")
-    public RedirectView save(@ModelAttribute("chapter") Chapter chapter,
+    public RedirectView save(@ModelAttribute Chapter chapter,
                              RedirectAttributes redirectAttributes) {
 
         Long cid = chapter.getChapterId();
@@ -166,23 +181,68 @@ public class ChapterController {
         return redirectView;
     }
 
+    // ==========================================================
+    // CHAPTER PAGE
+    // ==========================================================    
     @RequestMapping("/chapter/{chapterId}")
-    public String Chapter(@PathVariable long chapterId, Model m, HttpServletRequest request) {
+    public String chapter(@PathVariable long chapterId, Model m, HttpServletRequest request) {
         logger.info("GET /chapter/{} - start", chapterId);
 
-        Chapter chapter = cr.getReferenceById(chapterId);
+        Chapter chapter = cr.findById(chapterId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        // Check if released
-        if (chapter.getReleaseStatus() != ReleaseStatus.RELEASED) {
-            logger.warn("Attempt to access UNRELEASED chapter - chapterId={}, status={}",
-                    chapterId, chapter.getReleaseStatus());
-            request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, HttpStatus.NOT_FOUND.value());
-            return "forward:/error";
+        var user = (User)request.getSession().getAttribute("loggedInUser");
+
+        String username = (user != null) ? user.getUsername() : null;
+
+        // --------------------------------------------------
+        // 🔐 ACCESS DECISION (SINGLE SOURCE OF TRUTH)
+        // --------------------------------------------------
+        ChapterAccessResult accessResult =
+                chapterAccessService.decideAccess(chapter, username);
+
+        switch (accessResult) {
+
+            case ALLOWED:
+                break; // continue rendering
+
+            case LOGIN_REQUIRED:
+                logger.warn(
+                    "LOGIN_REQUIRED chapterId={}",
+                    chapterId
+                );
+                return "redirect:/auth/loginpage";
+
+            case PURCHASE_REQUIRED:
+                logger.warn(
+                    "PURCHASE_REQUIRED chapterId={} user={}",
+                    chapterId,
+                    (username != null ? EmailMasker.mask(username) : "anonymous")
+                );
+
+                int price = chapterAccessService.getChapterPrice(chapterId);
+                long balance = walletService.getBalance(username);
+                boolean canAfford = balance >= price;
+
+                // Minimal data for purchase-required page
+                m.addAttribute("chapterId", chapterId);
+                m.addAttribute("novelName", chapter.getNovelName());
+                m.addAttribute("chapterNo", chapter.getChapterNo());
+                m.addAttribute("chapterTitle", chapter.getTitle());
+                m.addAttribute("price", price);
+                m.addAttribute("walletBalance", balance);
+                m.addAttribute("canAfford", canAfford);
+                return "chapter-purchase-required";
         }
 
+        // --------------------------------------------------
+        // 👁️ VIEWS (only after access granted)
+        // --------------------------------------------------
         viewsService.incrementViews(chapterId, CommentEntityType.CHAPTER);
         logger.debug("Views incremented for chapterId={}", chapterId);
 
+        // --------------------------------------------------
+        // ❤️ REACTIONS
+        // --------------------------------------------------
         chapter.setLoveCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.LOVE));
         chapter.setAngryCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.ANGRY));
         chapter.setLaughCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.LAUGH));
@@ -190,69 +250,97 @@ public class ChapterController {
         chapter.setWowCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.WOW));
         chapter.setFireCount(likeService.getReactionCount(chapterId, "chapter", LikeEnum.FIRE));
 
-        var user = (com.wordsmith.Entity.User) request.getSession().getAttribute("loggedInUser");
         if (user != null) {
-            String maskedUser = EmailMasker.mask(user.getUsername());
-            logger.debug("User viewing chapter - usernameMasked={}, chapterId={}", maskedUser, chapterId);
+            String maskedUser = EmailMasker.mask(username);
+            logger.debug(
+                "User viewing chapter - usernameMasked={} chapterId={}",
+                maskedUser,
+                chapterId
+            );
 
-            var userReaction = likeService.getUserReaction("chapter", chapterId, user.getUsername());
+            var userReaction =
+                    likeService.getUserReaction("chapter", chapterId, username);
             chapter.setUserReaction(userReaction);
         }
 
-        if (chapter.getReleasedOn() != null) {
-            chapter.setTimeAgo(getTimeDifference(chapter.getReleasedOn()));
-        } else {
-            chapter.setTimeAgo(getTimeDifference(chapter.getPostedOn()));
-        }
 
         m.addAttribute("chapter", chapter);
 
+        // --------------------------------------------------
+        // 💬 COMMENTS
+        // --------------------------------------------------
         CommentEntityType type = CommentEntityType.CHAPTER;
-        List<Comment> comments = commentService.getCommentsByEntity(type, chapterId);
+        List<Comment> comments =
+                commentService.getCommentsByEntity(type, chapterId);
 
         for (Comment comment : comments) {
+
             if (comment.getCreatedAt() != null) {
                 comment.setTimeAgo(getTimeDifference(comment.getCreatedAt()));
             }
-            comment.setLikeCount(likeService.getLikesCount(comment.getId(), "comment"));
-            comment.setDislikeCount(likeService.getDislikesCount(comment.getId(), "comment"));
+
+            comment.setLikeCount(
+                    likeService.getLikesCount(comment.getId(), "comment"));
+            comment.setDislikeCount(
+                    likeService.getDislikesCount(comment.getId(), "comment"));
 
             if (user != null) {
-                var userReaction = likeService.getUserReaction("comment", comment.getId(), user.getUsername());
+                var userReaction =
+                        likeService.getUserReaction("comment", comment.getId(), username);
                 comment.setUserReaction(userReaction);
             }
 
             if (comment.isHasReplies()) {
-                comment.setReplies(commentService.getCommentsByEntity(CommentEntityType.COMMENT, comment.getId()));
+                comment.setReplies(
+                        commentService.getCommentsByEntity(
+                                CommentEntityType.COMMENT,
+                                comment.getId()
+                        )
+                );
+
                 for (Comment reply : comment.getReplies()) {
                     if (reply.getCreatedAt() != null) {
                         reply.setTimeAgo(getTimeDifference(reply.getCreatedAt()));
                     }
-                    reply.setLikeCount(likeService.getLikesCount(reply.getId(), "comment"));
-                    reply.setDislikeCount(likeService.getDislikesCount(reply.getId(), "comment"));
+
+                    reply.setLikeCount(
+                            likeService.getLikesCount(reply.getId(), "comment"));
+                    reply.setDislikeCount(
+                            likeService.getDislikesCount(reply.getId(), "comment"));
 
                     if (user != null) {
-                        var userReaction = likeService.getUserReaction("comment", reply.getId(), user.getUsername());
-                        reply.setUserReaction(userReaction);
+                        var replyReaction =
+                                likeService.getUserReaction(
+                                        "comment",
+                                        reply.getId(),
+                                        username
+                                );
+                        reply.setUserReaction(replyReaction);
                     }
                 }
             }
         }
 
-        logger.debug("Loaded {} top-level comments for chapterId={}", comments.size(), chapterId);
-
         m.addAttribute("comments", comments);
         m.addAttribute("newComment", new Comment());
 
-        Announcement announcement = announcementService.getLatestAnnouncement();
+        // --------------------------------------------------
+        // 📢 ANNOUNCEMENT
+        // --------------------------------------------------
+        Announcement announcement =
+                announcementService.getLatestAnnouncement();
+
         if (announcement != null && announcement.isVisible()) {
-            announcement.setTimeAgo(getTimeDifference(announcement.getCreatedAt()));
+            announcement.setTimeAgo(
+                    getTimeDifference(announcement.getCreatedAt()));
         }
+
         m.addAttribute("announcement", announcement);
 
         logger.info("Rendering chaptertemplate for chapterId={}", chapterId);
         return "chaptertemplate";
     }
+
 
     @RequestMapping("chapter-next/{chapterId}")
     public RedirectView nextChapter(@PathVariable long chapterId) {
@@ -317,17 +405,7 @@ public class ChapterController {
         return "lc";
     }
 
-    @RequestMapping("/latest1/{novelname}")
-    public String latestChapter(@PathVariable String novelname, Model model) {
-        logger.info("GET /latest1/{} - start", novelname);
-
-        Chapter chapter = cr.Latest1(novelname);
-        model.addAttribute("chapter", chapter);
-
-        logger.debug("Loaded single latest chapter for novelName={}, chapterId={}",
-                novelname, chapter != null ? chapter.getChapterId() : null);
-        return "ch";
-    }
+    
 
     @PostMapping("/ReleaseChapter")
     public RedirectView releaseChapter(@RequestParam("ChapterId") long id,
@@ -385,4 +463,39 @@ public class ChapterController {
             return formatter.format(pastTime).toString();
         }
     }
+
+
+    @PostMapping("/chapter/{chapterId}/purchase")
+    @Transactional
+    public String purchaseChapter(
+            @PathVariable long chapterId,
+            HttpSession session
+    ) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if (user == null) {
+            return "redirect:/auth/loginpage";
+        }
+
+        if(cr.findById(chapterId).isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Chapter not found");
+        }
+
+        // Safety re-check
+        boolean alreadyOwned = chapterPurchaseRepository.existsByUsernameAndChapterId(user.getUsername(), chapterId);
+
+        if (alreadyOwned) {
+            return "redirect:/chapter/" + chapterId;
+        }
+
+
+        // 🔒 Atomic operation
+        chapterPurchaseService.purchaseChapter(
+                user.getUsername(),
+                chapterId
+        );
+
+        return "redirect:/chapter/" + chapterId;
+    }
+
+
 }

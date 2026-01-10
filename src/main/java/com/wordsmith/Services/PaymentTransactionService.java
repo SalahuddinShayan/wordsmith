@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -103,6 +102,7 @@ public class PaymentTransactionService {
         txn.setPayerName(payerName);
         txn.setCreatedAt(ZonedDateTime.now());
         txn.setUsername(username);
+        txn .setTransactionType("MEMBERSHIP");
 
         paymentRepo.save(txn);
 
@@ -170,6 +170,11 @@ public class PaymentTransactionService {
         tx.setCreatedAt(ZonedDateTime.now(ZoneOffset.UTC));
 
         return paymentRepo.save(tx);
+    }
+
+    public boolean existsByPaypalOrderId(String orderId) {
+        log.debug("PAYMENT_TXN_EXISTS orderId={}", orderId);
+        return paymentRepo.existsByPaypalOrderId(orderId);
     }
 
 }

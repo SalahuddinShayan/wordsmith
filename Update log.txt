@@ -332,3 +332,8 @@ V 1.107
 -> Applied the adfree logic to all the pages
 -> Applied the Traffic Cop settings to all the pages with ads.
 -> Add the Call to Action Button on the home, novel and chapter pages.
+
+V 1.108
+-> Created DTO and DTO mapper for chapters and removed the folders and pages which were not nessasary.
+-> Created a system for dynamic chapter release sheduling.
+-> Created the early release system via a pay wall.

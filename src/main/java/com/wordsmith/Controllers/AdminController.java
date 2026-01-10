@@ -1,7 +1,10 @@
 package com.wordsmith.Controllers;
 
+import com.wordsmith.Entity.Chapter;
 import com.wordsmith.Services.AdminService;
+import com.wordsmith.Services.ChapterPurchaseService;
 import com.wordsmith.Services.PaymentTransactionService;
+import com.wordsmith.Services.WalletService;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,10 +22,14 @@ public class AdminController {
 
     private final AdminService adminService;
     private final PaymentTransactionService paymentService;
+    private final WalletService walletService;
+    private final ChapterPurchaseService chapterPurchaseService;
 
-    public AdminController(AdminService adminService, PaymentTransactionService paymentService) {
+    public AdminController(AdminService adminService, PaymentTransactionService paymentService, WalletService walletService, ChapterPurchaseService chapterPurchaseService) {
         this.adminService = adminService;
         this.paymentService = paymentService;
+        this.walletService = walletService;
+        this.chapterPurchaseService = chapterPurchaseService;
     }
 
     // ============================================================
@@ -98,6 +105,24 @@ public class AdminController {
         }
 
         return "redirect:/admin/webhook-failures";
+    }
+
+    @GetMapping("/chapter-purchases")
+    public String chapterPurchases(Model model) {
+        model.addAttribute("purchases", chapterPurchaseService.findAllPurchases());
+        return "chapter-purchases";
+    }
+
+    @GetMapping("/wallets")
+    public String wallets(Model model) {
+        model.addAttribute("wallets", walletService.getAllWallets());
+        return "wallets";
+    }
+
+    @GetMapping("/coin-ledgers")
+    public String coinLedgers(Model model) {
+        model.addAttribute("ledgers", walletService.getAllLedgers());
+        return "coin-ledgers";
     }
 }
 

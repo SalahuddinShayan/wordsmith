@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -202,24 +203,102 @@
          </div>
          <div class="col-10 col-lg-6 py-3 ">
          <h4 class="center">Table Of Content</h4>
+         <c:if test="${not empty StockpileChapters}">
+            <hr>
+
+            <!-- Early Access Header -->
+            <div class="d-flex justify-content-between align-items-center mb-2"
+                data-bs-toggle="collapse"
+                data-bs-target="#earlyAccessSection"
+                style="cursor:pointer;">
+                
+                <h5 class="mb-0">
+                    Early Access Chapters
+                    <span class="text-muted">(${fn:length(StockpileChapters)})</span>
+                </h5>
+
+                <i id="earlyAccessToggleIcon" class="fa-solid fa-chevron-down"></i>
+            </div>
+
+            <!-- Collapsible Content -->
+            <div id="earlyAccessSection" class="collapse">
+
+                <c:forEach var="chapter" items="${StockpileChapters}">
+                    <div class="row align-items-center py-2 stockpile-row">
+
+                        <!-- Chapter title -->
+                        <div class="col-5 col-lg-8 stm oneliner">
+                            <a href="../chapter/${chapter.chapterId}"
+                            class="early-access-link"
+                            data-chapter-id="${chapter.chapterId}"
+                            data-owned="${chapter.owned}">
+                            <c:choose>
+                                <c:when test="${chapter.owned}">
+                                    🔓
+                                </c:when>
+                                <c:otherwise>
+                                    🔒 
+                                </c:otherwise>
+                            </c:choose>                          
+                                C${chapter.chapterNo} : ${chapter.title}
+                            </a>
+                        </div>
+
+                        <!-- Lock / Unlock + Price -->
+                        <div class="col-2 col-lg-1 text-end">
+                            <small>
+                                <c:choose>
+                                    <c:when test="${chapter.owned}">
+                                         <span class="text-success"></span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="text-warning coin-inline">
+                                            ${chapter.priceCoins}
+                                            <span class="ew-coin" style="height: 17px; width: 17px;">
+                                                <img src="/images/enso.svg" alt="EWS Coins">
+                                            </span>
+                                        </span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </small>
+                        </div>
+
+                        <!-- Time ago and views -->
+                        <div class="col-3 col-lg-2 text-end">
+                        <small>
+                            <i class="fa-regular fa-clock"></i> ${chapter.timeAgo}
+                        </small>
+                        </div>
+                        <div class="col-2 col-lg-1 text-center">
+                        <small>
+                            ${chapter.views} <i class="fa-solid fa-eye"></i>
+                        </small>
+                        </div>
+
+                    </div>
+                </c:forEach>
+
+            </div>
+        </c:if>
+            <hr>
          <c:forEach var="chapter" items="${Chapters}">
   <div class="row align-items-center py-2">
     <!-- Chapter title and number -->
-    <div class="col-7 col-lg-6 stm oneliner">
+    <div class="col-7 col-lg-9 stm oneliner">
       <a href="../chapter/${chapter.chapterId}">
-        Chapter ${chapter.chapterNo} : ${chapter.title}
+        C${chapter.chapterNo} : ${chapter.title}
       </a>
     </div>
 
     <!-- Time ago and views -->
-    <div class="col-5 col-lg-3 text-end">
+    <div class="col-3 col-lg-2 text-end">
       <small>
         <i class="fa-regular fa-clock"></i> ${chapter.timeAgo}
       </small>
     </div>
-    <div class="col-12 col-lg-3 text-start">
+    <div class="col-2 col-lg-1 text-center">
       <small>
-        <i class="fa-solid fa-eye"></i> ${chapter.views}
+        ${chapter.views} <i class="fa-solid fa-eye"></i>
       </small>
     </div>
   </div>
@@ -473,6 +552,16 @@
 
        
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
+<script>
+    <c:choose>
+        <c:when test="${not empty loggedInUser}">
+            const IS_LOGGED_IN = true;
+        </c:when>
+        <c:otherwise>
+            const IS_LOGGED_IN = false;
+        </c:otherwise>
+    </c:choose>
+</script>
 <script type="text/javascript" src="../js/script.js"></script>
 <input type="hidden" id="_csrf" 
        name="${_csrf.parameterName}" 

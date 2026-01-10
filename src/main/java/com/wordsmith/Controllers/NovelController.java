@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +28,7 @@ import com.wordsmith.Entity.User;
 import com.wordsmith.Enum.CommentEntityType;
 import com.wordsmith.Repositories.ChapterRepository;
 import com.wordsmith.Repositories.NovelRepository;
+import com.wordsmith.Services.ChapterListDtoMapper;
 import com.wordsmith.Services.CommentService;
 import com.wordsmith.Services.FavoriteService;
 import com.wordsmith.Services.LikeService;
@@ -36,6 +37,7 @@ import com.wordsmith.Services.ViewsService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class NovelController {
@@ -48,26 +50,50 @@ public class NovelController {
     private final ViewsService viewsService;
     private final LikeService likeService;
     private final FavoriteService favoriteService;
+    private final ChapterListDtoMapper chapterListDtoMapper;
 
     public NovelController(CommentService commentService, ChapterRepository cr, NovelRepository NovelRepo,
-                           ViewsService viewsService, LikeService likeService, FavoriteService favoriteService) {
+                           ViewsService viewsService, LikeService likeService, FavoriteService favoriteService, ChapterListDtoMapper chapterListDtoMapper) {
         this.commentService = commentService;
         this.cr = cr;
         this.NovelRepo = NovelRepo;
         this.viewsService = viewsService;
         this.likeService = likeService;
         this.favoriteService = favoriteService;
+        this.chapterListDtoMapper = chapterListDtoMapper;
     }
 
     // ==========================================================
     // HOME PAGE
     // ==========================================================
     @RequestMapping(value = {"/", "/home"})
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
         logger.info("📘 Loading homepage with popular novels and updates");
 
-        model.addAttribute("Novels", NovelRepo.popular());
-        model.addAttribute("Novelsu", NovelRepo.NovelUpdates());
+        List<Novel> Pnovels = NovelRepo.popular();
+        for (Novel novel : Pnovels) {
+            Chapter latestChapter = cr.Latest1(novel.getNovelName());
+            if (latestChapter != null) {
+                novel.setLatestChapterId(latestChapter.getChapterId());
+                novel.setLatestChapterNo(latestChapter.getChapterNo());
+            }
+        }
+        model.addAttribute("Novels", Pnovels);
+
+        List<Novel> Unovels = NovelRepo.NovelUpdates();
+        for (Novel novel : Unovels) {
+            List<Chapter> recentChapters = cr.Latest(novel.getNovelName());
+            novel.setRecentChapters(chapterListDtoMapper.toReleasedChapterDtoList(recentChapters));
+        }
+        model.addAttribute("Novelsu", Unovels);
+
+        User user = (User) session.getAttribute("loggedInUser");
+        List<Novel> Snovels = NovelRepo.StockpileUpdates();
+        for (Novel novel : Snovels) {
+            List<Chapter> recentStockpileChapters = cr.stockpileLatest(novel.getNovelName());
+            novel.setStockpileChapters(chapterListDtoMapper.toStockpileChapterDtoList(recentStockpileChapters, user != null ? user.getUsername() : null));
+        }
+        model.addAttribute("Novelss", Snovels);
 
         return "index";
     }
@@ -173,7 +199,7 @@ public class NovelController {
     // NOVEL PAGE
     // ==========================================================
     @RequestMapping("/novel/{novelName}")
-    public String Novel(@PathVariable String novelName, Model m, HttpServletRequest request) {
+    public String Novel(@PathVariable String novelName, Model m, HttpServletRequest request, HttpSession session) {
 
         logger.info("📘 Viewing novel page — novelName={}", novelName);
 
@@ -203,24 +229,24 @@ public class NovelController {
 
         // Load chapters
         List<Chapter> chapters = cr.byNovelNameReleased(novelName);
+        List<Chapter> stockpileChapters = cr.byNovelNameStockpile(novelName);
 
         List<Long> chapterIds = chapters.stream()
                 .map(Chapter::getChapterId)
                 .collect(Collectors.toList());
 
+        List<Long> stockpileChapterIds = stockpileChapters.stream()
+                .map(Chapter::getChapterId)
+                .collect(Collectors.toList());
+
         Map<Long, Long> chapterViews = viewsService.getViewsForChapters(chapterIds);
+        Map<Long, Long> stockpileChapterViews = viewsService.getViewsForChapters(stockpileChapterIds);
 
-        for (Chapter chapter : chapters) {
-            if (chapter.getReleasedOn() != null) {
-                chapter.setTimeAgo(getTimeDifference(chapter.getReleasedOn()));
-            } else {
-                chapter.setTimeAgo(getTimeDifference(chapter.getPostedOn()));
-            }
 
-            chapter.setViews(chapterViews.getOrDefault(chapter.getChapterId(), 0L));
-        }
-
-        m.addAttribute("Chapters", chapters);
+        m.addAttribute("Chapters", chapterListDtoMapper.toReleasedChapterDtoList(chapters, chapterViews));
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        m.addAttribute("StockpileChapters", chapterListDtoMapper.toStockpileChapterDtoList(stockpileChapters,
+                loggedInUser != null ? loggedInUser.getUsername() : null, stockpileChapterViews));
 
         // Comments
         List<Comment> comments = commentService.getCommentsByEntity(CommentEntityType.NOVEL, (long) novel.getNovelId());
@@ -299,9 +325,24 @@ public class NovelController {
     }
 
     @RequestMapping("/updates")
-    public String updates(Model model) {
+    public String updates(Model model, HttpSession session) {
         logger.info("📘 Viewing novel updates page");
-        model.addAttribute("Novels", NovelRepo.AllUpdates());
+        List<Novel> novels = NovelRepo.AllUpdates();
+        for (Novel novel : novels) {
+            List<Chapter> recentChapters = cr.Latest(novel.getNovelName());
+            novel.setRecentChapters(chapterListDtoMapper.toReleasedChapterDtoList(recentChapters));
+        }
+
+        model.addAttribute("Novels", novels);
+
+        String username = session.getAttribute("loggedInUsername") != null ? session.getAttribute("loggedInUsername").toString() : null;
+        List<Novel> stockpileNovels = NovelRepo.AllStockpileUpdates();
+        for (Novel novel : stockpileNovels) {
+            List<Chapter> recentStockpileChapters = cr.stockpileLatest(novel.getNovelName());
+            novel.setStockpileChapters(chapterListDtoMapper.toStockpileChapterDtoList(recentStockpileChapters, username));
+        }
+        model.addAttribute("StockpileNovels", stockpileNovels);
+
         return "updates";
     }
 

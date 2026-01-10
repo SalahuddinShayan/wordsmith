@@ -1,9 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
   <!DOCTYPE html>
   <html>
 
   <head>
+    <c:if test="${not hasMembership}">
     <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
+    <meta name="google-adsense-account" content="ca-pub-3020770276580291">
+    <script type="text/javascript">
+		(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-3020770276580291",
+		enable_page_level_ads: true
+		});
+		</script>
+    </c:if>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
     <script>
@@ -13,26 +25,16 @@
 
       gtag('config', 'G-0D3MMVLTED');
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291"
-      crossorigin="anonymous"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-adsense-account" content="ca-pub-3020770276580291">
     <meta name="keywords"
       content="Eastern Word Smith, Eastern WordSmith, web novels, webnovels, novels, japanese novels, online novels, japanese webnovel">
-    <title>Eastern WordSmith</title>
+    <title>Profile: ${user.username}</title>
     <link rel="shortcut icon" type="image/x-icon" href="images/logo2.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-        <script
-          data-grow-initializer="">!(function () { window.growMe || ((window.growMe = function (e) { window.growMe._.push(e); }), (window.growMe._ = [])); var e = document.createElement("script"); (e.type = "text/javascript"), (e.src = "https://faves.grow.me/main.js"), (e.defer = !0), e.setAttribute("data-grow-faves-site-id", "U2l0ZTpjMzAxMTE4Mi1jZDdlLTRiYTMtOTkxNy1lMDZhMThiOGFiMjE="); var t = document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e, t); })();</script>
-
-  </head>
-
+</head>
 <body>
 
     <%@ include file="nav1.jsp" %>
@@ -56,7 +58,6 @@
             <div class="col-md-9">
                 <p><b>Username:</b> ${user.username}</p>
                 <p><b>Email:</b> ${user.email}</p>
-                <p><b>Role:</b> ${user.role}</p>
                 <p><b>Joined:</b> ${user.createdAt}</p>
                 <p><b>Last Login:</b> ${user.lastLoginTime}</p>
                 <a href="/auth/change-password">Change Password</a>
@@ -151,6 +152,80 @@
         <c:if test="${empty membershipHistory}">
             <p>No past membership records.</p>
         </c:if>
+
+
+        <hr/>
+
+        <h3>Wallet & Purchases</h3>
+
+        <div class="row mb-4">
+
+            <!-- Wallet Balance -->
+            <div class="col-md-4">
+                <div class="card bg-dark text-light shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Wallet Balance</h5>
+                        <h2 class="mt-3">
+                            <span class="ew-coin" style="height: 30px; width: 30px;">
+                          <img src="/images/enso.svg" alt="EWS Coins">
+                        </span> ${wallet}
+                        </h2>
+                        <p class="text-muted">Coins</p>
+
+                        <a href="/coin" class="btn btn-success btn-sm mt-2">
+                            Buy Coins
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Last 5 Purchases -->
+            <div class="col-md-8">
+                <div class="card bg-dark text-light shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Last 5 Chapter Purchases</h5>
+
+                        <c:if test="${empty LastFivePurchases}">
+                            <p class="text-muted mt-3">You haven’t purchased any chapters yet.</p>
+                        </c:if>
+
+                        <c:if test="${not empty LastFivePurchases}">
+                            <ul class="list-group list-group-flush">
+                                <c:forEach var="p" items="${LastFivePurchases}">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <b>${p.novelName}</b><br/>
+                                            Chapter ${p.chapterNo}
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-dark text-light">
+                                                <span class="ew-coin" style="height: 15px; width: 15px;">
+                                                <img src="/images/enso.svg" alt="EWS Coins">
+                                                </span> ${p.price}
+                                            </span><br/>
+                                            <small class="text-muted">
+                                                ${p.timeAgo}
+                                            </small>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </c:if>
+
+                        <!-- Action Links -->
+                        <div class="mt-3 d-flex gap-3">
+                            <a href="/profile/purchases" class="btn btn-outline-primary btn-sm">
+                                View Full Purchase History
+                            </a>
+                            <a href="/profile/coin-ledger" class="btn btn-outline-secondary btn-sm">
+                                View Coin Ledger
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <hr/>
 

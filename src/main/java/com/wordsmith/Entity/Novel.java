@@ -1,7 +1,10 @@
 package com.wordsmith.Entity;
 
 import java.util.Date;
+import java.util.List;
 
+import com.wordsmith.Dto.ReleasedChapterDTO;
+import com.wordsmith.Dto.StockpileChapterDTO;
 import com.wordsmith.Enum.LikeEnum;
 
 import jakarta.persistence.Column;
@@ -71,6 +74,18 @@ public class Novel {
 
 	@Transient
 	private boolean favorited; // For storing if the current user has favorited this novel
+
+	@Transient
+	private long latestChapterId; // For storing the ID of the latest chapter
+
+	@Transient
+	private String latestChapterNo; // For storing the chapter number of the latest chapter
+
+	@Transient
+	private List<ReleasedChapterDTO> recentChapters; // For storing recent chapters as DTOs
+
+	@Transient
+	private List<StockpileChapterDTO> stockpileChapters; // For storing stockpiled chapters as DTOs
 
 	public int getNovelId() {
 		return NovelId;
@@ -225,6 +240,37 @@ public class Novel {
 		this.favorited = favorited;
 	}
 
+	public long getLatestChapterId() {
+		return latestChapterId;
+	}
+
+	public void setLatestChapterId(long latestChapterId) {
+		this.latestChapterId = latestChapterId;
+	}
+
+	public String getLatestChapterNo() {
+		return latestChapterNo;
+	}
+
+	public void setLatestChapterNo(String latestChapterNo) {
+		this.latestChapterNo = latestChapterNo;
+	}
+
+	public List<ReleasedChapterDTO> getRecentChapters() {
+		return recentChapters;
+	}
+
+	public void setRecentChapters(List<ReleasedChapterDTO> recentChapters) {
+		this.recentChapters = recentChapters;
+	}
+
+	public List<StockpileChapterDTO> getStockpileChapters() {
+		return stockpileChapters;
+	}
+
+	public void setStockpileChapters(List<StockpileChapterDTO> stockpileChapters) {
+		this.stockpileChapters = stockpileChapters;
+	}
 	
 	
 

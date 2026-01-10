@@ -41,6 +41,13 @@ public class PaymentTransaction {
 
     private ZonedDateTime createdAt;
 
+    @Column(nullable = false)
+    private String transactionType;
+    // MEMBERSHIP or COIN_PURCHASE
+
+    @Column
+    private Long coinsGranted;
+
     @PrePersist
     protected void onCreate() {
         createdAt = ZonedDateTime.now();
@@ -132,6 +139,22 @@ public class PaymentTransaction {
 
     public void setPayerName(String payerName) {
         this.payerName = payerName;
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public Long getCoinsGranted() {
+        return coinsGranted;
+    }
+
+    public void setCoinsGranted(Long coinsGranted) {
+        this.coinsGranted = coinsGranted;
     }
 
     

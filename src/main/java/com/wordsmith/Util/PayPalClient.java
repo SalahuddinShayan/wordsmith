@@ -66,7 +66,7 @@ public class PayPalClient {
         return liveSettings.getSettings().getWebhookId();
     }
 
-    private String getApiBase() {
+    public String getApiBase() {
         return isDev
                 ? "https://api-m.sandbox.paypal.com"
                 : "https://api-m.paypal.com";
