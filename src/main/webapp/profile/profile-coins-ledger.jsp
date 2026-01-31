@@ -6,25 +6,6 @@
   <html>
 
   <head>
-    <c:if test="${not hasMembership}">
-    <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
-    <meta name="google-adsense-account" content="ca-pub-3020770276580291">
-    <script type="text/javascript">
-		(adsbygoogle = window.adsbygoogle || []).push({
-		google_ad_client: "ca-pub-3020770276580291",
-		enable_page_level_ads: true
-		});
-		</script>
-    </c:if>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-
-      gtag('config', 'G-0D3MMVLTED');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Coin Ledger: ${user.username}</title>

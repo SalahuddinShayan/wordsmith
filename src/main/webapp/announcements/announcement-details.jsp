@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<c:if test="${not hasMembership}">
 <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
+<meta name="google-adsense-account" content="ca-pub-3020770276580291">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
+</c:if>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
 <script>
@@ -12,20 +19,14 @@
 
   gtag('config', 'G-0D3MMVLTED');
 </script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="google-adsense-account" content="ca-pub-3020770276580291">
         <title>${announcement.title}</title>
         <link rel="icon" type="image/x-icon" href="../images/logo2.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
         <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
-         <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
-		 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-		 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-		 <script data-grow-initializer="">!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTpjMzAxMTE4Mi1jZDdlLTRiYTMtOTkxNy1lMDZhMThiOGFiMjE=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();</script>
 </head>
 <body>
 

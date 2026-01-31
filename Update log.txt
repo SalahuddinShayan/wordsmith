@@ -337,3 +337,9 @@ V 1.108
 -> Created DTO and DTO mapper for chapters and removed the folders and pages which were not nessasary.
 -> Created a system for dynamic chapter release sheduling.
 -> Created the early release system via a pay wall.
+
+V1.109
+-> Updated the editchapter form. changed the chaed the chapter no type from number to text.
+-> Moved the Trafic cop from block mode to monitor mode.
+-> Made all the ads responsive.
+-> Made the list of users desending by the last login.

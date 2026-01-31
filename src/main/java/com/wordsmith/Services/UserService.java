@@ -119,7 +119,7 @@ public class UserService implements UserDetailsService {
 
     public List<User> findallusers() {
         log.debug("USER_FIND_ALL");
-        return userRepository.findAll();
+        return userRepository.findAllByOrderByLastLoginTimeDesc();
     }
 
     // --------------------------------------------------------------

@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>

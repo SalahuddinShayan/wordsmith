@@ -8,12 +8,7 @@
     <c:if test="${not hasMembership}">
     <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
     <meta name="google-adsense-account" content="ca-pub-3020770276580291">
-    <script type="text/javascript">
-		(adsbygoogle = window.adsbygoogle || []).push({
-		google_ad_client: "ca-pub-3020770276580291",
-		enable_page_level_ads: true
-		});
-		</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
     </c:if>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,25 +30,12 @@
   <div class="d-none d-lg-block text-center my-3 container-fluid">
     
 
-				<!-- Responsive Horizontal -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9524461170"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+				<%@ include file="jspf/ad-horizontal.jspf" %>
       
           </div>
           
           <div class="d-block d-lg-none text-center my-3 container-fluid">
-				<!-- Responsive Square -->
-				<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9826879355"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true">
-     			</ins>
+				<%@ include file="jspf/ad-square.jspf" %>
           </div>
     </c:if>
 
@@ -107,24 +89,12 @@
   <div Style="margin-top: 30px;" class="row container-fluid">
 	     <div class="col-12 col-lg-6 text-center my-3">
             
-				<!-- Responsive Square -->
-				<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9826879355"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true">
-     			</ins>
-			
+				<%@ include file="jspf/ad-square.jspf" %>
           </div>
         <div class="col-12 col-lg-6 text-center my-3">
-            
-			<!-- Medium Rectangle -->
-			<ins class="adsbygoogle"
-     		style="display:inline-block;width:300px;height:250px"
-     		data-ad-client="ca-pub-3020770276580291"
-     		data-ad-slot="8950269194"></ins>
-          </div>
+         <%@ include file="jspf/ad-square.jspf" %>
+          </div>   
+
 	</div>
   </c:if>
 
@@ -143,13 +113,7 @@
             <c:if test="${not hasMembership}">
               <div class = "sticky-ad">
               <div class="d-none d-lg-block text-center my-3" >
-					<!-- Responsive Vertical -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9033506582"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+					<%@ include file="jspf/ad-vertical.jspf" %>
               </div>	
 			</div>
       </c:if>
@@ -235,18 +199,12 @@
       </div>
     </div>
 
-    <!-- ✅ Right Sidebar: 160x300 -->
+    <!-- ✅ Right Sidebar -->
     <div class="col-1 col-lg-2 py-3">
       <c:if test="${not hasMembership}">
       <div class = "sticky-ad">
               <div class="d-none d-lg-block text-center my-3" >
-					<!-- Responsive Vertical -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9033506582"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+					<%@ include file="jspf/ad-vertical.jspf" %>
               </div>	
 			</div>
       </c:if>
@@ -255,13 +213,7 @@
 
   <c:if test="${not hasMembership}">
   <div class="text-center my-3">
-				<!-- Responsive Horizontal -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9524461170"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+				<%@ include file="jspf/ad-horizontal.jspf" %>
           </div>
           </c:if>
 

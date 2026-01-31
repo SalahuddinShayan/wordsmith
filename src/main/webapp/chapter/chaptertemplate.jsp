@@ -9,12 +9,7 @@
 <c:if test="${not hasMembership}">
 <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
 <meta name="google-adsense-account" content="ca-pub-3020770276580291">
-        <script type="text/javascript">
-		(adsbygoogle = window.adsbygoogle || []).push({
-		google_ad_client: "ca-pub-3020770276580291",
-		enable_page_level_ads: true
-		});
-		</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
 </c:if>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
@@ -25,13 +20,13 @@
 
   gtag('config', 'G-0D3MMVLTED');
 </script>
-<meta charset="UTF-8" />
+        <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="keywords" content="${chapter.keywords}">
         <meta name="description" content="Read ${chapter.novelName} Chapter ${chapter.chapterNo} online — English translation. Enjoy the latest chapters and updates only on Eastern Wordsmith.">
         <title>${chapter.novelName} - Chapter ${chapter.chapterNo}: ${chapter.title} | Read ${chapter.novelName} English Translation</title>
         <link rel="icon" type="image/x-icon" href="../images/logo2.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" >
         <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
@@ -42,24 +37,11 @@
 
 <c:if test="${not hasMembership}">
 <div class="d-none d-lg-block text-center my-3 container-fluid">
-				<!-- Responsive Horizontal -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9524461170"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+				<%@ include file="../jspf/ad-horizontal.jspf" %>
           </div>
           
           <div class="d-block d-lg-none text-center my-3 container-fluid">
-				<!-- Responsive Square -->
-				<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9826879355"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true">
-     			</ins>
+				<%@ include file="../jspf/ad-square.jspf" %>
           </div>
 </c:if>        
         
@@ -111,22 +93,10 @@
     <c:if test="${not hasMembership}">
     <div Style="margin-top: 30px;" class="row container-fluid">
 	     <div class="col-12 col-lg-6 text-center my-3">
-				<!-- Responsive Square -->
-				<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9826879355"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true">
-     			</ins>
+				<%@ include file="../jspf/ad-square.jspf" %>
           </div>
         <div class="col-12 col-lg-6 text-center my-3">
-				<!-- Medium Rectangle -->
-				<ins class="adsbygoogle"
-     			style="display:inline-block;width:300px;height:250px"
-     			data-ad-client="ca-pub-3020770276580291"
-     			data-ad-slot="8950269194"></ins>
-     			</ins>
+				<%@ include file="../jspf/ad-square.jspf" %>
           </div>
 	</div>
     </c:if>    
@@ -136,13 +106,7 @@
          	<c:if test="${not hasMembership}">
             <!-- ✅ Left Sidebar Ad (Load only on desktop) -->  
             <div id="leftSidebarAd" class = "sticky-ad">
-					<!-- Responsive Vertical -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9033506582"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+					<%@ include file="../jspf/ad-vertical.jspf" %>
 			</div>
             </c:if>
          </div>
@@ -172,15 +136,8 @@
          </div>
          <div class="col-1 col-lg-2 py-3">
 			<c:if test="${not hasMembership}">
-            <!-- ✅ Right Sidebar: 160x300 -->
             <div id="rightSidebarAd" class = "sticky-ad">
-					<!-- Responsive Vertical -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9033506582"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+					<%@ include file="../jspf/ad-vertical.jspf" %>
          </div>
             </c:if>
 
@@ -209,25 +166,13 @@
         </c:if>
 
         <c:if test="${not hasMembership}">
-         <!-- ✅ In-content 300x250 mid-section ad -->
       <div Style="margin-top: 30px;" class="row container-fluid">
 	     <div class="col-12 col-lg-6 text-center my-3">
-				<!-- Responsive Square -->
-				<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9826879355"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true">
+				<%@ include file="../jspf/ad-square.jspf" %>
      			</ins>
           </div>
         <div class="col-12 col-lg-6 text-center my-3">
-				<!-- Medium Rectangle -->
-				<ins class="adsbygoogle"
-     			style="display:inline-block;width:300px;height:250px"
-     			data-ad-client="ca-pub-3020770276580291"
-     			data-ad-slot="8950269194"></ins>
-     			</ins>
+				<%@ include file="../jspf/ad-square.jspf" %>
           </div>
 	</div>
         </c:if>
@@ -412,24 +357,13 @@
 
 
         <c:if test="${not hasMembership}"> 
-         <!-- ✅ In-content 300x250 mid-section ad -->
-      <div class="text-center mt-4">
-<!-- Medium Rectangle -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:300px;height:250px"
-     data-ad-client="ca-pub-3020770276580291"
-     data-ad-slot="8950269194"></ins>
-      </div>
+            <div class="text-center mt-4">
+                <%@ include file="../jspf/ad-square.jspf" %>
+            </div>
 
 
         <div class="d-none d-lg-block text-center my-3 container-fluid">
-				<!-- Responsive Horizontal -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9524461170"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+				<%@ include file="../jspf/ad-horizontal.jspf" %>
           </div>
          </c:if>
         

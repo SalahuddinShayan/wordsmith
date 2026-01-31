@@ -5,16 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <c:if test="${not hasMembership}">
-	<script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
-  <meta name="google-adsense-account" content="ca-pub-3020770276580291">
-		<script type="text/javascript">
-		(adsbygoogle = window.adsbygoogle || []).push({
-		google_ad_client: "ca-pub-3020770276580291",
-		enable_page_level_ads: true
-		});
-		</script>
-    </c:if>
+<c:if test="${not hasMembership}">
+<script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
+<meta name="google-adsense-account" content="ca-pub-3020770276580291">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3020770276580291" crossorigin="anonymous"></script>
+</c:if>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
 <script>
@@ -41,26 +36,13 @@
         <c:if test="${not hasMembership}">
         <div class="d-none d-lg-block text-center my-3 container-fluid">
             
-				<!-- Responsive Horizontal -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9524461170"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+				<%@ include file="jspf/ad-horizontal.jspf" %>
 		  
           </div>
           
           <div class="d-block d-lg-none text-center my-3 container-fluid">
             
-				<!-- Responsive Square -->
-				<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9826879355"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true">
-     			</ins>
+				<%@ include file="jspf/ad-square.jspf" %>
 			
           </div>
           </c:if>
@@ -72,13 +54,7 @@
          <div class = "sticky-ad">
          	  <div class="d-none d-lg-block text-center my-3" >
                 
-					<!-- Responsive Vertical -->
-					<ins class="adsbygoogle"
-     				style="display:block"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="9033506582"
-     				data-ad-format="auto"
-     				data-full-width-responsive="true"></ins>
+					<%@ include file="jspf/ad-vertical.jspf" %>
 				
               </div>
 			</div>
@@ -168,11 +144,7 @@
           <c:if test="${not hasMembership}">
          <div class="d-none d-lg-block text-center my-3 sticky-ad">
     
-					<!-- Wide SkyScraper -->
-					<ins class="adsbygoogle"
-     				style="display:inline-block;width:160px;height:600px"
-     				data-ad-client="ca-pub-3020770276580291"
-     				data-ad-slot="6212425217"></ins>
+        <%@ include file="jspf/ad-vertical.jspf" %>
 				
 </div>
 </c:if>
@@ -182,11 +154,7 @@
         <c:if test="${not hasMembership}">
         <div class="d-none d-lg-block text-center my-3">
     			
-				<!-- Billboard - Rising Star -->
-				<ins class="adsbygoogle"
-     				style="display:inline-block;width:970px;height:250px"
-     			data-ad-client="ca-pub-3020770276580291"
-     			data-ad-slot="8159931703"></ins>
+				<%@ include file="jspf/ad-horizontal.jspf" %>
 			
 		</div>
     </c:if>

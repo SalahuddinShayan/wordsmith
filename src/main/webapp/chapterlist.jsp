@@ -121,7 +121,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label>Chapter No:</label>
-                    <input type="number" id="edit-chapterNo" name="chapterNo" class="form-control" required />
+                    <input type="text" id="edit-chapterNo" name="chapterNo" class="form-control" required />
                 </div>
                 <div class="col-md-8">
                     <label>Title:</label>

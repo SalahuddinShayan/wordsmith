@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
 <%@include file="../css/stylesheet.css"%>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 <meta charset="UTF-8">

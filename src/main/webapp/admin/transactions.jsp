@@ -8,8 +8,7 @@
 <link rel="stylesheet" href="../css/stylesheet.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
- <title>User Registration</title>
+ <title>Payment Transactions</title>
 </head>
 <body Style= "background-color: #2D3047; color: white;">
 

@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <script type="text/javascript" src="//c.pubguru.net/pghb.easternwordsmith_com.tc.js" async></script>
-    <title>Membership Plans</title>
+    <title>Coin Packs</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
