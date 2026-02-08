@@ -343,3 +343,6 @@ V1.109
 -> Moved the Trafic cop from block mode to monitor mode.
 -> Made all the ads responsive.
 -> Made the list of users desending by the last login.
+
+V1.110
+-> updated the rss controller to reinforce the content type.

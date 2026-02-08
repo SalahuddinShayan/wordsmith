@@ -23,8 +23,12 @@ public class RssController {
     @Autowired
     private ChapterRepository cr;
 
-    @GetMapping(value = "/rss.xml", produces = "application/rss+xml")
+    @GetMapping("/rss.xml")
     public void generateRssFeed(HttpServletResponse response) throws Exception {
+
+        // 🔑 CRITICAL: Explicit headers for feed readers
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/rss+xml; charset=UTF-8");
 
         log.info("RSS_FEED_REQUEST — Generating RSS XML feed");
 
@@ -34,14 +38,14 @@ public class RssController {
 
             PrintWriter writer = response.getWriter();
 
-            writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-            writer.println("<rss version=\"2.0\">");
+            writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            writer.println("<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">");
             writer.println("<channel>");
             writer.println("<title>Eastern Wordsmith - Chapter Updates</title>");
             writer.println("<link>https://easternwordsmith.com</link>");
             writer.println("<description>Latest chapters posted on Eastern Wordsmith</description>");
             writer.println("<language>en-us</language>");
-            writer.println("<atom:link href=\"https://easternwordsmith.com/rss.xml\" rel=\"self\" type=\"application/rss+xml\" xmlns:atom=\"http://www.w3.org/2005/Atom\"/>");
+            writer.println("<atom:link href=\"https://easternwordsmith.com/rss.xml\" rel=\"self\" type=\"application/rss+xml\"/>");
 
             DateTimeFormatter formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
 
@@ -73,9 +77,9 @@ public class RssController {
             log.info("RSS_FEED_SUCCESS — Feed generation completed successfully");
 
         } catch (Exception ex) {
-            log.error("RSS_FEED_ERROR — Failed to generate RSS feed: {}", ex.getMessage(), ex);
+            log.error("RSS_FEED_ERROR — Failed to generate RSS feed", ex);
             throw ex;
         }
     }
-
 }
+
