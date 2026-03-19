@@ -125,7 +125,7 @@
                 </div>
                 <div class="col-md-8">
                     <label>Title:</label>
-                    <input type="text" id="edit-title" name="title" class="form-control" required />
+                    <input type="text" id="edit-title" name="title" class="form-control"/>
                 </div>
             </div>
 

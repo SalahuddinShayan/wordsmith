@@ -346,3 +346,8 @@ V1.109
 
 V1.110
 -> updated the rss controller to reinforce the content type.
+
+V1.111
+-> Changed the query of the latest paid novels so that al the novels get visibility.
+-> Removed the required from the chapter list page chapter updated form.
+-> Removed the one USD pack from the buy coin page.

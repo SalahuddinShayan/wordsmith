@@ -25,28 +25,6 @@
     
     <div class="row g-4">
 
-        <!-- Small -->
-        <div class="col-md-4">
-            <div class="card text-center text-dark" style="background:white;">
-                <div class="card-header"><b>Small Bundel</b></div>
-                <div class="card-body">
-                    <h3 class="coin-price-line">
-                      <span class="coin-amount">80</span>
-
-                      <span class="coin-inline">
-                        <span class="ew-coin" Style="height: 23px; width: 23px;">
-                          <img src="/images/enso.svg" alt="EWS Coins">
-                        </span>
-                      </span>
-
-                      <span class="coin-for">For $1</span>
-                    </h3>
-
-
-                    <div id="paypal-small"></div>
-                </div>
-            </div>
-        </div>
 
 
         
