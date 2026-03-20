@@ -351,3 +351,7 @@ V1.111
 -> Changed the query of the latest paid novels so that al the novels get visibility.
 -> Removed the required from the chapter list page chapter updated form.
 -> Removed the one USD pack from the buy coin page.
+
+V1.112
+-> removed the wrong and useless card lables from the byu coin page
+-> fixed the query for the paid novels.

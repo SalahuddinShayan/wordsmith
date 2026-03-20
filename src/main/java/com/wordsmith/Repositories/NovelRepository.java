@@ -20,13 +20,13 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name where c.release_status = 'RELEASED' order by COALESCE( c.released_on, c.posted_on) desc LIMIT 0,200) s group by s.novel_name LIMIT 0,12;", nativeQuery = true)
     List<Novel>  NovelUpdates();
 
-	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name where c.release_status = 'STOCKPILE' order by c.posted_on desc LIMIT 0,200) s group by s.novel_name LIMIT 0,12;", nativeQuery = true)
+	@Query(value = "select n.* from novel n join (select novel_name, max(posted_on) as latest_post from chapter where release_status ='STOCKPILE' group by novel_name) c on n.novel_name = c.novel_name order by c.latest_post desc;", nativeQuery = true)
 	List<Novel>  StockpileUpdates();
 	
 	@Query(value = "select s.* from (select n.* from novel n inner join chapter c on n.novel_name = c.novel_name where c.release_status = 'RELEASED' order by COALESCE( c.released_on, c.posted_on) desc LIMIT 0,10000) s group by s.novel_name;", nativeQuery = true)
     List<Novel>  AllUpdates();
 
-	@Query(value = "select n.* from novel n  join (select c.novel_name from chapter c where c.release_status = 'STOCKPILE' group by c.novel_name) latest on n.novel_name = latest.novel_name order by latest.posted_on desc;", nativeQuery = true)
+	@Query(value = "select n.* from novel n join (select novel_name, max(posted_on) as latest_post from chapter where release_status ='STOCKPILE' group by novel_name) c on n.novel_name = c.novel_name order by c.latest_post desc;", nativeQuery = true)
 	List<Novel> AllStockpileUpdates();
 	
 	@Query(value = "SELECT * FROM novel WHERE LENGTH(Novel_image)>0 AND status = 'Ongoing' limit 4;", nativeQuery = true)

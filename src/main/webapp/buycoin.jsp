@@ -32,7 +32,6 @@
         <!-- Mid -->
         <div class="col-md-4">
             <div class="card text-center text-dark" style="background:white;">
-                <div class="card-header"><b>Half-Yearly Plan</b></div>
                 <div class="card-body">
                     <h3 class="coin-price-line">
                       <span class="coin-amount">450</span>
@@ -51,7 +50,6 @@
         <!-- Large -->
         <div class="col-md-4">
             <div class="card text-center text-dark" style="background:white;">
-                <div class="card-header"><b>Yearly Plan</b></div>
                 <div class="card-body">
                     <h3 class="coin-price-line">
                       <span class="coin-amount">1000</span>
