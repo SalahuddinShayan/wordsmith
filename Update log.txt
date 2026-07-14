@@ -355,3 +355,8 @@ V1.111
 V1.112
 -> removed the wrong and useless card lables from the byu coin page
 -> fixed the query for the paid novels.
+
+V1.113
+-> Added the analytics laybel back in the home page.
+-> Fixed the otp page.
+-> Changed the query for popular novels.

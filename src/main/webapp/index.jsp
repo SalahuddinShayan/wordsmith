@@ -15,6 +15,8 @@
     <meta name="keywords"
       content="Eastern Word Smith, Eastern WordSmith, web novels, webnovels, novels, japanese novels, online novels, japanese webnovel">
     <title>Eastern WordSmith</title>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0D3MMVLTED"></script>
     <link rel="shortcut icon" type="image/x-icon" href="images/logo2.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -39,11 +41,11 @@
           </div>
     </c:if>
 
-  <!-- Popular Today -->
+  <!-- Popular Novels -->
   <div style="margin-top: 30px;" class="row">
     <div class="col-1 col-lg-2 py-3"></div>
     <div class="col-10 col-lg-8 bg-az">
-      <h5>Popular Today</h5>
+      <h5>Popular Novels</h5>
     </div>
     <div class="col-1 col-lg-2 py-3"></div>
   </div>

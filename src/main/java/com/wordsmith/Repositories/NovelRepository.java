@@ -29,7 +29,7 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 	@Query(value = "select n.* from novel n join (select novel_name, max(posted_on) as latest_post from chapter where release_status ='STOCKPILE' group by novel_name) c on n.novel_name = c.novel_name order by c.latest_post desc;", nativeQuery = true)
 	List<Novel> AllStockpileUpdates();
 	
-	@Query(value = "SELECT * FROM novel WHERE LENGTH(Novel_image)>0 AND status = 'Ongoing' limit 4;", nativeQuery = true)
+	@Query(value = "SELECT n.* FROM novel n WHERE LENGTH(n.novel_image) > 0 ORDER BY ( SELECT COALESCE(SUM(v.views), 0) FROM chapter c JOIN views v ON v.entity_id = c.chapter_id AND v.entity_type = 'CHAPTER' WHERE c.novel_name = n.novel_name) DESC LIMIT 4;", nativeQuery = true)
 	List<Novel>  popular();
 	
 	@Query(value = "SELECT novel_name FROM novel WHERE status = 'Ongoing' order by novel_id;", nativeQuery = true)
