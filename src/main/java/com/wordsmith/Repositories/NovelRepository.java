@@ -49,4 +49,7 @@ public interface NovelRepository extends JpaRepository<Novel,Integer> {
 	@Query(value = "SELECT status FROM novel WHERE novel_name = :novelname", nativeQuery = true)
 	String findStatusByNovelName(@Param("novelname") String novelname);
 
+
+	@Query(value = "SELECT * FROM novel WHERE novel_id NOT IN (:popularIds) ORDER BY RAND() LIMIT 5 ", nativeQuery = true)
+	List<Novel> featuredNovels(@Param("popularIds") List<Integer> popularIds);
 }

@@ -360,3 +360,7 @@ V1.113
 -> Added the analytics laybel back in the home page.
 -> Fixed the otp page.
 -> Changed the query for popular novels.
+
+V1.114
+-> Added a All Update button in the Latest Updates section.
+-> Added a featured novels section onn the top oof the website.

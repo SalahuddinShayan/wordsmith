@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -94,6 +93,12 @@ public class NovelController {
             novel.setStockpileChapters(chapterListDtoMapper.toStockpileChapterDtoList(recentStockpileChapters, user != null ? user.getUsername() : null));
         }
         model.addAttribute("Novelss", Snovels);
+
+        List<Integer> popularIds = Pnovels.stream()
+        .map(Novel::getNovelId)
+        .toList();
+
+        model.addAttribute("featuredNovels", NovelRepo.featuredNovels(popularIds));
 
         return "index";
     }

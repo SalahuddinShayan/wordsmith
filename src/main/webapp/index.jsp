@@ -27,19 +27,80 @@
 
   <%@ include file="nav1.jsp" %>
 
-  <c:if test="${not hasMembership}">
-  <!-- ✅ Top banner (728x90 for desktop / 320x50 for mobile) -->
-  <div class="d-none d-lg-block text-center my-3 container-fluid">
-    
+  <div class="row mt-4 mb-4">
+    <div class="col-1 col-lg-2"></div>
 
-				<%@ include file="jspf/ad-horizontal.jspf" %>
-      
-          </div>
-          
-          <div class="d-block d-lg-none text-center my-3 container-fluid">
-				<%@ include file="jspf/ad-square.jspf" %>
-          </div>
-    </c:if>
+    <div class="col-10 col-lg-8">
+
+        <div id="featuredCarousel"
+             class="carousel slide"
+             data-bs-ride="carousel"
+             data-bs-interval="8000">
+
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                <c:forEach var="novel" items="${featuredNovels}" varStatus="status">
+                    <button type="button"
+                            data-bs-target="#featuredCarousel"
+                            data-bs-slide-to="${status.index}"
+                            class="${status.first ? 'active' : ''}">
+                    </button>
+                </c:forEach>
+            </div>
+
+            <div class="carousel-inner">
+
+                <c:forEach var="novel" items="${featuredNovels}" varStatus="status">
+
+                    <div class="carousel-item ${status.first ? 'active' : ''}">
+
+                        <div class="row">
+
+                            
+                            <div class="col-5 col-lg-3  center">
+                              <a href ="novel/${novel.novelName}">
+                                <img width="100%" src ="<c:out value='${pageContext.request.contextPath}/novel-image/${novel.novelId}'/>" 
+                                alt="images/No_image_available.svg.png" onerror="this.src='images/No_image_available.svg.png';"> 
+                              </a> 
+                              <a> ${novel.originalLanguage}  </a> <BR>
+                              <a>${novel.genre}  </a>
+                            </div>
+                            
+                            <div class="col-7 col-lg-9 ">
+                              <h6 class =" oneliner stm"><a href ="novel/${novel.novelName}">${novel.novelName}</a></h6>
+                              <a>${novel.status}  </a><br><br>
+                              <div class="featured-description">${novel.description}</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </c:forEach>
+
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#featuredCarousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#featuredCarousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="col-1 col-lg-2"></div>
+</div>
 
   <!-- Popular Novels -->
   <div style="margin-top: 30px;" class="row">
@@ -199,6 +260,14 @@
         </c:forEach>
         </div>
       </div>
+
+       <!-- View All Button -->
+      <div class="text-end mt-4">
+    <a href="${pageContext.request.contextPath}/updates"
+       class="btn btn-outline-primary btn-sm">
+        All Updates →
+    </a>
+</div>
     </div>
 
     <!-- ✅ Right Sidebar -->

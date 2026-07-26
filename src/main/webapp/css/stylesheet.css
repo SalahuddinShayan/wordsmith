@@ -445,3 +445,143 @@ table {
     min-width: 100px;
 }
 
+#featuredCarousel{
+    min-height: 380px;
+    max-height: 430px;
+    overflow: hidden;
+}
+
+#featuredCarousel .carousel-item{
+    padding: 30px 40px;
+    min-height: 380px;
+    max-height: 430px;
+    overflow: hidden;
+}
+
+#featuredCarousel .carousel-control-prev,
+#featuredCarousel .carousel-control-next{
+    width: 6%;
+}
+
+#featuredCarousel .carousel-indicators{
+    margin-bottom: 0.5rem;
+    z-index: 3;
+}
+
+#featuredCarousel .carousel-indicators button{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+#featuredCarousel .row{
+    width: 100%;
+    margin: 0;
+}
+
+#featuredCarousel .carousel-inner {
+    position: relative;
+}
+
+.featured-image-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-cover{
+    height: 300px;
+    width: 210px;
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.featured-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.featured-content > * {
+    width: 100%;
+}
+
+.featured-content h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.featured-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: block;
+    line-height: 1.2;
+}
+
+.featured-description{
+    min-height: 7rem;
+    max-height: 10rem;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    line-clamp: 7;
+    overflow: hidden;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.featured-buttons{
+    margin-top: 0.25rem;
+}
+
+@media (max-width:576px){
+
+    #featuredCarousel .carousel-item{
+        padding:20px 15px;
+    }
+
+    .featured-description{
+        -webkit-line-clamp:4;
+        line-clamp:4;
+        min-height:auto;
+        max-height:none;
+        font-size:.9rem;
+        line-height:1.45;
+    }
+
+    .featured-title{
+        font-size:1rem;
+    }
+
+    .featured-image-col{
+        font-size:.8rem;
+    }
+
+    .featured-cover{
+        width:100%;
+        height:auto;
+        max-height:220px;
+    }
+
+    #featuredCarousel .carousel-control-prev,
+    #featuredCarousel .carousel-control-next{
+        display:none;
+    }
+
+    #featuredCarousel,
+    #featuredCarousel .carousel-item{
+        min-height:270px;
+        max-height:none;
+    }
+
+
+}
